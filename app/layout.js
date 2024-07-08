@@ -3,6 +3,8 @@ import './globals.css'
 import Navbar from './components/Navbar'
 import { Providers } from './providers'
 import ToastComponent from './components/toaster/ToastComponent'
+import Header from './components/header/Header'
+import Footer from './components/footer/Footer'
 
 
 
@@ -19,8 +21,10 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <Providers>
-          <Navbar />
+          <Header />
+        
           {children}
+          
           <ToastComponent />
         </Providers>
       </body>
