@@ -8,7 +8,7 @@ const BlogDetail = async ({ params }) => {
 
     const id = params?.id;
 
-    const blog = await fetchSingleBlog(id);
+  const blog = await fetchSingleBlog(id);
 
     return (
         <div className="">

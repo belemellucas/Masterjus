@@ -3,7 +3,7 @@ import { authOptions } from "./api/auth/[...nextauth]/route"
 
 import LogoutButton from "./ui/LogoutButton";
 import { redirect } from "next/navigation";
-import CardCourses from "../app/cursos/page";
+import CardCourses from "../app/courses/page";
 
 export default async function Home({ searchParams }) {
 
@@ -18,7 +18,7 @@ export default async function Home({ searchParams }) {
      {/* <h2>Home Page logged in User {session?.user?.username}</h2>  
       <LogoutButton label={'Logout'} /> */}
      <CardCourses searchParams={searchParams} />
-
+   
    </main>
   
   )
