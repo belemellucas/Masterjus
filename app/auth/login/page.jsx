@@ -29,7 +29,6 @@ const LoginPage = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        console.log(userInfo)
         if (!userInfo.email || !userInfo.password) {
             setError("Must provide all the Credentials!");
         }

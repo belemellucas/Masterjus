@@ -16,9 +16,6 @@ const AddPreferenceForm = ({tags}) => {
 
     const [selectedTags, setSelectedTags] = useState([]);
 
-    console.log('setSelectedTags', selectedTags)
-
-
     const savePreferences = async () => {
 
             try {

@@ -51,11 +51,9 @@ const RegisterPage = () => {
                 setPending(false);
                 ref?.current?.reset();
                 router.push('/auth/login')
-                console.log("User registration done");
             } else {
                 const errorData = await res.json();
                 setError(errorData.message);
-                console.log('Something went wrong in else block');
                 setPending(false);
             }
 

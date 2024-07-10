@@ -32,9 +32,6 @@ export const authOptions = {
                     }
                 })
 
-
-                console.log('user found', user);
-
                 if (!user) {
                     return null;
                 }
@@ -61,7 +58,6 @@ export const authOptions = {
     callbacks: {
 
         async session({ session, token }) {
-            console.log('session token', token)
             return {
                 ...session,
                 user: {

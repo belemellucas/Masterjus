@@ -4,6 +4,7 @@ import { PrismaClient } from "@prisma/client";
 import { getServerSession } from "next-auth";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+
 const prisma = new PrismaClient();
 
 
@@ -222,9 +223,6 @@ export const assignPermission = async (userId, formData) => {
 }
 
 
-
-
-
 // fetch All Blogs tags
 
 export const fetchAllTags = async () => {
@@ -267,5 +265,15 @@ export const fetchPreferedBlogs = async () => {
     })
 
     return blogs
+
+}
+
+
+export const fetchCategory = async () => {
+    const categories = await prisma.catCurso.findMany({
+        take: 5
+    })
+
+    return categories
 
 }

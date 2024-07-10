@@ -5,9 +5,6 @@ export const CommentListings = async ({ blogId }) => {
 
     const comments = await fetchComments(blogId)
 
-    console.log('comments', comments);
-
-
     return (
         <div className="">
 

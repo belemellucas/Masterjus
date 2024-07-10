@@ -1,5 +1,5 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route"
-import AddCourseForm from "@/app/components/forms/AddCourseForm"
+import AddCategoryForm from "@/app/components/forms/AddCategoryForm"
 import { getServerSession } from "next-auth"
 import { redirect } from "next/navigation"
 
@@ -14,15 +14,14 @@ const AddBlog = async () => {
     const admin = session?.user?.role === 'ADMIN';
 
     if (!admin && !checkPermissions) {
-        console.log('YOU CANNOT CREATE!')
         redirect('/')
     }
 
     return (
         <div>
-            <h2 className='text-center mt-4 px-2 text-2xl py-2 font-bold'>Adicionar Curso</h2>
+            <h2 className='text-center mt-4 px-2 text-2xl py-2 font-bold'>Adicionar Categoria</h2>
 
-            <AddCourseForm />
+            <AddCategoryForm />
 
         </div>
     )

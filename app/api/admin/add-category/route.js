@@ -5,6 +5,7 @@ import { authOptions } from "../../auth/[...nextauth]/route";
 import { revalidatePath } from "next/cache";
 
 
+
 const prisma = new PrismaClient();
 
 export async function POST(req, {params}) {
@@ -13,35 +14,31 @@ export async function POST(req, {params}) {
         const session = await getServerSession(authOptions);
 
 
-        const { imageUrl, title, category, tags, description } = await req.json();
+        const { NomeCat } = await req.json();
 
    
-    let test="teste"
     
     if (session?.user?.role === 'ADMIN' || session?.user?.permissions?.includes('CREATE_BLOG')) {
         // push the data into the DB
-        const new_blog = await prisma.blog.create({
+        const new_cat = await prisma.catCurso.create({
             data: {
-                imageUrl: imageUrl ? imageUrl : null,
-                title,
-                category,
-                tags:tags, 
-                description,
-                authorId: session?.user?.id,
-                subtitulo: test
+                NomeCat,
+               // authorId: session?.user?.id
             }
         })
 
-        revalidatePath('/blogs')
+        revalidatePath('/categories')
     
-        return NextResponse.json({ message: 'Blog Added Successfully!' }, { status: 201 });
+        return NextResponse.json({ message: 'Categoria adicionada com sucesso!' }, { status: 201 });
 
     } else {
 
-        return NextResponse.json({ message: 'You Do not have Add blog permissions!' }, { status: 403 });
+        return NextResponse.json({ message: 'Você não tem permissão para adicionar a categoria!' }, { status: 403 });
 
     }
 
+    
+    
     } catch (error) {
         console.log("Error while Registeing", error);
         return NextResponse.json({ message: 'Error Occured While Registering the user.' }, { status: 500 });

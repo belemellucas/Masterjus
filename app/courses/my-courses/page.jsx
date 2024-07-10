@@ -33,8 +33,6 @@ const CardCourses = async ({searchParams}) => {
     let query = searchParams?.query || '';
     
     const blogs = await fetchBlogs(query);
-
-  console.log(blogs, "BLOGS")
   return (
     <div>
              <Search /> 
