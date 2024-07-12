@@ -31,6 +31,9 @@ const AddBlogForm = () => {
 
     const router = useRouter();
 
+    const multer = require('multer');
+    const upload = multer({ storage: multer.memoryStorage() });
+
     const {register, handleSubmit, control, formState: {errors}} = useForm();
 
     const onSubmit = async (data) => {
@@ -80,7 +83,7 @@ const AddBlogForm = () => {
                     Upload Image Link
                 </label>
                 <input
-                    type="text"
+                    type="file"
                     id="imageUrl"
                     name="imageUrl"
                     {...register('imageUrl')}
