@@ -5,8 +5,7 @@ import { Providers } from './providers'
 import ToastComponent from './components/toaster/ToastComponent'
 import Header from './components/header/Header'
 import Footer from './components/footer/Footer'
-
-
+import Home from './components/initial/Initial'
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -21,11 +20,9 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <Providers>
-          <Header />
-        
-          {children}
-          
-          <ToastComponent />
+       
+        {children}
+        <ToastComponent />
         </Providers>
       </body>
     </html>

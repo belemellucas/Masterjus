@@ -1,6 +1,6 @@
 import BlogItem from "@/app/components/BlogItem";
 import Search from "@/app/components/Search"
-import CardItem from "../../components/CardItem";
+import CardItem from "../../components/CourseItem";
 
 
 const fetchBlogs = async (query="") => {

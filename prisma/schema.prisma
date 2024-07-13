@@ -76,7 +76,7 @@ model Cards {
 
 model InfoSite {
   id          String    @id @default(auto()) @map("_id") @db.ObjectId
-  imageAnex   String
+  imageAnex   String[]
   linkVideo   String
   published   Boolean   @default(true)
   createdAt   DateTime  @default(now())

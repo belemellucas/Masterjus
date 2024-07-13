@@ -21,7 +21,9 @@ const AdminDashboard = async () => {
 
     return (
         <div className="mt-5 justify-center items-start flex">
-            {users?.length > 0 && <AdminTable users={users} />}
+            {/* {users?.length > 0 && <AdminTable users={users} />
+            } */}
+            
         </div>
     )
 }
