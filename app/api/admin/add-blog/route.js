@@ -12,23 +12,23 @@ export async function POST(req, {params}) {
 
         const session = await getServerSession(authOptions);
 
-
         const { imageUrl, title, category, tags, description } = await req.json();
 
-   
-    let test="teste"
+       // console.log("Received subtitulo:", subtitulo);
+
+      //  console.log(imageUrl);
     
     if (session?.user?.role === 'ADMIN' || session?.user?.permissions?.includes('CREATE_BLOG')) {
         // push the data into the DB
         const new_blog = await prisma.blog.create({
             data: {
-                imageUrl: imageUrl ? imageUrl : null,
+                imageUrl,
                 title,
+              //  subtitulo,
                 category,
                 tags:tags, 
                 description,
-                authorId: session?.user?.id,
-                subtitulo: test
+                authorId: session?.user?.id
             }
         })
 
