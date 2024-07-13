@@ -39,6 +39,7 @@ model Comment {
 model Blog {
   id          String    @id @default(auto()) @map("_id") @db.ObjectId
   imageUrl    String?
+  imageAnex   String?
   subtitulo   String
   AutorBlog   String?
   title       String

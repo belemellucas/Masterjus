@@ -7,6 +7,7 @@ import { Controller, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import TagsInput from "react-tagsinput";
 import 'react-tagsinput/react-tagsinput.css';
+import React, { useState } from 'react';
 
 const AddBlogForm = () => {
 
@@ -28,13 +29,39 @@ const AddBlogForm = () => {
     //         theme: "dark",
     //     });
     // }
+    
 
     const router = useRouter();
 
     const {register, handleSubmit, control, formState: {errors}} = useForm();
+    const [base64String, setBase64String] = useState('');
 
-    const onSubmit = async (data) => {
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                const base64 = reader.result.replace('data:', '').replace(/^.+,/, '');
+                setBase64String(base64);
+               // setValue('imageUrl', base64);
+            };
+            reader.readAsDataURL(file);
+        }
+        console.log(value)
+    };
+
+    const onSubmit = async (formData) => {
         try {
+            const data = {
+                ...formData,
+                imageUrl: base64String,
+                // title: getValues('title'),
+                // subtitulo: getValues('subtitulo'),
+                // category: getValues('category'),
+                // tags: getValues('tags'),
+                // description: getValues('description'),
+            };
+            console.log(data, "data on")
             const res = await fetch("/api/admin/add-blog", {
                 method: "POST",
                 headers: {
@@ -65,9 +92,6 @@ const AddBlogForm = () => {
         } catch (error) {
            console.log('error', error);
         }
-
-
-
     }
 
 
@@ -76,15 +100,16 @@ const AddBlogForm = () => {
             <h2 className="text-2xl text-green-500 font-semibold mb-6">Create a New Blog Post</h2>
 
             <div className="mb-4">
-                <label htmlFor="title" className="block text-sm font-medium text-gray-600">
+                <label htmlFor="image" className="block text-sm font-medium text-gray-600">
                     Upload Image Link
                 </label>
-                <input
-                    type="text"
+                 <input
+                    type="file"
                     id="imageUrl"
                     name="imageUrl"
                     {...register('imageUrl')}
                     className="mt-1 p-2 w-full border text-gray-600 rounded-md"
+                    onChange={handleImageChange}
                     placeholder="Enter imageUrl"
                 />
             </div>
@@ -100,6 +125,20 @@ const AddBlogForm = () => {
                     {...register('title', {required: true})}
                     className="mt-1 p-2 w-full border text-gray-600 rounded-md"
                     placeholder="Enter title"
+                />
+                   {errors?.title && <p role="alert">{errors?.title?.message}</p>}
+            </div>
+            <div className="mb-4">
+                <label htmlFor="subtitulo" className="block text-sm font-medium text-gray-600">
+                    subtitulo
+                </label>
+                <input
+                    type="text"
+                    id="subtitulo"
+                    name="subtitulo"
+                    {...register('subtitulo', {required: true})}
+                    className="mt-1 p-2 w-full border text-gray-600 rounded-md"
+                    placeholder="Enter subtitulo"
                 />
                    {errors?.title && <p role="alert">{errors?.title?.message}</p>}
             </div>
