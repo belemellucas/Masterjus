@@ -2,36 +2,63 @@
 
 import Button from "@/app/ui/Button";
 import { useRouter } from "next/navigation";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import TagsInput from "react-tagsinput";
 import 'react-tagsinput/react-tagsinput.css';
+import React, { useState } from 'react';
+import Image from "next/image";
 
 const AddInfoSiteForm = () => {
     const ref = useRef();
     const router = useRouter();
     const {register, handleSubmit, control, formState: {errors}} = useForm();
-    const onSubmit = async (data) => {
-        const formData = new FormData();
+    const [base64String, setBase64String] = useState('');
+    const [imageFiles, setImageFiles] = useState([]);
+    const [base64Files, setBase64Files] = useState([]);
 
-        // Capturar arquivos do input e adicioná-los ao FormData
-        const files = data.imageAnex;
-        if (files && files.length > 0) {
-          for (let i = 0; i < files.length; i++) {
-            formData.append('imageAnex', files[i]);
-          }
-        }
-        console.log([...formData.entries()]);
+
+     const handleImageChange = (e) => {
+      const files = Array.from(e.target.files);
+       const promises = files.map((file) => {
+     return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+
+        reader.onload = (e) => {
+           resolve(reader.result.split(',')[1]); 
+          }; 
+          
+          reader.onerror = (error) => {
+           reject(error);
+         };
+         reader.readAsDataURL(file); 
+       }); 
+      }); 
+
+      Promise.all(promises)
+     .then((base64String) => {
+      setImageFiles([...imageFiles, ...files]);
+      setBase64Files([...base64Files, ...base64String]);
+    })
+      .catch((error) => console.error("Error convertion images", error)); 
+    }; 
+
+    // const handleImageChange = (e) => {
+    //   const files = Array.from(e.target.files);
+    //   setImageFiles(files);
+    // };
+
+    const onSubmit = async (event) => {
         try {
-
+          event.imageAnex = base64Files; 
             const res = await fetch("/api/admin/add-info", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
                 //body: JSON.stringify(data)
-                body: formData
+                body: JSON.stringify(event)
             });
 
             if (res.ok) {
@@ -57,25 +84,40 @@ const AddInfoSiteForm = () => {
            console.log('error', error);
         }
     }
-
+    
     return (
         <form ref={ref} onSubmit={handleSubmit(onSubmit)}  className="max-w-md mx-auto mt-8 p-8 bg-white rounded shadow-md">
             <h2 className="text-2xl text-green-500 font-semibold mb-6">Adicionar novas imagens</h2>
             <div className="mb-4">
-        <label htmlFor="imageAnex" className="block text-sm font-medium text-gray-600">
+        {/* <label htmlFor="image" className="block text-sm font-medium text-gray-600">
           Adicionar Imagens
         </label>
         <input
+          type="file"
           id="imageAnex"
           name="imageAnex"
-          type="file"
-          {...register('imageAnex', { required: true })}
-          multiple
+          {...register('imageAnex')}
+          //multiple
           className="mt-1 p-2 text-gray-600 w-full border rounded-md"
-        />
+          onChange={handleImageChange}
+        /> */}
+         <div>
+        <input type="file" onChange={handleImageChange} multiple />
+      </div>
+      <div>
+      {imageFiles.map((preview, index) => (
+          <div key={index} style={{ display: "inline-block", margin: "10px" }}>
+            <img 
+            //src={preview} 
+            src={URL.createObjectURL(preview)}
+            alt="" style={{ width: "100px", height: "auto" }} />
+            <button type="button" onClick={() => removeImage(index)}>Remove</button>
+          </div>
+        ))} 
+      </div>
         {errors.imageAnex && <p className="text-red-500 text-sm mt-1">Este campo é obrigatório</p>}
       </div>
-      {/* <div className="mb-4">
+     <div className="mb-4">
         <label htmlFor="linkVideo" className="block text-sm font-medium text-gray-600">
           Link do Vídeo
         </label>
@@ -88,7 +130,7 @@ const AddInfoSiteForm = () => {
           placeholder="Insira o link do vídeo"
         />
         {errors.linkVideo && <p className="text-red-500 text-sm mt-1">Este campo é obrigatório</p>}
-      </div> */}
+      </div> 
             <Button label={'Adicionar Categoria'} color={'green'} />
         </form>
     )

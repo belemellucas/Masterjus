@@ -1,20 +1,21 @@
-import Image from "next/image"
+import Image from "next/image";
+import SlideImages from "../slide/SlideImages";
 
-function Initial() {
-    const menuOptions = [
-        { name: "Home" },
-        { name: "Cursos" },
-        { name: "PrevEvolution" },
-        { name: "Mat. Gratuitos" },
-        { name: "BLOG" },
-        { name: "Livros/e-books" },
-        { name: "Fale Conosco" },
-      ];
+function Initial({ infoSite }) {
+  const menuOptions = [
+    { name: "Home" },
+    { name: "Cursos" },
+    { name: "PrevEvolution" },
+    { name: "Mat. Gratuitos" },
+    { name: "BLOG" },
+    { name: "Livros/e-books" },
+    { name: "Fale Conosco" },
+  ];
 
-    return (
-        <>
-         <div className="flex justify-center items-center px-16 py-3 bg-white max-md:px-5">
-        <div className="flex gap-5 justify-between items-start w-full max-w-[1160px] max-md:flex-wrap max-md:max-w-full">
+  return (
+    <>
+      <div className="flex justify-center items-center px-16 py-3 bg-white max-md:px-5">
+      <div className="flex gap-5 justify-between items-start w-full max-w-[1160px] max-md:flex-wrap max-md:max-w-full">
           <Image
             loading="lazy"
             src="/logo/logo-master.png"
@@ -47,21 +48,9 @@ function Initial() {
               height={19}
             />
           </div>
-        </div>
       </div>
-      <div className="relative w-full h-[452px] overflow-hidden">
-        <Image
-          loading="lazy"
-          src="/background/slide.jpg"
-          alt="slide"
-          width={1440}
-          height={452}
-          objectFit="cover"
-          layout="responsive"
-          quality={100}
-          className="w-full h-full"
-        />
       </div>
+      <SlideImages infoSite={infoSite} />
       <div className="flex justify-center items-center px-8 py-4 w-full text-xs text-white bg-neutral-950 max-md:px-5 max-md:max-w-full">
         <div className="flex gap-5 justify-between items-start max-w-full w-[1169px] max-md:flex-wrap">
           <div className="text-lg leading-7">
@@ -228,8 +217,8 @@ function Initial() {
           </div>
         </div>
       </div>
-        </>
-    )
+    </>
+  );
 }
 
-export default Initial
+export default Initial;
