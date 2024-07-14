@@ -12,7 +12,7 @@ export async function POST(req, {params}) {
 
         const session = await getServerSession(authOptions);
 
-        const { imageUrl, title, category, tags, description } = await req.json();
+        const { imageUrl, title, subtitulo, category, tags, description } = await req.json();
 
        // console.log("Received subtitulo:", subtitulo);
 
@@ -24,7 +24,7 @@ export async function POST(req, {params}) {
             data: {
                 imageUrl,
                 title,
-              //  subtitulo,
+                subtitulo,
                 category,
                 tags:tags, 
                 description,

@@ -6,6 +6,7 @@ import Header from "./components/header/Header";
 import Depositions from "./components/depositions/Depositions";
 
 import Cards from "./cards/page";
+import Blogs from "./components/blogs/Blogs";
 
 export default async function Home({ searchParams }) {
   const session = await getServerSession(authOptions);
@@ -14,12 +15,23 @@ export default async function Home({ searchParams }) {
 
   const infoSite = await prisma.infoSite.findMany();
 
+  const blogs = await prisma.blog.findMany({
+    where: query ? {
+        OR: [
+            { title: { contains: query } },
+            { category: { contains: query } },
+        ],
+
+    } : {} // fetch all the data blogs
+})
+
   return (
     <>
       <Header />
       <Initial infoSite={infoSite} />
       <Cards searchParams={searchParams} />
       <Depositions infoSite={infoSite} />
+      <Blogs blog={blogs} />
     </>
   );
 }

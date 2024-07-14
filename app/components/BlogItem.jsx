@@ -6,7 +6,7 @@ import React from 'react'
 
 const BlogItem = ({ blog }) => {
 
-    const { id, title, imageUrl, description, category } = blog || {};
+    const { id, title, subititulo, imageUrl, description, category } = blog || {};
 
     const router = useRouter();
 
@@ -50,14 +50,17 @@ const BlogItem = ({ blog }) => {
         <div className="bg-gray-900 p-4 border-2 border-green-200 mx-2 my-2 rounded-lg shadow-md">
 
             <Link href={`/blogs/${id}`}>
-                {imageUrl ? <Image
-                    blurDataURL={imageUrl}
-                    placeholder="blur"
-                    loading="lazy"
-                    width="600"
-                    height="400"
-                    quality={100} src={imageUrl} className="w-full h-[200px]  lg:h-[250px] object-cover mb-4 rounded-md" /> : null}
+            {imageUrl ?    <Image
+                
+                src={`data:image/jpeg;base64,${imageUrl}`}
+                alt={""}
+                width={500}
+                height={500}
+                className="object-cover"
+              />: null}
             </Link>
+
+            
 
             <Link href={`/blogs/${id}`}>
                 <h2 className='text-xl text-white font-semibold mb-2'>{title}</h2>

@@ -47,7 +47,6 @@ const AddBlogForm = () => {
             };
             reader.readAsDataURL(file);
         }
-        console.log(value)
     };
 
     const onSubmit = async (formData) => {
