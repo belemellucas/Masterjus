@@ -1,10 +1,15 @@
 import { PrismaClient } from "@prisma/client"
 import BlogItem from "../components/BlogItem";
 import Search from "../components/Search";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route"
+import { getServerSession } from "next-auth"
+import { redirect } from "next/navigation"
 
 const prisma = new PrismaClient();
 
 const Blogs = async ({searchParams}) => {
+    const session = await getServerSession(authOptions)
+    const checkPermissions = session?.user?.permissions?.includes('CREATE_BLOG');
 
     const query = searchParams?.query;
    
@@ -20,7 +25,13 @@ const Blogs = async ({searchParams}) => {
         } : {} // fetch all the data blogs
     })
 
-  
+    const admin = session?.user?.role === 'ADMIN';
+
+    if (!admin && !checkPermissions) {
+        console.log('YOU CANNOT CREATE!')
+        redirect('/')
+    }
+
    
     return (
         <div>

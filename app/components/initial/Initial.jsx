@@ -1,5 +1,6 @@
 import Image from "next/image";
 import SlideImages from "../slide/SlideImages";
+import Lead from "../lead/Lead";
 
 function Initial({ infoSite }) {
   const menuOptions = [
@@ -51,36 +52,7 @@ function Initial({ infoSite }) {
       </div>
       </div>
       <SlideImages infoSite={infoSite} />
-      <div className="flex justify-center items-center px-8 py-4 w-full text-xs text-white bg-neutral-950 max-md:px-5 max-md:max-w-full">
-        <div className="flex gap-5 justify-between items-start max-w-full w-[1169px] max-md:flex-wrap">
-          <div className="text-lg leading-7">
-            Fique por dentro
-            <br />
-            de tudo que
-            <br />
-            acontece no
-            <br />
-            Direito!
-          </div>
-          <div className="flex flex-col justify-start items-start px-4 py-3 bg-white rounded-3xl border border-white border-solid text-neutral-500 max-md:pr-5 w-96 h-14">
-            <span className="text-sm font-semibold text-center">nome</span>
-            <input
-              type="text"
-              className="w-full h-full bg-transparent focus:outline-none"
-            />
-          </div>
-          <div className="flex flex-col justify-start items-start px-4 py-3 bg-white rounded-3xl border border-white border-solid text-neutral-500 max-md:pr-5 w-96 h-14">
-            <span className="text-sm font-semibold text-center">e-mail</span>
-            <input
-              type="email"
-              className="w-full h-full bg-transparent focus:outline-none"
-            />
-          </div>
-          <div className="flex justify-center px-12 py-4 text-base leading-6 text-center bg-blue-800 rounded-[40px] max-md:px-5">
-            ENVIAR
-          </div>
-        </div>
-      </div>
+      <Lead />
       <div className="self-center px-5 mt-9 max-w-full mx-auto max-w-[1200px]">
         <div className="flex gap-5 max-md:flex-col max-md:gap-0">
           <div className="flex flex-col items-center w-full mt-10 max-md:ml-0 max-md:w-full">

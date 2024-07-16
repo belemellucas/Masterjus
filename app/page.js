@@ -4,9 +4,9 @@ import { authOptions } from "./api/auth/[...nextauth]/route";
 import Initial from "./components/initial/Initial";
 import Header from "./components/header/Header";
 import Depositions from "./components/depositions/Depositions";
-
+import VideoComponent from "./components/video/VideoComponent";
 import Cards from "./cards/page";
-import Blogs from "./components/blogs/Blogs";
+
 
 export default async function Home({ searchParams }) {
   const session = await getServerSession(authOptions);
@@ -15,23 +15,14 @@ export default async function Home({ searchParams }) {
 
   const infoSite = await prisma.infoSite.findMany();
 
-  const blogs = await prisma.blog.findMany({
-    where: query ? {
-        OR: [
-            { title: { contains: query } },
-            { category: { contains: query } },
-        ],
-
-    } : {} // fetch all the data blogs
-})
-
+  const depositions = await prisma.depoimento.findMany();
+  
   return (
     <>
-      <Header />
       <Initial infoSite={infoSite} />
       <Cards searchParams={searchParams} />
-      <Depositions infoSite={infoSite} />
-      <Blogs blog={blogs} />
+      <VideoComponent infoSite={infoSite} />
+      <Depositions depositions={depositions} />
     </>
   );
 }

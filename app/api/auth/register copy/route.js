@@ -8,7 +8,7 @@ const prisma = new PrismaClient();
 export async function POST(req, res) {
     try {
 
-        const { username, email, password, cpf, nome, celular, cep, endereco, numero, complemento, bairro  } = await req.json();
+        const { username, email, password } = await req.json();
 
         const exists = await prisma.user.findFirst({
             where: {
@@ -27,37 +27,13 @@ export async function POST(req, res) {
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);
-        // await prisma.user.create({
-        //     data: {
-        //         username: username,
-        //         email: email,
-        //         password: hashedPassword
-        //     }
-        // })
-       const result = await prisma.$transaction(async (prisma) => {
-        const user = await prisma.user.create({
+        await prisma.user.create({
             data: {
                 username: username,
                 email: email,
                 password: hashedPassword
             }
         })
-        const lead = await prisma.lead.create({
-            data: {
-                userId: user.id,
-                cpf: cpf,
-                nome: nome,
-                email: email,
-                celular: celular,
-                cep: cep,
-                endereco: endereco,
-                numero: numero,
-                complemento: complemento,
-                bairro: bairro
-             }
-        });
-        return { user, lead }; 
-       })
 
         return NextResponse.json({ message: 'User Registered' }, { status: 201 });
 
