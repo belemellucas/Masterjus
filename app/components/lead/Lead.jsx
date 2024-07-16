@@ -7,8 +7,7 @@ const Lead = () => {
   const ref = useRef();
   const [formData, setFormData] = useState({
     nome: "",
-    email: "",
-    isComplex: false,
+    email: ""
   });
 
   const handleInputChange = (e) => {
@@ -21,8 +20,6 @@ const Lead = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    formData.isComplex = false;
-
     try {
       const res = await fetch("/api/leads", {
         method: "POST",

@@ -23,7 +23,7 @@ model User {
   Comment     Comment[]
   Blog        Blog[]
   Cards       Cards[]
-  Lead        Lead[]
+  UserInfo    UserInfo[]
 }
 
 model Comment {
@@ -102,7 +102,7 @@ model CatCurso{
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
 }
-model Lead{
+model UserInfo{
   id          String    @id @default(auto()) @map("_id") @db.ObjectId
   userId      String    @db.ObjectId
   user        User?     @relation(fields: [userId], references: [id])
@@ -114,11 +114,18 @@ model Lead{
   endereco    String?
   numero      String?
   complemento String?
-  bairro      String?
-  categoria   String?
+  bairro      String
+  cidade      String
+  estado      String
   published   Boolean   @default(true)
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
+}
+
+model Lead{
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  nome        String
+  email       String
 }
 enum Role {
   ADMIN
