@@ -57,7 +57,7 @@ const CourseItem = ({ card }) => {
 
     return (
         <> 
-       <div className="flex flex-col ml-10 md:ml-0 max-w-[307px]">
+       <div className="flex flex-col md:ml-10 md:max-w-[307px] max-w-full">
        <div className="flex flex-col justify-center text-2xl font-bold leading-8 text-center text-white whitespace-nowrap bg-zinc-100 relative"></div>
           <div className="flex flex-col px-6 py-7 mt-10 w-full bg-white rounded-2xl border border-solid border-zinc-100 max-md:px-5">
             <Link href={`/cards/${id}`}>
