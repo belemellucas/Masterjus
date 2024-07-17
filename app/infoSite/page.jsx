@@ -9,14 +9,7 @@ const prisma = new PrismaClient();
 
 const infoSite = async () => {
    
-    const infoSite = await prisma.infoSite.findMany({
-        where: query ? {
-            OR: [
-                { infoCard: { contains: query } },
-            ],
-
-        } : {} 
-    })
+    const infoSite = await prisma.infoSite.findMany();
     
 
     return (

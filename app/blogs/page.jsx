@@ -1,7 +1,9 @@
 import { PrismaClient } from "@prisma/client"
 import BlogItem from "../components/BlogItem";
 import Search from "../components/Search";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route"
+//import { authOptions } from "@/app/api/auth/[...nextauth]/route"
+import { authOptions } from "@/app/utils/authOptions"
+
 import { getServerSession } from "next-auth"
 import { redirect } from "next/navigation"
 

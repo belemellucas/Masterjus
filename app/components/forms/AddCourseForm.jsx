@@ -6,7 +6,7 @@ import { Controller, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import TagsInput from "react-tagsinput";
 import 'react-tagsinput/react-tagsinput.css';
-import { fetchCategory } from "@/actions/actions"
+//import { fetchCategory } from "@/actions/actions"
 
 
 const AddCourseForm = () => {
@@ -67,11 +67,11 @@ const AddCourseForm = () => {
     }
 
     useEffect(() => {
-        const getCategories = async () => {
+      /*  const getCategories = async () => {
             const categoriesData = await fetchCategory();
             setCategories(categoriesData);
         };
-        getCategories();
+        getCategories(); */
     }, []);
 
     return (

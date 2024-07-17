@@ -1,4 +1,5 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route"
+//import { authOptions } from "@/app/api/auth/[...nextauth]/route"
+import { authOptions } from "@/app/utils/authOptions"
 import AddCourseForm from "@/app/components/forms/AddCourseForm"
 import { getServerSession } from "next-auth"
 import { redirect } from "next/navigation"

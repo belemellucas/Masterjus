@@ -1,5 +1,7 @@
 "usenpm server";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+//import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/app/utils/authOptions"
+
 import { PrismaClient } from "@prisma/client";
 import { getServerSession } from "next-auth";
 import { revalidatePath } from "next/cache";
@@ -240,19 +242,4 @@ export const fetchCategory = async () => {
   return categories;
 };
 
-export const addLead = async (formData) => {
-  const { nome, email } = formData;
 
-  try {
-    const new_lead = await prisma.lead.create({
-      data: {
-        email,
-        nome,
-      },
-    });
-    return new_lead;
-  } catch (error) {
-    console.error("Error adding lead:", error);
-    throw error;
-  }
-};

@@ -19,10 +19,6 @@ const Register = ({ onRegister }) => {
     estado: "",
   });
 
-  // const handleChange = (e) => {
-  //   setFormData({ ...formData, [e.target.name]: e.target.value });
-  // };
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({

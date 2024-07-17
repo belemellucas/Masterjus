@@ -1,6 +1,8 @@
 import { getServerSession } from "next-auth";
 import { PrismaClient } from "@prisma/client";
-import { authOptions } from "./api/auth/[...nextauth]/route";
+//import { authOptions } from "./api/auth/[...nextauth]/route";
+import { authOptions } from "@/app/utils/authOptions"
+
 import Initial from "./components/initial/Initial";
 import Header from "./components/header/Header";
 import Depositions from "./components/depositions/Depositions";

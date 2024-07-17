@@ -1,4 +1,4 @@
-"use client";
+/*"use client";
 
 import { assignPermission } from "@/actions/actions";
 import Button from "@/app/ui/Button";
@@ -31,7 +31,6 @@ const AdminTable = ({ users }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {/* Sample data, replace with your actual data */}
                     {users.map((user, index) => {
                         return <tr key={user?.id}>
                             <td className="border p-4">{index + 1}</td>
@@ -51,7 +50,6 @@ const AdminTable = ({ users }) => {
                             </td>
                         </tr>
                     })}
-                    {/* Add more rows as needed */}
                 </tbody>
             </table>
         </div>
@@ -59,3 +57,4 @@ const AdminTable = ({ users }) => {
 }
 
 export default AdminTable
+*/
