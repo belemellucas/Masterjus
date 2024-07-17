@@ -1,6 +1,7 @@
 import Image from "next/image";
 import SlideImages from "../slide/SlideImages";
 import Lead from "../lead/Lead";
+import Link from "next/link";
 
 function Initial({ infoSite }) {
   const menuOptions = [
@@ -34,20 +35,29 @@ function Initial({ infoSite }) {
             </ul>
           </div>
           <div className="flex gap-4 self-stretch my-auto mt-2">
-            <Image
-              loading="lazy"
-              src="/icones/carrinho.svg"
-              alt="Icone Carrinho"
-              width={19}
-              height={19}
-            />
-            <Image
-              loading="lazy"
-              src="/icones/user.svg"
-              alt="Icone Usuário"
-              width={19}
-              height={19}
-            />
+          <Link href="/registerUser" passHref>
+      
+          <Image
+            loading="lazy"
+            src="/icones/carrinho.svg"
+            alt="Icone Carrinho"
+            width={19}
+            height={19}
+          />
+      
+      </Link>
+ 
+      <Link href="/registerUser" passHref>
+       
+          <Image
+            loading="lazy"
+            src="/icones/user.svg"
+            alt="Icone Usuário"
+            width={19}
+            height={19}
+          />
+        
+      </Link>
           </div>
       </div>
       </div>

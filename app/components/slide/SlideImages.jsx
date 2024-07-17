@@ -23,7 +23,7 @@ const SlideImages = ({ infoSite }) => {
   }
 
   return (
-    <div className="relative w-full h-[452px] overflow-hidden">
+    <div className="relative w-full h-96 md:h-[452px] overflow-hidden">
       <div className="absolute inset-0 transition-opacity duration-1000">
         {infoSite[0].imageAnex.map((base64String, imageIndex) => (
           <div
@@ -34,7 +34,8 @@ const SlideImages = ({ infoSite }) => {
               src={`data:image/jpeg;base64,${base64String}`}
               alt={`Image ${imageIndex}`}
               layout="fill"
-              className="object-cover w-full h-full"
+              objectFit="cover" // Garante que a imagem cubra totalmente o espaço disponível
+              className="w-full h-full" // Garante que a imagem ocupe todo o espaço do contêiner
             />
           </div>
         ))}
