@@ -8,48 +8,60 @@ function Footer() {
         Venha fazer parte!
       </div>
       <div className="flex flex-col">
-        <div className="flex justify-around gap-5 items-start self-center px-5 max-w-full w-[1034px] max-md:flex-wrap">
+        <div className="flex justify-around gap-5 items-start self-center px-5 max-w-full w-[1034px] max-md:flex-wrap pt-8">
           <div>
-          <div className="flex flex-col self-stretch">
-            <img
-              loading="lazy"
-              srcSet="..."
-              className="max-w-full aspect-[2.56] w-[180px]"
-            />
-            <div className="flex z-10 gap-5 justify-between items-start mt-0 text-base leading-3 text-neutral-600">
-              <img
+            <div className="flex flex-col self-stretch">
+              <Image
                 loading="lazy"
-                src="https://cdn.builder.io/api/v1/image/assets/TEMP/2768aeff38b7afd140675fe324559816b661f7b48aa0bdbd3c5171b8e8139996?"
-                className="shrink-0 aspect-[0.77] w-[23px]"
+                src="/logo/logo-master.png"
+                alt="Logo"
+                width={200}
+                height={50}
               />
-              <div className="flex flex-col mt-1.5">
-                <div>Praça da Sé, 96 404</div>
-                <div className="mt-3">Sé - São Paulo - SP</div>
-                <div className="mt-4">CEP 01.001-001</div>
+              <div className="flex z-10 gap-5 justify-between items-start mt-0 pt-4 text-base leading-3 text-neutral-600">
+                <Image
+                  loading="lazy"
+                  src="/icones/localizacao.svg"
+                  alt="localizacao"
+                  width={24}
+                  height={24}
+                />
+                <div className="flex flex-col mt-1.5">
+                  <div>Praça da Sé, 96 404</div>
+                  <div className="mt-3">Sé - São Paulo - SP</div>
+                  <div className="mt-4">CEP 01.001-001</div>
+                </div>
+              </div>
+              <div className="flex gap-5 mt-5  items-center">
+                <div className="text-2xl leading-6 text-stone-400">
+                  <Image
+                    loading="lazy"
+                    src="/icones/iconewhatsapp.svg"
+                    alt="localizacao"
+                    width={34}
+                    height={34}
+                  />
+                </div>
+                <div className="flex-auto text-xl font-semibold leading-4 text-neutral-600">
+                  (11) 95466-5200
+                </div>
               </div>
             </div>
-            <div className="flex gap-5 mt-5">
-              <div className="text-2xl leading-6 text-stone-400"></div>
-              <div className="flex-auto text-xl font-semibold leading-4 text-neutral-600">
-                (11) 95466-5200
+          </div>
+          <div className="flex flex-row gap-5 mt-3 text-neutral-600">
+            <div className="flex flex-col">
+              <div className="text-base font-semibold leading-5">
+                Acesso Rápido
               </div>
+              <div className="mt-6 text-sm leading-5">Carrinho</div>
             </div>
-          </div>
-          </div>
-          <div>
-          <div className="flex flex-col mt-3 text-neutral-600">
-            <div className="text-base font-semibold leading-5">
-              Acesso Rápido
+            <div className="flex flex-col">
+              <div className="text-base font-semibold leading-5">Contato</div>
+              <div className="mt-7 text-sm leading-5">Perguntas Frequentes</div>
             </div>
-            <div className="mt-6 text-sm leading-5">Carrinho</div>
-          </div>
-          <div className="flex flex-col mt-3.5 text-neutral-600">
-            <div className="text-base font-semibold leading-5">Contato</div>
-            <div className="mt-7 text-sm leading-5">Perguntas Frequentes</div>
-          </div>
-          <div className="flex-auto mt-3 text-base font-semibold leading-5 text-neutral-600">
-            Fale Conosco
-          </div>
+            <div className="flex-auto text-base font-semibold leading-5">
+              Fale Conosco
+            </div>
           </div>
         </div>
         <div className="flex flex-col items-center px-16 pt-5 pb-20 mt-16 w-full text-4xl leading-9 bg-white text-stone-400 max-md:px-5 max-md:mt-10 max-md:max-w-full">
@@ -60,36 +72,63 @@ function Footer() {
                 <br />
                 REDES SOCIAIS
               </div>
-              <div></div>
-              <div></div>
-              <div className="my-auto"></div>
+              <div>
+                {" "}
+                <Image
+                  loading="lazy"
+                  src="/icones/facebook-icone-gris.png"
+                  alt="icone-facebook"
+                  width={20}
+                  height={20}
+                />
+              </div>
+              <div>
+                {" "}
+                <Image
+                  loading="lazy"
+                  src="/icones/instagram-icone-gris.png"
+                  alt="icone-instagram"
+                  width={20}
+                  height={20}
+                />
+              </div>
+              <div>
+                <Image
+                  loading="lazy"
+                  src="/icones/youtube-icone-gris.png"
+                  alt="icone-youtube"
+                  width={20}
+                  height={20}
+                />
+              </div>
             </div>
-            <img
+            <Image
               loading="lazy"
-              srcSet="..."
-              className="aspect-[12.5] w-[465px] max-md:max-w-full"
+              src="/imagens/pagamentos.png"
+              alt="pagamentos"
+              width={465}
+              height={37}
             />
           </div>
         </div>
+
         <div className="flex justify-center items-center px-16 py-16 w-full text-sm font-light leading-5 text-center bg-blue-600 max-md:px-5 max-md:max-w-full">
-          <div className="flex gap-3 max-md:flex-wrap">
-            <div className="flex flex-auto gap-3 text-white max-md:flex-wrap">
+          <div className="flex gap-3 max-md:flex-wrap items-end">
+            <div className="flex flex-auto gap-3 text-white max-md:flex-wrap items-end">
               <div>Copyright © 2024</div>
-              <div className="self-start mt-3">.</div>
+              <div className="mt-3">.</div>
               <div className="flex-auto">
                 MasterJus editora e inteligência educacional ltda
               </div>
-              <div className="self-start mt-3">.</div>
+              <div className="mt-3">.</div>
               <div className="flex-auto">CNPJ 41.708.941/0001-61</div>
-              <div className="self-start mt-3">.</div>
-              <div className="flex-auto my-auto">
-                Todos os direitos reservados{" "}
+              <div className="mt-3">.</div>
+              <div className="flex-auto">Todos os direitos reservados</div>
+              <div className="mt-3">.</div>
+              <div className="flex gap-1">
+                <div className="text-white">Desenvolvido por</div>
+                <div className="text-blue-600">TUTOR</div>
               </div>
-              <div className="self-start mt-3">.</div>
-            </div>
-            <div className="flex gap-1 self-start">
-              <div className="grow text-white">Desenvolvido por </div>
-              <div className="text-blue-600">TUTOR</div>
             </div>
           </div>
         </div>
