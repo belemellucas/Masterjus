@@ -8,6 +8,7 @@ import Header from "./components/header/Header";
 import Depositions from "./components/depositions/Depositions";
 import VideoComponent from "./components/video/VideoComponent";
 import Cards from "./cards/page";
+import Footer from "./components/footer/Footer";
 
 
 export default async function Home({ searchParams }) {
@@ -25,6 +26,7 @@ export default async function Home({ searchParams }) {
       <Cards searchParams={searchParams} />
       <VideoComponent infoSite={infoSite} />
       <Depositions depositions={depositions} />
+      <Footer />
     </>
   );
 }
