@@ -1,4 +1,4 @@
-/*"use client";
+"use client";
 
 import { assignPermission } from "@/actions/actions";
 import Button from "@/app/ui/Button";
@@ -57,4 +57,3 @@ const AdminTable = ({ users }) => {
 }
 
 export default AdminTable
-*/

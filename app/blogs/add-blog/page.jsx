@@ -4,6 +4,7 @@ import { authOptions } from "@/app/utils/authOptions"
 import AddBlogForm from "@/app/components/forms/AddBlogForm"
 import { getServerSession } from "next-auth"
 import { redirect } from "next/navigation"
+import AdminLayout from "@/app/admin/layout"
 
 
 const AddBlog = async () => {
@@ -20,12 +21,14 @@ const AddBlog = async () => {
     }
 
     return (
+        <AdminLayout>
         <div>
             <h2 className='text-center mt-4 px-2 text-2xl py-2 font-bold'>Add Blog Page</h2>
 
             <AddBlogForm />
 
         </div>
+        </AdminLayout>
     )
 }
 

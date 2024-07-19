@@ -1,5 +1,6 @@
 "use client";
 import { signIn } from "next-auth/react";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
@@ -65,7 +66,15 @@ const LoginPage = () => {
 
     }
     return (
-        <div className="min-h-screen flex items-center justify-center">
+        <div className="min-h-[80vh] flex items-center justify-center flex-col">
+             <div className="mb-6">
+        <Image
+          src="/logo/logo-master.png" // Substitua pelo caminho correto do seu logo
+          alt="Logo"
+          width={200} // Ajuste o tamanho do logo conforme necessário
+          height={60} // Ajuste o tamanho do logo conforme necessário
+        />
+      </div>
             <form ref={ref} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
                 <div className="mb-4">
                     <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
@@ -107,7 +116,7 @@ const LoginPage = () => {
                         {pending ? 'Loggin in...' : 'Log In'}
                     </button>
 
-                    <Link href={'/auth/register'}><span className="bg-green-600 mx-2 px-2 py-1 rounded-lg">Register</span></Link>
+                    {/* <Link href={'/auth/register'}><span className="bg-green-600 mx-2 px-2 py-1 rounded-lg">Register</span></Link> */}
                 </div>
             </form>
         </div>

@@ -39,7 +39,7 @@ const RegisterPage = () => {
 
             setPending(true);
 
-            const res = await fetch("/api/auth/register", {
+            const res = await fetch("/api/auth/registerSimple", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
