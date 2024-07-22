@@ -1,8 +1,10 @@
 import { fetchSingleBlog } from "@/actions/actions";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+//import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import UpdateBlogForm from "@/app/components/forms/UpdateBlogForm";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
+import { authOptions } from "@/app/utils/authOptions"
+
 
 const UpdateBlogPage = async ({ params }) => {
 

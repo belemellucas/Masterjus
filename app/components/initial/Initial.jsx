@@ -1,86 +1,16 @@
 import Image from "next/image";
 import SlideImages from "../slide/SlideImages";
+import Lead from "../lead/Lead";
+import Link from "next/link";
+import MenuItems from "../menuItems/MenuItems";
+import HamburgerMenu from "../HamburgerMenu";
 
 function Initial({ infoSite }) {
-  const menuOptions = [
-    { name: "Home" },
-    { name: "Cursos" },
-    { name: "PrevEvolution" },
-    { name: "Mat. Gratuitos" },
-    { name: "BLOG" },
-    { name: "Livros/e-books" },
-    { name: "Fale Conosco" },
-  ];
-
   return (
     <>
-      <div className="flex justify-center items-center px-16 py-3 bg-white max-md:px-5">
-      <div className="flex gap-5 justify-between items-start w-full max-w-[1160px] max-md:flex-wrap max-md:max-w-full">
-          <Image
-            loading="lazy"
-            src="/logo/logo-master.png"
-            alt="Logo"
-            width={200}
-            height={50}
-          />
-          <div className="flex flex-wrap max-w-[800px] text-sm font-semibold tracking-wider leading-5 uppercase text-neutral-700">
-            <ul className="flex flex-wrap gap-x-4 gap-y-2">
-              {menuOptions.map((option, index) => (
-                <li key={index} className="flex-shrink-0 mr-4">
-                  {option.name}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="flex gap-4 self-stretch my-auto mt-2">
-            <Image
-              loading="lazy"
-              src="/icones/carrinho.svg"
-              alt="Icone Carrinho"
-              width={19}
-              height={19}
-            />
-            <Image
-              loading="lazy"
-              src="/icones/user.svg"
-              alt="Icone Usuário"
-              width={19}
-              height={19}
-            />
-          </div>
-      </div>
-      </div>
       <SlideImages infoSite={infoSite} />
-      <div className="flex justify-center items-center px-8 py-4 w-full text-xs text-white bg-neutral-950 max-md:px-5 max-md:max-w-full">
-        <div className="flex gap-5 justify-between items-start max-w-full w-[1169px] max-md:flex-wrap">
-          <div className="text-lg leading-7">
-            Fique por dentro
-            <br />
-            de tudo que
-            <br />
-            acontece no
-            <br />
-            Direito!
-          </div>
-          <div className="flex flex-col justify-start items-start px-4 py-3 bg-white rounded-3xl border border-white border-solid text-neutral-500 max-md:pr-5 w-96 h-14">
-            <span className="text-sm font-semibold text-center">nome</span>
-            <input
-              type="text"
-              className="w-full h-full bg-transparent focus:outline-none"
-            />
-          </div>
-          <div className="flex flex-col justify-start items-start px-4 py-3 bg-white rounded-3xl border border-white border-solid text-neutral-500 max-md:pr-5 w-96 h-14">
-            <span className="text-sm font-semibold text-center">e-mail</span>
-            <input
-              type="email"
-              className="w-full h-full bg-transparent focus:outline-none"
-            />
-          </div>
-          <div className="flex justify-center px-12 py-4 text-base leading-6 text-center bg-blue-800 rounded-[40px] max-md:px-5">
-            ENVIAR
-          </div>
-        </div>
-      </div>
+      <Lead />
+
       <div className="self-center px-5 mt-9 max-w-full mx-auto max-w-[1200px]">
         <div className="flex gap-5 max-md:flex-col max-md:gap-0">
           <div className="flex flex-col items-center w-full mt-10 max-md:ml-0 max-md:w-full">

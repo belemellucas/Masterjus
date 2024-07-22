@@ -1,4 +1,4 @@
-"use client";
+/*"use client";
 
 import { updateBlog } from "@/actions/actions";
 import Button from "@/app/ui/Button";
@@ -82,4 +82,4 @@ const UpdateBlogForm = ({ blog }) => {
     )
 }
 
-export default UpdateBlogForm
+export default UpdateBlogForm */

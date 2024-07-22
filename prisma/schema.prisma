@@ -23,6 +23,7 @@ model User {
   Comment     Comment[]
   Blog        Blog[]
   Cards       Cards[]
+  UserInfo    UserInfo[]
 }
 
 model Comment {
@@ -59,7 +60,7 @@ model Cards {
   infoCard    String?
   catId       String    @db.ObjectId
   categoria   CatCurso? @relation(fields: [catId], references: [id])
-  imageCard   String?
+  imageCard   String[]
   valorAtual  String
   valorAnt    String?
   numParcela  Int
@@ -87,7 +88,6 @@ model InfoSite {
 model Depoimento {
   id          String    @id @default(auto()) @map("_id") @db.ObjectId
   imageDep    String
-  subtitulo   String
   depoimento  String?
   autorDepo   String?
   published   Boolean   @default(true)
@@ -102,8 +102,10 @@ model CatCurso{
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
 }
-model Lead{
+model UserInfo{
   id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  userId      String    @db.ObjectId
+  user        User?     @relation(fields: [userId], references: [id])
   cpf         String?
   nome        String?
   email       String?
@@ -112,11 +114,18 @@ model Lead{
   endereco    String?
   numero      String?
   complemento String?
-  bairro      String?
-  categoria   String?
+  bairro      String
+  cidade      String
+  estado      String
   published   Boolean   @default(true)
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
+}
+
+model Lead{
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  nome        String
+  email       String
 }
 enum Role {
   ADMIN

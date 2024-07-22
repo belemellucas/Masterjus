@@ -1,10 +1,11 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route"
-import AddCourseForm from "@/app/components/forms/AddCourseForm"
+//import { authOptions } from "@/app/api/auth/[...nextauth]/route"
+import AddDepositionsForm from "@/app/components/forms/AddDepositionsForm"
 import { getServerSession } from "next-auth"
 import { redirect } from "next/navigation"
+import { authOptions } from "@/app/utils/authOptions"
 
 
-const AddBlog = async () => {
+const AddDepositions = async () => {
     const session = await getServerSession(authOptions)
 
     // as i have the permissions i can see this page / routes
@@ -20,12 +21,10 @@ const AddBlog = async () => {
 
     return (
         <div>
-            <h2 className='text-center mt-4 px-2 text-2xl py-2 font-bold'>Adicionar Curso</h2>
-
-            <AddCourseForm />
-
+            <h2 className='text-center mt-4 px-2 text-2xl py-2 font-bold'>Adicionar Depoimentos</h2>
+            <AddDepositionsForm />
         </div>
     )
 }
 
-export default AddBlog
+export default AddDepositions

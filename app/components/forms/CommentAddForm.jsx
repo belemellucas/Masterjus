@@ -1,4 +1,4 @@
-"use client"
+/*"use client"
 
 import { addCommentToBlog } from "@/actions/actions"
 import Button from "@/app/ui/Button"
@@ -63,4 +63,4 @@ const CommentAddForm = ({ blogId }) => {
     )
 }
 
-export default CommentAddForm
+export default CommentAddForm */
