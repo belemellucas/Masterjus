@@ -9,6 +9,8 @@ import Depositions from "./components/depositions/Depositions";
 import VideoComponent from "./components/video/VideoComponent";
 import Cards from "./courses/page";
 import Footer from "./components/footer/Footer";
+//import Blogs from "./blogs/page";
+import Blogs from "./components/blogs/Blogs";
 
 
 export default async function Home({ searchParams }) {
@@ -20,13 +22,15 @@ export default async function Home({ searchParams }) {
 
   const depositions = await prisma.depoimento.findMany();
   
+  const blogs = await prisma.blog.findMany();
+
   return (
     <>
       <Initial infoSite={infoSite} />
       <Cards searchParams={searchParams} />
       <VideoComponent infoSite={infoSite} />
       <Depositions depositions={depositions} />
-      
+      <Blogs blogs={blogs} />
     </>
   );
 }

@@ -81,7 +81,7 @@ function Header() {
     </div>
 
     {/* Cabeçalho com logo e menu */}
-    <header className="flex justify-between items-center px-16 py-3 bg-white max-md:px-5">
+    <header className="flex justify-center items-center px-16 py-3 bg-white max-md:px-5">
       {/* Logo visível em todas as telas */}
       <div className="flex items-center md:hidden">
         <Image

@@ -62,6 +62,7 @@ function MenuItems() {
                       ))}
                     </ul>
                   )}
+                  
                 </>
               ) : (
                 <Link href={option.href || "/"}>{option.name}</Link>
@@ -70,6 +71,22 @@ function MenuItems() {
           ))}
         </ul>
       </div>
+      <div className="flex gap-4 self-stretch my-auto mt-2">
+            <Image
+              loading="lazy"
+              src="/icones/carrinho.svg"
+              alt="Icone Carrinho"
+              width={19}
+              height={19}
+            />
+            <Image
+              loading="lazy"
+              src="/icones/user.svg"
+              alt="Icone Usuário"
+              width={19}
+              height={19}
+            />
+                   </div>
     </div>
   );
 }
