@@ -44,8 +44,6 @@ const BlogItem = ({ blog }) => {
 
     }
 
-
-
     return (
         <div className="bg-gray-900 p-4 border-2 border-green-200 mx-2 my-2 rounded-lg shadow-md">
 
@@ -59,18 +57,11 @@ const BlogItem = ({ blog }) => {
                 className="object-cover"
               />: null}
             </Link>
-
-            
-
             <Link href={`/blogs/${id}`}>
                 <h2 className='text-xl text-white font-semibold mb-2'>{title}</h2>
             </Link>
-
-
             <p className="mb-2 max-w-md text-green-500 inline-block border-2 p-2 border-green-300 rounded-full">{category}</p>
             <p className="text-gray-300">{description.slice(0, 100)}...</p>
-
-            <button type='button' onClick={() => deleteBlogHandler(id)} className='rounded-lg bg-red-700 text-center px-2 py-1  mt-4'>delete</button>
         </div>
     )
 }

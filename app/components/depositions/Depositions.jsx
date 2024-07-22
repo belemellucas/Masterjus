@@ -4,7 +4,6 @@ function Depositions({ depositions, infoSite }) {
   //     const embedUrl = `https://www.youtube.com/embed/${videoId}`;
   //     return embedUrl;
   //   };
-  console.log(infoSite[0].linkVideo, "LINK VIDEO");
   return (
     <>
    <div className="w-screen h-800 flex justify-center items-center">

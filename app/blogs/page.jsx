@@ -20,7 +20,6 @@ const Blogs = async ({searchParams}) => {
         } : {} // fetch all the data blogs
     })
 
-  
    
     return (
         <div>

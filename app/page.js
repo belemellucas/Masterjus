@@ -15,15 +15,8 @@ export default async function Home({ searchParams }) {
 
   const infoSite = await prisma.infoSite.findMany();
 
-  const blogs = await prisma.blog.findMany({
-    where: query ? {
-        OR: [
-            { title: { contains: query } },
-            { category: { contains: query } },
-        ],
-
-    } : {} // fetch all the data blogs
-})
+  const blogs = await prisma.blog.findMany();
+    
 
   return (
     <>
@@ -31,7 +24,7 @@ export default async function Home({ searchParams }) {
       <Initial infoSite={infoSite} />
       <Cards searchParams={searchParams} />
       <Depositions infoSite={infoSite} />
-      <Blogs blog={blogs} />
+      <Blogs blogs={blogs} />
     </>
   );
 }
