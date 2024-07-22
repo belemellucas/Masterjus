@@ -60,7 +60,7 @@ model Cards {
   infoCard    String?
   catId       String    @db.ObjectId
   categoria   CatCurso? @relation(fields: [catId], references: [id])
-  imageCard   String?
+  imageCard   String[]
   valorAtual  String
   valorAnt    String?
   numParcela  Int

@@ -1,47 +1,9 @@
 import { PrismaClient } from "@prisma/client";
-import BlogItem from "../components/BlogItem";
-import Search from "../components/Search";
-import CardItem from "../components/CourseItem";
-import { fetchCategory } from "@/actions/actions";
-import Image from "next/image";
+import CourseItem from "../courseItem/CourseItem";
 
 const prisma = new PrismaClient();
 
-const Cards = async ({ searchParams }) => {
-  const query = searchParams?.query;
-
-  // Função para buscar categorias e cartões
-  const fetchCards = async () => {
-    const cards = await prisma.cards.findMany({
-      include: { categoria: true }, // Inclui os dados da categoria relacionada
-      where: query
-        ? {
-            OR: [{ infoCard: { contains: query } }],
-          }
-        : {},
-    });
-
-    const categoriesData = await fetchCategory();
-
-    // Inicializar groupedCards com todas as categorias e cartões vazios
-    const groupedCards = {};
-    categoriesData.forEach((category) => {
-      groupedCards[category.NomeCat] = [];
-    });
-
-    // Mapear cartões para categorias correspondentes
-    cards.forEach((card) => {
-      const categoryName = card.categoria?.NomeCat || "Sem Categoria";
-      if (groupedCards[categoryName]) {
-        groupedCards[categoryName].push(card);
-      }
-    });
-
-    return groupedCards;
-  };
-
-  // Renderizar as categorias e cartões após a resolução da promessa
-  const groupedCards = await fetchCards();
+const Course = async ({ groupedCards, searchParams }) => {
 
   return (
     <div className="px-4 md:px-16 pb-6 mt-14 mx-auto bg-zinc-100 min-h-screen">
@@ -68,7 +30,7 @@ const Cards = async ({ searchParams }) => {
                     {cardsInCategory.length > 0 ? (
                       <div className="mt-4">
                         {cardsInCategory.map((card) => (
-                          <CardItem key={card.id} card={card} />
+                          <CourseItem key={card.id} card={card} />
                         ))}
                       </div>
                     ) : (
@@ -85,4 +47,4 @@ const Cards = async ({ searchParams }) => {
   );
 };
 
-export default Cards;
+export default Course

@@ -10,69 +10,40 @@ const CourseItem = ({ card }) => {
         avaliacao, tituloCurso, subCurso, DescCurso, author } = card || {};
 
     const router = useRouter();
-    
-   // const category = categories.find((cat) => cat.id === catId); 
-    
+        
     const formatCurrency = (value) => {
         return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
     } 
-
     const valorAtualFormatted = formatCurrency(parseFloat(valorAtual));
     const valorAntFormatted = formatCurrency(parseFloat(valorAnt));
     const valorParcela = formatCurrency(parseFloat(valorAtual) / numParcela);
-
-    const deleteBlogHandler = async (blogId) => {
-        try {
-            const res = await fetch(`/api/admin/remove-blog/${blogId}`,{
-                method: "DELETE",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                cache: 'no-cache',
-            });
-
-            if (res.ok) {
-                router.refresh();
-                const data = await res.json();
-                toast.success(`${data.message}`, {
-                            position: "top-right",
-                            autoClose: 3000,
-                            hideProgressBar: false,
-                            closeOnClick: true,
-                            pauseOnHover: true,
-                            draggable: true,
-                            progress: undefined,
-                            theme: "dark",
-                        });
-            } else {
-                const errorData = await res.json();
-                console.log('Something went wrong in else block');
-                
-            }
-        } catch (error) {
-           console.log('error', error);
-        }
-
-    }
 
     return (
         <> 
        <div className="flex flex-col md:ml-10 md:max-w-[307px] max-w-full">
        <div className="flex flex-col justify-center text-2xl font-bold leading-8 text-center text-white whitespace-nowrap bg-zinc-100 relative"></div>
           <div className="flex flex-col px-6 py-7 mt-10 w-full bg-white rounded-2xl border border-solid border-zinc-100 max-md:px-5">
-            <Link href={`/cards/${id}`}>
+            <Link href={`/courses/${id}`}>
             {imageCard ? (
                 <div className="relative w-full h-[260px] mb-4 rounded-md overflow-hidden">
-              <Image
+            {/*   <Image
                   blurDataURL={imageCard}
                   placeholder="blur"
                   loading="lazy"
                   layout="fill"
                   objectFit="cover"
                   quality={100}
-                  src={imageCard}
+                  alt="img card"
+                  src={`data:image/jpeg;base64,${imageCard}`}
                   className="absolute inset-0"
-              />
+              />*/}
+               <Image
+              src={`data:image/jpeg;base64,${imageCard}`}
+              alt={`Image ${imageCard}`}
+              layout="fill"
+              objectFit="cover" // Garante que a imagem cubra totalmente o espaço disponível
+              className="w-full h-full" // Garante que a imagem ocupe todo o espaço do contêiner
+            />
                 </div>
             ) : null}
             </Link>

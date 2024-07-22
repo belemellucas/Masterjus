@@ -1,58 +1,63 @@
-import { fetchSingleBlog } from "@/actions/actions";
-import { CommentListings } from "@/app/components/CommentListings";
-import CommentAddForm from "@/app/components/forms/CommentAddForm";
+import { fetchSingleCourse } from "@/actions/actions";
 import Image from "next/image";
 import Link from "next/link";
 
 const CourseDetail = async ({ params }) => {
+  const id = params?.id;
 
-    const id = params?.id;
+  const course = await fetchSingleCourse(id);
 
-    const blog = await fetchSingleBlog(id);
-
-    return (
-        <div className="">
-            <div className="text-center bg-gray-800 rounded-md border-2 border-green-600 shadow-md px-4 py-2 mx-3 my-3">
-
-                {
-                    blog?.imageUrl ?
-                        <Image
-                            blurDataURL={blog?.imageUrl}
-                            placeholder="blur"
-                            loading="lazy"
-                            quality={100}
-                            src={blog?.imageUrl}
-                            alt={blog?.title}
-                            width="600"
-                            height="400"
-                            className="w-full h-[600px] mt-2 px-2 py-2 object-cover mb-2 rounded-sm shadow-sm" /> : null
-                }
-
-                <h2 className="text-center font-extrabold text-lg mx-2 my-2 text-green-500">
-                    ({blog?.category})
-                </h2>
-                <h3 className="font-semibold text-center text-2xl text-gray-200 my-2 mx-2 px-2 py-2">
-                    " {blog?.title} "
-                </h3>
-
-                <p className="text-center text-gray-300 my-2 mx-2 px-2 py-2">
-                    {blog?.description}
-                </p>
-
-                <Link className="text-gray-700 bg-gray-200 my-2 border-2 py-2 rounded-lg border-gray-400 shadow-sm mx-2 px-2" href={`/blogs/update-blog/${blog?.id}`}>Update Blog</Link>
-
+  return (
+    <div className="flex flex-col pb-10">
+      <div className="flex overflow-hidden relative flex-col justify-center items-center px-16 py-3 w-full text-center text-white min-h-[350px] max-md:px-5 max-md:max-w-full"
+      
+      style={{
+        backgroundImage: 'linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(https://www.masterjus.com.br/imagemsite/38/PoS-PLANEJAMENTO-PREV.png)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center'
+      }}
+      >
+        {/* <img
+          loading="lazy"
+          src={`data:image/jpeg;base64,${course.imageCard}`}
+          className="object-cover absolute inset-0 size-full"
+          alt={course.infoCard}
+        /> */}
+        <div className="flex relative flex-col items-center w-full max-w-[1649px] max-md:max-w-full">
+          <div className="self-stretch text-3xl font-medium leading-10 max-md:max-w-full">
+            {course.infoCard}
+          </div>
+          <div className="self-stretch mx-6 mt-14 text-3xl font-light leading-10 max-md:mt-10 max-md:mr-2.5 max-md:max-w-full">
+            {course.subCurso}
+          </div>
+          <div className="flex gap-1 mt-11 max-md:mt-10">
+            <div className="grow text-base leading-6">
+              De <span className="line-through">R$ {course.valorAnt}</span> por{" "}
             </div>
-
-            <div>
-                <CommentAddForm blogId={id} />
+            <div className="text-xl leading-8">R$ {course.valorAtual}</div>
+          </div>
+          <div className="mt-2 text-base leading-6">
+            ou 12 x R$ {(course.valorAtual / course.numParcela).toFixed(2)}
+          </div>
+          <Link href={course.linkCurso} passHref>
+            <div className="flex gap-3 justify-center px-10 py-3.5 mt-6 text-base leading-6 whitespace-nowrap bg-blue-800 rounded-xl max-md:px-5 cursor-pointer">
+              <img
+                loading="lazy"
+                src="https://cdn.builder.io/api/v1/image/assets/TEMP/2d385240edbd6cbd65b40ca89a183f6ef24732315add13c27f6f470eb964240a?"
+                className="shrink-0 self-start w-5 aspect-[1.11]"
+              />
+              <div className="flex-auto">MATRICULE-SE</div>
             </div>
-
-            <div>
-                <CommentListings blogId={id} />
-            </div>
-
+          </Link>
         </div>
-    )
-}
+      </div>
+      <div className="flex flex-col self-center px-5 mt-14 text-base font-bold leading-6 text-neutral-800 max-w-[1200px] max-md:mt-10 max-md:max-w-full">
+        <div className="self-start mt-5 leading-[150%] max-md:max-w-full">
+          {course.DescCurso}
+        </div>
+      </div>
+    </div>
+  );
+};
 
-export default CourseDetail
+export default CourseDetail;

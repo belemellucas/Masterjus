@@ -1,16 +1,23 @@
+"use client";
 import Image from "next/image";
-import React from "react";
-import Card from "../card/Card";
+import React, { useState } from "react";
+import Card from "../course/Course";
 import Search from "../Search";
 import Link from "next/link";
 import MenuItems from "../menuItems/MenuItems";
 import HamburgerMenu from "../HamburgerMenu";
 
 function Header() {
+  const [showSearch, setShowSearch] = useState(false);
+
+  const toggleSearch = () => {
+    setShowSearch(!showSearch);
+  }
+
   return (
     <>
     {/* Barra superior com ícones e pesquisa */}
-    <div className="w-full overflow-hidden bg-blue-800 hidden md:flex">
+    <div className="w-full overflow-hidden bg-[#0402a7] hidden md:flex">
       <div className="flex justify-center items-center px-16 py-3 w-full text-base text-white max-md:px-5 max-md:max-w-full">
         <div className="flex gap-5 justify-between max-w-full w-[1158px] max-md:flex-wrap">
           <div className="flex gap-5 my-auto whitespace-nowrap leading-[100%]">
@@ -43,13 +50,16 @@ function Header() {
             </div>
           </div>
           <div className="flex gap-5 justify-between items-center text-right leading-[150%] max-md:flex-col max-md:items-start">
-            <Search />
+           
+            {showSearch &&  <Search /> }
             <Image
               loading="lazy"
               src="/icones/Icon2.svg"
               alt="Icon 3"
               width={19}
               height={19}
+              onClick={toggleSearch}
+              className="cursor-pointer"
             />
             <div className="flex gap-3">
               <Link href="/auth/login">

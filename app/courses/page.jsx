@@ -1,40 +1,52 @@
-import { PrismaClient } from "@prisma/client"
+import { PrismaClient } from "@prisma/client";
 import BlogItem from "../components/BlogItem";
 import Search from "../components/Search";
-import CardItem from "../components/CourseItem";
-import { fetchCategory } from "@/actions/actions"
+import { fetchCategory } from "@/actions/actions";
+import Image from "next/image";
+import Card from "../components/course/Course";
+import Course from "../components/course/Course";
 
 const prisma = new PrismaClient();
 
-const Courses = async ({searchParams}) => {
-    const query = searchParams?.query;
-   
-    const cards = await prisma.cards.findMany({
-        where: query ? {
-            OR: [
-                { infoCard: { contains: query } },
-                // { categoria: { contains: query } },
-            ],
+const Courses = async ({ searchParams }) => {
+  const query = searchParams?.query;
 
-        } : {} // fetch all the data blogs
-    })
-    
+  // Função para buscar categorias e cartões
+  const fetchCards = async () => {
+    const cards = await prisma.cards.findMany({
+      include: { categoria: true }, // Inclui os dados da categoria relacionada
+      where: query
+        ? {
+            OR: [{ infoCard: { contains: query } }],
+          }
+        : {},
+    });
+
     const categoriesData = await fetchCategory();
 
-    return (
-        <div>
-            {/* <Search /> */}
-            <h2 className='text-center mt-4 px-2 text-2xl py-2 font-bold'>Cursos</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-5 mb-5 px-4 py-5">
-                {cards?.length > 0 && cards.map((card) => (
-                    <CardItem key={card?.id} card={card} categories={categoriesData} />
+    // Inicializar groupedCards com todas as categorias e cartões vazios
+    const groupedCards = {};
+    categoriesData.forEach((category) => {
+      groupedCards[category.NomeCat] = [];
+    });
 
-                ))}
-            </div>
+    // Mapear cartões para categorias correspondentes
+    cards.forEach((card) => {
+      const categoryName = card.categoria?.NomeCat || "Sem Categoria";
+      if (groupedCards[categoryName]) {
+        groupedCards[categoryName].push(card);
+      }
+    });
 
+    return groupedCards;
+  };
 
-        </div>
-    )
-}
+  // Renderizar as categorias e cartões após a resolução da promessa
+  const groupedCards = await fetchCards();
 
-export default Courses
+  return (
+    <Course groupedCards={groupedCards} />
+  );
+};
+
+export default Courses;

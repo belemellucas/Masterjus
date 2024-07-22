@@ -23,6 +23,15 @@ export const fetchSingleBlog = async (id) => {
   return blogs;
 };
 
+export const fetchSingleCourse = async (id) => {
+  const courses = await prisma.cards.findFirst({
+    where: {
+      id: id
+    },
+  });
+  return courses;
+}
+
 export const addBlog = async (formData) => {
   // collect info from form using formData
   const imageUrl = formData.get("imageUrl");
@@ -242,4 +251,44 @@ export const fetchCategory = async () => {
   return categories;
 };
 
+
+export const fetchCardsByCategory = async (category) => {
+  
+  
+  const decodedCategory = decodeURIComponent(category).trim().toLowerCase();
+  const query = decodedCategory ? { categoria: { NomeCat: { equals: decodedCategory, mode: 'insensitive'} } } : {}; 
+  const cards = await prisma.cards.findMany({
+    include: { categoria: true },
+    where: query,
+  });
+
+  //const categoriesData = await fetchCategory();
+  const categoriesData = await prisma.catCurso.findMany();
+
+  const groupedCards = {};
+
+  /*categoriesData.forEach((cat) => {
+    groupedCards[cat.NomeCat.toLowerCase()] = [];
+  });
+
+  cards.forEach((card) => {
+    const categoryName = card.categoria?.NomeCat.toLowerCase() || 'Sem Categoria';
+    if (groupedCards[categoryName]) {
+      groupedCards[categoryName].push(card);
+    }
+  }); */
+  categoriesData.forEach((cat) => {
+    const cleanedCategoryName = cat.NomeCat.replace(/\s+/g, ' ').trim().toLowerCase();
+    groupedCards[cleanedCategoryName] = [];
+  });
+
+  cards.forEach((card) => {
+    const categoryName = card.categoria?.NomeCat.replace(/\s+/g, ' ').trim().toLowerCase() || 'sem categoria';
+    if (groupedCards[categoryName]) {
+      groupedCards[categoryName].push(card);
+    }
+  });
+
+  return groupedCards;
+}
 

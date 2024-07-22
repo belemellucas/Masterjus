@@ -7,7 +7,7 @@ import Initial from "./components/initial/Initial";
 import Header from "./components/header/Header";
 import Depositions from "./components/depositions/Depositions";
 import VideoComponent from "./components/video/VideoComponent";
-import Cards from "./cards/page";
+import Cards from "./courses/page";
 import Footer from "./components/footer/Footer";
 
 
