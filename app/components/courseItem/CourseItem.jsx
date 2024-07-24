@@ -26,17 +26,7 @@ const CourseItem = ({ card }) => {
             <Link href={`/courses/${id}`}>
             {imageCard ? (
                 <div className="relative w-full h-[260px] mb-4 rounded-md overflow-hidden">
-            {/*   <Image
-                  blurDataURL={imageCard}
-                  placeholder="blur"
-                  loading="lazy"
-                  layout="fill"
-                  objectFit="cover"
-                  quality={100}
-                  alt="img card"
-                  src={`data:image/jpeg;base64,${imageCard}`}
-                  className="absolute inset-0"
-              />*/}
+           
                <Image
               src={`data:image/jpeg;base64,${imageCard}`}
               alt={`Image ${imageCard}`}

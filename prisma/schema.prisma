@@ -48,7 +48,7 @@ model Blog {
   tags        String[]
   authorId    String    @db.ObjectId
   author      User?     @relation(fields: [authorId], references: [id])
-  category    String
+  category    String?
   published   Boolean   @default(true)
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt

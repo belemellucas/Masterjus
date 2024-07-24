@@ -2,7 +2,6 @@ import React from "react";
 import BlogPost from './BlogPost';
 
 function Blogs({ searchParams, blogs }) {
-    console.log(blogs)
     return (
       <>
         <main className="bg-white">
