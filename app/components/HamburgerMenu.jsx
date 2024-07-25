@@ -1,11 +1,31 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 
 const HamburgerMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const menuRef = useRef(null);
 
   const toggleMenu = () => setIsOpen(!isOpen);
+
+  const handleClickOutside = (event) => {
+    if (menuRef.current && !menuRef.current.contains(event.target)) {
+      setIsOpen(false); 
+    }
+  };
+
+  useEffect(() => {
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside); 
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside); 
+    }; 
+  }, [isOpen]);
+
   return (
     <div className="relative">
       <button
@@ -30,6 +50,7 @@ const HamburgerMenu = () => {
       {isOpen && (
         <div className="fixed inset-0 z-50 flex items-start bg-black bg-opacity-50 transition-opacity duration-500 ease-in-out">
           <div
+            ref={menuRef}
             className={`bg-black w-64 h-full p-5 transform transition-transform duration-500 ease-in-out ${
               isOpen ? "translate-x-0 scale-100" : "translate-x-full scale-95"
             }`}

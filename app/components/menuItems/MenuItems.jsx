@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 function MenuItems() {
   const menuOptions = [
@@ -24,10 +24,31 @@ function MenuItems() {
   ];
 
   const [isCursosSubMenu, setIsCursosSubMenu] = useState(false);
+  const subMenuRef = useRef(null); 
+  const buttonRef = useRef(null);
 
-  const handleCursosClick = () => {
-    setIsCursosSubMenu(!isCursosSubMenu);
+  const handleCursosClick = (event) => {
+    event.stopPropagation(); 
+    setIsCursosSubMenu((prev) => !prev);
   };
+
+  const handleClickOutside = (event) => {
+    if (
+      subMenuRef.current &&
+      !subMenuRef.current.contains(event.target) &&
+      buttonRef.current &&
+      !buttonRef.current.contains(event.target)
+    ) {
+      setIsCursosSubMenu(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("click", handleClickOutside); 
+    return () => {
+      document.removeEventListener("click", handleClickOutside); 
+    };
+  }, []);
 
   return (
     <div className="flex gap-5 justify-between items-start w-full max-w-[1160px] max-md:flex-wrap max-md:max-w-full">
@@ -49,12 +70,15 @@ function MenuItems() {
                 <>
                   <button
                     onClick={handleCursosClick}
+                    ref={buttonRef}
                     className="flex items-center"
                   >
                     {option.name}
                   </button>
                   {isCursosSubMenu && (
-                    <ul className="absolute top-full left-0 mt-2 bg-gray-200 border border-gray-300 shadow-lg rounded-lg w-48 z-10">
+                    <ul 
+                    ref={subMenuRef}
+                    className="absolute top-full left-0 mt-2 bg-gray-200 border border-gray-300 shadow-lg rounded-lg w-48 z-10">
                       {option.subMenuOptions.map((subItem, subIndex) => (
                         <li key={subIndex} className="p-2 hover:bg-gray-300">
                           <Link href={subItem.href || "/"}>{subItem.name}</Link>
@@ -72,6 +96,7 @@ function MenuItems() {
         </ul>
       </div>
       <div className="flex gap-4 self-stretch my-auto mt-2">
+      <Link href="/cart">
             <Image
               loading="lazy"
               src="/icones/carrinho.svg"
@@ -79,6 +104,8 @@ function MenuItems() {
               width={19}
               height={19}
             />
+      </Link>
+      <Link href="/registerUser">
             <Image
               loading="lazy"
               src="/icones/user.svg"
@@ -86,6 +113,7 @@ function MenuItems() {
               width={19}
               height={19}
             />
+      </Link>
                    </div>
     </div>
   );

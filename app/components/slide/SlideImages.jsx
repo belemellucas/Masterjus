@@ -4,31 +4,48 @@ import { useEffect, useState } from "react";
 
 const SlideImages = ({ infoSite }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const isDesktop = typeof window !== "undefined" && window.innerWidth >= 768;
+  const images = isDesktop ? infoSite[0].imageAnex : infoSite[0].imageMob;
+  console.log(isDesktop);
+  const handlePrev = () => {
+    setCurrentSlide((prevSlide) =>
+      prevSlide === 0 ? images.length - 1 : prevSlide - 1
+    );
+  };
+
+  const handleNext = () => {
+    setCurrentSlide((prevSlide) =>
+      prevSlide === images.length - 1 ? 0 : prevSlide + 1
+    );
+  };
 
   useEffect(() => {
     if (!infoSite || infoSite.length === 0) return;
 
     const interval = setInterval(() => {
-      setCurrentSlide((prevSlide) => (prevSlide + 1) % infoSite[0].imageAnex.length);
+      setCurrentSlide(
+        (prevSlide) => (prevSlide + 1) % infoSite[0].imageAnex.length
+      );
     }, 3000);
 
     return () => clearInterval(interval);
-  }, [infoSite]); 
+  }, [infoSite]);
 
-  useEffect(() => {
-  }, [currentSlide]); 
+  useEffect(() => {}, [currentSlide]);
 
   if (!infoSite || infoSite.length === 0) {
-    return null; 
+    return null;
   }
 
   return (
     <div className="relative w-full h-96 md:h-[452px] overflow-hidden">
       <div className="absolute inset-0 transition-opacity duration-1000">
-        {infoSite[0].imageAnex.map((base64String, imageIndex) => (
+        {images.map((base64String, imageIndex) => (
           <div
             key={imageIndex}
-            className={`absolute inset-0 ${imageIndex === currentSlide ? 'opacity-100' : 'opacity-0'}`}
+            className={`absolute inset-0 ${
+              imageIndex === currentSlide ? "opacity-100" : "opacity-0"
+            }`}
           >
             <Image
               src={`data:image/jpeg;base64,${base64String}`}
@@ -40,6 +57,18 @@ const SlideImages = ({ infoSite }) => {
           </div>
         ))}
       </div>
+      <button
+        onClick={handlePrev}
+        className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-lg"
+      >
+        &lt;
+      </button>
+      <button
+        onClick={handleNext}
+        className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-lg"
+      >
+        &gt;
+      </button>
     </div>
   );
 };

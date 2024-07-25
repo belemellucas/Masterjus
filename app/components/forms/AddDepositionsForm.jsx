@@ -39,7 +39,6 @@ const AddDepositionsForm = () => {
         ...formData,
         imageDep: base64String,
       };
-      console.log(data, "data on");
       const res = await fetch("/api/admin/add-depositions", {
         method: "POST",
         headers: {
@@ -50,7 +49,7 @@ const AddDepositionsForm = () => {
 
       if (res.ok) {
         ref?.current?.reset();
-        router.push("/depositions");
+       // router.push("/depositions");
         const data = await res.json();
         toast.success(`${data.message}`, {
           position: "top-right",
@@ -72,70 +71,79 @@ const AddDepositionsForm = () => {
   };
 
   return (
-    <>
-      <form
-        ref={ref}
-        onSubmit={handleSubmit(onSubmit)}
-        className="max-w-md mx-auto mt-8 p-8 bg-white rounded shadow-md"
-      >
-        <h2 className="text-2xl text-green-500 font-semibold mb-6">
-          Adicionar Novo Depoimento
+    <div className="flex-grow ml-64">
+      <div className="flex flex-col justify-center items-center">
+        <h2 className="text-center px-2 text-2xl py-2 font-bold">
+          Adicionar Depoimento
         </h2>
-        <div className="mb-4">
-          <label
-            htmlFor="image"
-            className="block text-sm font-medium text-gray-600"
-          >
-            Imagem Perfil
+        <form
+          ref={ref}
+          onSubmit={handleSubmit(onSubmit)}
+          className="max-w-md mx-auto mt-8 p-8 bg-white rounded shadow-md"
+        >
+          <h2 className="text-2xl text-green-500 font-semibold mb-6">
+            Adicionar Novo Depoimento
+          </h2>
+          <div className="mb-4">
+            <label
+              htmlFor="image"
+              className="block text-sm font-medium text-gray-600"
+            >
+             Carregar Imagem
+            </label>
+            <input
+              type="file"
+              id="imageDep"
+              name="imageDep"
+              {...register("imageDep")}
+              className="hidden"
+              onChange={handleImageChange}
+            />
+            <label htmlFor="imageDep" className=" cursor-pointer block w-full max-w-xs mx-auto bg-blue-200 hover:bg-blue-300 text-blue-800 font-semibold py-2 px-4 rounded-lg text-center shadow-md">
+            Selecionar Imagem
           </label>
-          <input
-            type="file"
-            id="imageDep"
-            name="imageDep"
-            {...register("imageDep")}
-            className="mt-1 p-2 w-full border text-gray-600 rounded-md"
-            onChange={handleImageChange}
-            placeholder="Adicione a imagem"
-          />
-        </div>
+          </div>
 
-        <div className="mb-4">
-          <label
-            htmlFor="depoimento"
-            className="block text-sm font-medium text-gray-600"
-          >
-            Depoimento
-          </label>
-          <input
-            type="text"
-            id="depoimento"
-            name="depoimento"
-            {...register("depoimento", { required: true })}
-            className="mt-1 p-2 w-full border text-gray-600 rounded-md"
-            placeholder="Insira o depoimento"
-          />
-          {errors?.title && <p role="alert">{errors?.title?.message}</p>}
-        </div>
-        <div className="mb-4">
-          <label
-            htmlFor="autorDepo"
-            className="block text-sm font-medium text-gray-600"
-          >
-            Autor
-          </label>
-          <input
-            type="text"
-            id="autorDepo"
-            name="autorDepo"
-            {...register("autorDepo", { required: true })}
-            className="mt-1 p-2 w-full border text-gray-600 rounded-md"
-            placeholder="Insira o autor"
-          />
-          {errors?.title && <p role="alert">{errors?.title?.message}</p>}
-        </div>
-        <Button label={"Adicionar Depoimento"} color={"green"} />
-      </form>
-    </>
+          <div className="mb-4">
+            <label
+              htmlFor="depoimento"
+              className="block text-sm font-medium text-gray-600"
+            >
+              Depoimento
+            </label>
+            <input
+              type="text"
+              id="depoimento"
+              name="depoimento"
+              {...register("depoimento", { required: true })}
+              className="mt-1 p-2 w-full border text-gray-600 rounded-md"
+              placeholder="Insira o depoimento"
+            />
+            {errors?.title && <p role="alert">{errors?.title?.message}</p>}
+          </div>
+          <div className="mb-4">
+            <label
+              htmlFor="autorDepo"
+              className="block text-sm font-medium text-gray-600"
+            >
+              Autor
+            </label>
+            <input
+              type="text"
+              id="autorDepo"
+              name="autorDepo"
+              {...register("autorDepo", { required: true })}
+              className="mt-1 p-2 w-full border text-gray-600 rounded-md"
+              placeholder="Insira o autor"
+            />
+            {errors?.title && <p role="alert">{errors?.title?.message}</p>}
+          </div>
+          <div className="flex justify-center">
+          <Button label={"Adicionar Depoimento"} color={"green"} />
+          </div>
+        </form>
+      </div>
+    </div>
   );
 };
 

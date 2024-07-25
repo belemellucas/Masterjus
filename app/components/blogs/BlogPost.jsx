@@ -1,7 +1,7 @@
 import React from 'react';
 
 const BlogPost = ({ blogs }) => {
-  console.log(blogs)
+  console.log(blogs, "item blog")
    return (
     <div></div>
    )

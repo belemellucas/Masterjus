@@ -11,7 +11,7 @@ const prisma = new PrismaClient();
 export async function POST(req, { params }) {
   try {
     const session = await getServerSession(authOptions);
-    const { linkVideo, imageAnex } = await req.json();
+    const { linkVideo, imageAnex, imageMob } = await req.json();
  
     if (
       session?.user?.role === "ADMIN" ||
@@ -20,6 +20,7 @@ export async function POST(req, { params }) {
       const newInfo = await prisma.infoSite.create({
         data: {
           imageAnex: imageAnex,
+          imageMob: imageMob,
           linkVideo,
         },
       });

@@ -11,7 +11,7 @@ const prisma = new PrismaClient();
 const Courses = async ({ searchParams }) => {
   const query = searchParams?.query;
 
-  // Função para buscar categorias e cartões
+// Função para buscar categorias e cartões
   const fetchCards = async () => {
     const cards = await prisma.cards.findMany({
       include: { categoria: true }, // Inclui os dados da categoria relacionada

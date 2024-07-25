@@ -37,7 +37,7 @@ const Register = ({ onRegister }) => {
   };
 
   return (
-    <div className="relative w-full max-w-[1200px] mx-auto p-4">
+    <div className="relative w-full max-w-[1200px] mx-auto p-4 mb-20">
       {/* Heading */}
       <h2 className="absolute w-full lg:w-[264.78px] h-[48px] left-1/2 transform -translate-x-1/2 top-[45px] font-poppins font-extrabold text-[32px] lg:text-[40px] leading-[48px] text-center text-[#0A0A0A]">
         Cadastre-se
@@ -46,6 +46,7 @@ const Register = ({ onRegister }) => {
       {/* Form */}
       <form onSubmit={handleSubmit}>
         <div className="relative h-auto lg:h-[416px] mx-auto top-[111px]">
+      
           <div className="relative w-full lg:w-[1170px] h-auto lg:h-[314px] mx-auto bg-[#929090] rounded-[10px] p-4 lg:p-0">
             {/* CPF/CNPJ */}
             <label className="block lg:absolute lg:w-[71.75px] lg:h-[21px] lg:left-[20px] lg:top-[22px] font-poppins font-bold text-[14px] leading-[21px] text-[#212529] mt-2 lg:mt-0">
@@ -244,6 +245,7 @@ const Register = ({ onRegister }) => {
               CADASTRAR
             </button>
           </div>
+
         </div>
       </form>
     </div>

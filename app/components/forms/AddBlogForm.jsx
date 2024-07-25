@@ -6,199 +6,204 @@ import { useRef } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import TagsInput from "react-tagsinput";
-import 'react-tagsinput/react-tagsinput.css';
-import React, { useState } from 'react';
+import "react-tagsinput/react-tagsinput.css";
+import React, { useState } from "react";
 
 const AddBlogForm = () => {
+  const ref = useRef();
 
-    const ref = useRef();
+  // const addBlogHandler = async (formData) => {
+  //     // await addBlog(formData);
+  //     //refresh the form
+  //     ref?.current?.reset();
+  //     // show toast
+  //     toast.success('New Blog Added', {
+  //         position: "top-right",
+  //         autoClose: 3000,
+  //         hideProgressBar: false,
+  //         closeOnClick: true,
+  //         pauseOnHover: true,
+  //         draggable: true,
+  //         progress: undefined,
+  //         theme: "dark",
+  //     });
+  // }
 
-    // const addBlogHandler = async (formData) => {
-    //     // await addBlog(formData);
-    //     //refresh the form
-    //     ref?.current?.reset();
-    //     // show toast 
-    //     toast.success('New Blog Added', {
-    //         position: "top-right",
-    //         autoClose: 3000,
-    //         hideProgressBar: false,
-    //         closeOnClick: true,
-    //         pauseOnHover: true,
-    //         draggable: true,
-    //         progress: undefined,
-    //         theme: "dark",
-    //     });
-    // }
-    
+  const router = useRouter();
 
-    const router = useRouter();
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm();
+  const [base64String, setBase64String] = useState("");
 
-    const {register, handleSubmit, control, formState: {errors}} = useForm();
-    const [base64String, setBase64String] = useState('');
-
-    const handleImageChange = (e) => {
-        const file = e.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                const base64 = reader.result.replace('data:', '').replace(/^.+,/, '');
-                setBase64String(base64);
-               // setValue('imageUrl', base64);
-            };
-            reader.readAsDataURL(file);
-        }
-    };
-
-    const onSubmit = async (formData) => {
-        try {
-            const data = {
-                ...formData,
-                imageUrl: base64String,
-                // title: getValues('title'),
-                // subtitulo: getValues('subtitulo'),
-                // category: getValues('category'),
-                // tags: getValues('tags'),
-                // description: getValues('description'),
-            };
-            console.log(data, "data on")
-            const res = await fetch("/api/admin/add-blog", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(data)
-            });
-
-            if (res.ok) {
-                ref?.current?.reset();
-                router.push('/blogs');
-                const data = await res.json();
-                toast.success(`${data.message}`, {
-                            position: "top-right",
-                            autoClose: 3000,
-                            hideProgressBar: false,
-                            closeOnClick: true,
-                            pauseOnHover: true,
-                            draggable: true,
-                            progress: undefined,
-                            theme: "dark",
-                        });
-            } else {
-                const errorData = await res.json();
-                console.log('Something went wrong in else block');
-                
-            }
-        } catch (error) {
-           console.log('error', error);
-        }
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64 = reader.result.replace("data:", "").replace(/^.+,/, "");
+        setBase64String(base64);
+        // setValue('imageUrl', base64);
+      };
+      reader.readAsDataURL(file);
     }
+  };
 
+  const onSubmit = async (formData) => {
+    console.log(formData);
+    try {
+      const data = {
+        ...formData,
+        imageUrl: base64String,
+      };
+      console.log(data, "data on");
+      const res = await fetch("/api/admin/add-blog", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
 
-    return (
-        <form ref={ref} onSubmit={handleSubmit(onSubmit)}  className="max-w-md mx-auto mt-8 p-8 bg-white rounded shadow-md">
-            <h2 className="text-2xl text-green-500 font-semibold mb-6">Create a New Blog Post</h2>
+      if (res.ok) {
+        ref?.current?.reset();
+        router.push("/blogs");
+        const data = await res.json();
+        toast.success(`${data.message}`, {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+      } else {
+        const errorData = await res.json();
+        console.log("Something went wrong in else block");
+      }
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
 
-            <div className="mb-4">
-                <label htmlFor="image" className="block text-sm font-medium text-gray-600">
-                    Upload Image Link
-                </label>
-                 <input
-                    type="file"
-                    id="imageUrl"
-                    name="imageUrl"
-                    {...register('imageUrl')}
-                    className="mt-1 p-2 w-full border text-gray-600 rounded-md"
-                    onChange={handleImageChange}
-                    placeholder="Enter imageUrl"
-                />
-            </div>
+  return (
+    <div className="flex-grow ml-64">
+      <div className="flex flex-col justify-center items-center">
+      <h2 className='text-center px-2 text-2xl py-2 font-bold'>Adicionar Blog</h2>
 
-            <div className="mb-4">
-                <label htmlFor="title" className="block text-sm font-medium text-gray-600">
-                    Title
-                </label>
-                <input
-                    type="text"
-                    id="title"
-                    name="title"
-                    {...register('title', {required: true})}
-                    className="mt-1 p-2 w-full border text-gray-600 rounded-md"
-                    placeholder="Enter title"
-                />
-                   {errors?.title && <p role="alert">{errors?.title?.message}</p>}
-            </div>
-            <div className="mb-4">
-                <label htmlFor="subtitulo" className="block text-sm font-medium text-gray-600">
-                    subtitulo
-                </label>
-                <input
-                    type="text"
-                    id="subtitulo"
-                    name="subtitulo"
-                    {...register('subtitulo', {required: true})}
-                    className="mt-1 p-2 w-full border text-gray-600 rounded-md"
-                    placeholder="Enter subtitulo"
-                />
-                   {errors?.title && <p role="alert">{errors?.title?.message}</p>}
-            </div>
+        <form
+          ref={ref}
+          onSubmit={handleSubmit(onSubmit)}
+          className="max-w-md mx-auto mt-8 p-8 bg-white rounded shadow-md"
+        >
+          <h2 className="text-2xl text-green-500 font-semibold mb-6">
+            Criar novo bloge page
+          </h2>
 
-            <div className="mb-4">
-                <label htmlFor="description" className="block text-sm font-medium text-gray-600">
-                    Description
-                </label>
-                <textarea
-                    id="description"
-                    name="description"
-                    {...register('description')}
-                    rows="4"
-                    className="mt-1 p-2 text-gray-600 w-full border rounded-md"
-                    placeholder="Enter description"
-                ></textarea>
-            </div>
+          <div className="mb-4">
+            <label
+              htmlFor="imageUrl"
+              className="pb-2block text-sm font-medium text-gray-700"
+            >
+              Carregar imagem
+            </label>
 
-            <div className="mb-4">
-            <label htmlFor="tags" className="block text-sm mt-2 p-1 font-medium text-gray-600 dark:text-gray-400">Job Responsibilities (UI Design, Testing, Coding) *</label>
-            <Controller
-                name="tags"
-                control={control}
-                defaultValue={[]}
-                render={({ field }) => (
-                <div className="my-3 py-2">
-                    <ul className="list-disc list-inside">
-                    {field?.value?.map((tag, index) => (
-                        <li key={index} className="bg-gray-200 dark:bg-gray-600 text-gray-600 dark:text-gray-300 mb-1 px-2 py-1 rounded-md">
-                        {tag}
-                        </li>
-                    ))}
-                    </ul>
-                    <TagsInput
-                    type="text"
-                    {...field}
-                    className="py-2 my-2 w-full border rounded-md focus:outline-none focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300"
-                    />
-                </div>
-                )}
+            <input
+              type="file"
+              id="imageUrl"
+              name="imageUrl"
+              {...register("imageUrl")}
+              className="hidden"
+              onChange={handleImageChange}
+              placeholder="Adicione a Imagem"
             />
-            </div>
+            <label
+              htmlFor="imageUrl"
+              className="cursor-pointer block w-full max-w-xs mx-auto bg-blue-200 hover:bg-blue-300 text-blue-800 font-semibold py-2 px-4 rounded-lg text-center shadow-md"
+            >
+              Selecionar Imagem
+            </label>
+          </div>
 
-            <div className="mb-4">
-                <label htmlFor="category" className="block text-sm font-medium text-gray-600">
-                    Category
-                </label>
-                <input
-                    type="text"
-                    id="category"
-                    name="category"
-                    {...register('category', {required: true})}
-                    className="mt-1 p-2 text-gray-600 w-full border rounded-md"
-                    placeholder="Enter category"
-                />
-            </div>
+          <div className="mb-4">
+            <label
+              htmlFor="title"
+              className="block text-sm font-medium text-gray-600"
+            >
+              Title
+            </label>
+            <input
+              type="text"
+              id="title"
+              name="title"
+              {...register("title", { required: true })}
+              className="mt-1 p-2 w-full border text-gray-600 rounded-md"
+              placeholder="Entre com o título"
+            />
+            {errors?.title && <p role="alert">{errors?.title?.message}</p>}
+          </div>
+          <div className="mb-4">
+            <label
+              htmlFor="subtitulo"
+              className="block text-sm font-medium text-gray-600"
+            >
+              Subtitulo
+            </label>
+            <input
+              type="text"
+              id="subtitulo"
+              name="subtitulo"
+              {...register("subtitulo", { required: true })}
+              className="mt-1 p-2 w-full border text-gray-600 rounded-md"
+              placeholder="Entre com o subtitulo"
+            />
+            {errors?.title && <p role="alert">{errors?.title?.message}</p>}
+          </div>
 
-            <Button label={'Add Blog'} color={'green'} />
+          <div className="mb-4">
+            <label
+              htmlFor="description"
+              className="block text-sm font-medium text-gray-600"
+            >
+              Descrição
+            </label>
+            <textarea
+              id="description"
+              name="description"
+              {...register("description")}
+              rows="4"
+              className="mt-1 p-2 text-gray-600 w-full border rounded-md"
+              placeholder="Entre com a descrição"
+            ></textarea>
+          </div>
 
+          <div className="mb-4">
+            <label
+              htmlFor="category"
+              className="block text-sm font-medium text-gray-600"
+            >
+              Categoria
+            </label>
+            <input
+              type="text"
+              id="category"
+              name="category"
+              {...register("category", { required: true })}
+              className="mt-1 p-2 text-gray-600 w-full border rounded-md"
+              placeholder="Entre com a Categoria"
+            />
+          </div>
+
+          <Button label={"Adicionar Blog"} color={"green"} />
         </form>
-    )
-}
+      </div>
+    </div>
+  );
+};
 
-export default AddBlogForm
+export default AddBlogForm;

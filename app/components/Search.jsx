@@ -26,12 +26,12 @@ const Search = () => {
 
 
     return (
-        <div className="flex flex-1 w-[400] flex-shrink-0">
+        <div className="flex flex-1 w-[170px] h-[24px] flex-shrink-0">
     <label htmlFor="search" className="sr-only">
         Search
     </label>
     <input
-        className="peer block mt-1 py-1.5 rounded-md text-gray-200 bg-[#0402A7] pl-4 text-sm placeholder:text-gray-400 border border-white"
+        className="peer block mt-1 py-1.5 rounded-md text-gray-200 bg-[#0402A7] pl-4 text-xs placeholder:text-gray-400 border border-white"
         placeholder="Pesquise o Curso"
         onChange={(e) => {
             handleSearch(e.target.value);

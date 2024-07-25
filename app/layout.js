@@ -8,6 +8,8 @@ import Footer from './components/footer/Footer'
 import Home from './components/initial/Initial'
 import { getServerSession } from 'next-auth'
 import { authOptions } from "@/app/utils/authOptions"
+import AdminLayout from './admin/layout'
+import HeaderAdmin from './components/admin/header/HeaderAdmin'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -18,12 +20,13 @@ export const metadata = {
 
 const RootLayout = async ({children}) => {
   const session = await getServerSession(authOptions);
+  //console.log(session, "SESSION")
   if (session?.user?.role === "ADMIN") {
      return (
       <html lang="en">
       <body className={inter.className}>
         <Providers>
-      
+         <HeaderAdmin />
         {children}
       
         <ToastComponent />
