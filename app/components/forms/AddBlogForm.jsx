@@ -53,7 +53,6 @@ const AddBlogForm = () => {
   };
 
   const onSubmit = async (formData) => {
-    console.log(formData);
     try {
       const data = {
         ...formData,

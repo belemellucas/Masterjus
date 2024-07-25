@@ -46,12 +46,9 @@ const [mobileBase64Files, setMobileBase64Files] = useState([]);
     Promise.all(promises)
       .then((base64String) => {
         if (type === "desktop") {
-          console.log("entrou no tyoe desktop ")
           setDesktopImageFiles([...desktopImageFiles, ...files]);
           setDesktopBase64Files([...desktopBase64Files, ...base64String]);
         } else if (type === "mobile") {
-          console.log("entrou no tyoe mobile ")
-
           setMobileImageFiles([...mobileImageFiles, ...files]);
           setMobileBase64Files([...mobileBase64Files, ...base64String]);
         }

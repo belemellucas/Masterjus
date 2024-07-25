@@ -6,7 +6,6 @@ const SlideImages = ({ infoSite }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const isDesktop = typeof window !== "undefined" && window.innerWidth >= 768;
   const images = isDesktop ? infoSite[0].imageAnex : infoSite[0].imageMob;
-  console.log(isDesktop);
   const handlePrev = () => {
     setCurrentSlide((prevSlide) =>
       prevSlide === 0 ? images.length - 1 : prevSlide - 1
