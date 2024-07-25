@@ -5,8 +5,10 @@ import { useEffect, useState } from "react";
 const SlideImages = ({ infoSite }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const isDesktop = typeof window !== "undefined" && window.innerWidth >= 768;
-  const images = isDesktop ? infoSite[0].imageAnex : infoSite[0].imageMob;
-  const handlePrev = () => {
+ // const images = isDesktop ? infoSite[0].imageAnex : infoSite[0].imageMob;
+ const images = isDesktop && infoSite && infoSite[0] ? infoSite[0].imageAnex : infoSite && infoSite[0] ? infoSite[0].imageMob : [];
+ 
+ const handlePrev = () => {
     setCurrentSlide((prevSlide) =>
       prevSlide === 0 ? images.length - 1 : prevSlide - 1
     );
@@ -17,6 +19,10 @@ const SlideImages = ({ infoSite }) => {
       prevSlide === images.length - 1 ? 0 : prevSlide + 1
     );
   };
+
+  if (!infoSite || !infoSite[0]) {
+    return <div>Loading...</div>; // or some loading indicator
+  }
 
   useEffect(() => {
     if (!infoSite || infoSite.length === 0) return;
