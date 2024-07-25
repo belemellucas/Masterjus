@@ -32,7 +32,7 @@ const Courses = async ({searchParams}) => {
     {cards?.length > 0 ? (
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-5 mb-5 px-4 py-5">
         {cards.map((card) => (
-          <CardItem key={card?.id} card={card} categories={categoriesData} />
+          <CardItem key={card?.id} card={card} />
         ))}
       </div>
     ) : (

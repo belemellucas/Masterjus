@@ -11,7 +11,7 @@ const CardItem = ({ card, categories }) => {
 
     const router = useRouter();
     
-    const category = categories.find((cat) => cat.id === catId); 
+    //const category = categories.find((cat) => cat.id === catId); 
 
     const deleteBlogHandler = async (blogId) => {
         try {
@@ -54,12 +54,13 @@ const CardItem = ({ card, categories }) => {
 
             <Link href={`/courses/${id}`}>
                 {imageCard ? <Image
-                    blurDataURL={imageCard}
-                    placeholder="blur"
+                   // placeholder="blur"
                     loading="lazy"
                     width="600"
                     height="400"
-                    quality={100} src={imageCard} className="w-full h-[200px]  lg:h-[250px] object-cover mb-4 rounded-md" /> : null}
+                    quality={100} 
+                    src={`data:image/jpeg;base64,${imageCard}`}
+                    className="w-full h-[200px]  lg:h-[250px] object-cover mb-4 rounded-md" /> : null}
             </Link>
 
             <Link href={`/courses/${id}`}>
@@ -67,9 +68,9 @@ const CardItem = ({ card, categories }) => {
             </Link>
  
 
-            <p className="mb-2 max-w-md text-green-500 inline-block border-2 p-2 border-green-300 rounded-full">
+            {/* <p className="mb-2 max-w-md text-green-500 inline-block border-2 p-2 border-green-300 rounded-full">
                 {category ? category.NomeCat : 'Categoria não encontrada'}
-            </p>
+            </p> */}
             <p className="text-gray-300">{DescCurso.slice(0, 100)}...</p>
 
             <button type='button' onClick={() => deleteBlogHandler(id)} className='rounded-lg bg-red-700 text-center px-2 py-1  mt-4'>delete</button>
