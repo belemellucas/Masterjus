@@ -60,9 +60,9 @@ services:
     # we're mounting the volume named "amazona" inside the container at /data/db directory
     # this is done so that the data inside the mongodb container is persisted even if the container is stopped
     volumes:
-      - amazona:/data/db
+      - masterjus:/data/db
     command: sh -c "npm install && npx prisma db push && npm run dev"
 
 # define the volumes to be used by the services
 volumes:
-  amazona:
+  masterjus:
