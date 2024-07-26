@@ -1,5 +1,5 @@
 # specify the version of docker-compose
-version: '3.9'
+version: '3.8'
 
 # define the services to be run
 services:
@@ -29,7 +29,6 @@ services:
     # the second number is the port inside the container
     ports:
       - 3000:3000
-    command: sh -c "npx prisma generate && npm run dev"
 
     # this is for docker compose watch mode
     # anything mentioned under develop will be watched for changes by docker compose watch
@@ -60,9 +59,8 @@ services:
     # we're mounting the volume named "amazona" inside the container at /data/db directory
     # this is done so that the data inside the mongodb container is persisted even if the container is stopped
     volumes:
-      - masterjus:/data/db
-   # command: sh -c "npm install && npx prisma db push && npm run dev"
+      - amazona:/data/db
 
 # define the volumes to be used by the services
 volumes:
-  masterjus:
+  amazona:
