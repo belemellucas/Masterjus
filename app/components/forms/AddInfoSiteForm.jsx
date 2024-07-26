@@ -118,7 +118,7 @@ const [mobileBase64Files, setMobileBase64Files] = useState([]);
   };
 
   return (
-    <div className="flex-grow ml-64">
+    <div className="flex-grow ml-64 mt-16">
       <div className="flex flex-col justify-center items-center">
         <h2 className="text-center mt-4 px-2 text-2xl py-2 font-bold">
            Imagens e video do Site

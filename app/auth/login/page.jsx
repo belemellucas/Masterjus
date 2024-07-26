@@ -56,7 +56,7 @@ const LoginPage = () => {
 
             setPending(false);
 
-            router.replace('/')
+            window.location.href = '/';
 
 
         } catch (error) {

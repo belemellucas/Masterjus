@@ -13,7 +13,7 @@ const HeaderAdmin = () => {
 
   return (
     <header
-      className={`flex justify-between items-center px-6 py-3 bg-gray-700`}
+      className={`fixed top-0 left-0 w-full flex justify-between items-center px-6 py-3 bg-gray-700`}
     >
       <div className="flex items-center">
         <Image
