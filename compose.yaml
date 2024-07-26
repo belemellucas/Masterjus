@@ -1,5 +1,5 @@
 # specify the version of docker-compose
-version: '3.9'
+version: '3.8'
 
 # define the services to be run
 services:
@@ -8,8 +8,8 @@ services:
     # we use depends_on to specify that service depends on another service
     # in this case, we specify that the web depends on the mongo service
     # this means that the mongo service will be started before the web service
-    depends_on:
-      - mongo
+    # depends_on:
+    #   - mongo
 
     # specify the environment variables for the web service
     # these environment variables will be available inside the container
