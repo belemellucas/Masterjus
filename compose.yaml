@@ -1,5 +1,5 @@
 # specify the version of docker-compose
-version: '3.8'
+version: '3.9'
 
 # define the services to be run
 services:
