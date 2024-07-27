@@ -19,7 +19,6 @@ export const metadata = {
 
 const RootLayout = async ({children}) => {
   const session = await getServerSession(authOptions);
-  //console.log(session, "SESSION")
   if (session?.user?.role === "ADMIN") {
      return (
       <html lang="en">

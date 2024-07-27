@@ -11,7 +11,6 @@ import Image from "next/image";
 SwiperCore.use([EffectCoverflow, Pagination]);
 
 const Course = ({ groupedCards, searchParams }) => {
- console.log(groupedCards)
   return (
     <div className="px-4 md:px-16 pb-6 mt-14 mx-auto bg-zinc-100 min-h-screen">
       <div className="flex">

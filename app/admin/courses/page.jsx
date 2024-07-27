@@ -2,15 +2,13 @@ import { PrismaClient } from "@prisma/client"
 import CardItem from "../../components/CardItem";
 import { fetchCategory } from "@/actions/actions"
 import Link from "next/link";
-import AdminLayout from "../layouttest";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/utils/authOptions"
-
+import AdminLayout from "../../components/admin/adminLayout/AdminLayout"
 const prisma = new PrismaClient();
 
 const Courses = async ({searchParams}) => {
   const session = await getServerSession(authOptions);
-  console.log(session, "SESSION")
     const query = searchParams?.query;
    
     const cards = await prisma.cards.findMany({
@@ -43,7 +41,7 @@ const Courses = async ({searchParams}) => {
       <p className="text-center text-gray-500">Não há cursos cadastrados.</p>
     )}
   </div>
-        </AdminLayout>
+  </AdminLayout>
     )
 }
 

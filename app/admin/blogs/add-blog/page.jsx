@@ -4,7 +4,7 @@ import { authOptions } from "@/app/utils/authOptions";
 import AddBlogForm from "@/app/components/forms/AddBlogForm";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
-import AdminLayout from "@/app/admin/layout";
+import AdminLayout from "../../../components/admin/adminLayout/AdminLayout"
 
 const AddBlog = async () => {
   const session = await getServerSession(authOptions);

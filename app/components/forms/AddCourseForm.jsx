@@ -58,9 +58,7 @@ const AddCourseForm = ({ categoriesData }) => {
   };
 
   const handleImageChange = (e) => {
-    console.log(e, "entrou no handle")
     const files = Array.from(e.target.files);
-    console.log(files)
     const promises = files.map((file) => {
       return new Promise((resolve, reject) => {
         const reader = new FileReader();

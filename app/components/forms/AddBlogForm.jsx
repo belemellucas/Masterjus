@@ -58,7 +58,6 @@ const AddBlogForm = () => {
         ...formData,
         imageUrl: base64String,
       };
-      console.log(data, "data on");
       const res = await fetch("/api/admin/add-blog", {
         method: "POST",
         headers: {

@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client"
 import DepositionsItem from "../../components/DepositionsItem";
-import AdminLayout from "../layout";
+import AdminLayout from "../../components/admin/adminLayout/AdminLayout"
 import Link from "next/link";
 
 const prisma = new PrismaClient();

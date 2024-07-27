@@ -19,7 +19,6 @@ const AddBlog = async () => {
         console.log('YOU CANNOT CREATE!')
         redirect('/')
     }
-  console.log(session, "SESSION")
     const categoriesData = await fetchCategory();
    
     return (

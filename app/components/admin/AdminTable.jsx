@@ -14,7 +14,6 @@ const AdminTable = ({ users }) => {
         await assignPermission(userId, formData);
         ref?.current?.reset();
         console.log('Assigning permissions done!')
-
     }
 
     return (

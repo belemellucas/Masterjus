@@ -1,8 +1,9 @@
 import { getServerSession } from "next-auth";
-import { authOptions } from "../../utils/authOptions";
 import { redirect } from "next/navigation";
-import AdminLayout from "../../components/admin/adminLayout/AdminLayout"
-const AdminDashboard = async () => {
+import AdminLayout from "../components/admin/adminLayout/AdminLayout"
+import { authOptions } from "../utils/authOptions";
+import Courses from "./courses/page";
+const Admin = async () => {
   const session = await getServerSession(authOptions);
 
   if (!session) {
@@ -16,10 +17,10 @@ const AdminDashboard = async () => {
   return (
     <AdminLayout>
       <div>
-        <h1>conteudo</h1>
+        <Courses />
       </div>
     </AdminLayout>
   );
 };
 
-export default AdminDashboard;
+export default Admin;

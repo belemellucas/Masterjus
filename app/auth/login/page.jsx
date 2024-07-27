@@ -56,7 +56,7 @@ const LoginPage = () => {
 
             setPending(false);
 
-            window.location.href = '/';
+            window.location.href = '/admin';
 
 
         } catch (error) {

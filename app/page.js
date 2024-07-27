@@ -9,8 +9,8 @@ import Depositions from "./components/depositions/Depositions";
 import VideoComponent from "./components/video/VideoComponent";
 import Cards from "./courses/page";
 import Footer from "./components/footer/Footer";
-//import Blogs from "./blogs/page";
-import Blogs from "./components/blogs/Blogs";
+import Blogs from "./blog/page";
+// import Blogs from "./components/blogs/Blogs";
 
 
 export default async function Home({ searchParams }) {
@@ -30,7 +30,7 @@ export default async function Home({ searchParams }) {
       <Cards searchParams={searchParams} />
       <VideoComponent infoSite={infoSite} />
       <Depositions depositions={depositions} />
-      <Blogs blogs={blogs} />
+      <Blogs searchParams={searchParams} />
     </>
   );
 }

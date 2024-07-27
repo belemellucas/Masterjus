@@ -1,7 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import BlogItem from "../../components/BlogItem";
 import Link from "next/link";
-import AdminLayout from "../layout";
+import AdminLayout from "../../components/admin/adminLayout/AdminLayout"
 
 const prisma = new PrismaClient();
 

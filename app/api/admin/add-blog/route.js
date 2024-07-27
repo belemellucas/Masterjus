@@ -14,10 +14,6 @@ export async function POST(req, {params}) {
         const session = await getServerSession(authOptions);
 
         const { imageUrl, title, subtitulo, category, tags, description } = await req.json();
-
-       // console.log("Received subtitulo:", subtitulo);
-
-      //  console.log(imageUrl);
     
     if (session?.user?.role === 'ADMIN' || session?.user?.permissions?.includes('CREATE_BLOG')) {
         // push the data into the DB
