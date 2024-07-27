@@ -1,7 +1,53 @@
 "use client";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
-const Register = ({ onRegister }) => {
+const Register = () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (formData.password !== formData.confirmPassword) {
+      alert("As senhas não coincidem!");
+      return;
+    }
+    try {
+        const response = await fetch('/api/auth/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json', 
+            },
+            body: JSON.stringify(formData)
+        });
+        if (response.ok) {
+            const data = await response.json(); 
+    
+            toast.success(`${data.message}`, {
+              position: "top-right",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "dark",
+            });
+          } else {
+            toast.error("Ocorreu um erro. Tente novamente.", {
+              position: "top-right",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "dark",
+            });
+            
+          }
+    } catch (error) {
+        console.error('Erro:', error);
+
+    }
+   }
   const [formData, setFormData] = useState({
     cpf: "",
     username: "",
@@ -27,14 +73,14 @@ const Register = ({ onRegister }) => {
     });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (formData.password !== formData.confirmPassword) {
-      alert("As senhas não coincidem!");
-      return;
-    }
-    onRegister(formData);
-  };
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   if (formData.password !== formData.confirmPassword) {
+  //     alert("As senhas não coincidem!");
+  //     return;
+  //   }
+  //   onRegister(formData);
+  // };
 
   return (
     <div className="relative w-full max-w-[1200px] mx-auto p-4 mb-20">

@@ -24,7 +24,7 @@ const Course = ({ groupedCards, searchParams }) => {
                   className="w-full mb-6 flex flex-col items-center sm:flex-row sm:flex-col sm:items-start"
                 >
                   <div className="relative w-full max-w-[278.2px] h-[50px] bg-[#F1F1F1] whitespace-nowrap max-md:whitespace-normal">
-                    <div className="absolute w-full max-w-[262.2px] h-[50px] left-0 top-0 bg-[#200140] rounded-[7px] flex items-center justify-center">
+                    <div className="absolute w-full max-w-[272.2px] h-[50px] left-0 top-0 bg-[#200140] rounded-[7px] flex items-center justify-center">
                       <span
                         className="w-full max-w-[230.58px] h-[42px] font-poppins font-bold text-[20px] md:text-[24px] leading-[30px] md:leading-[36px] text-center text-white flex items-center"
                         style={{ display: "flex", justifyContent: "center" }}
@@ -33,7 +33,7 @@ const Course = ({ groupedCards, searchParams }) => {
                       </span>
                     </div>
                   </div>
-                  <div className="hidden md:flex flex-wrap justify-center mt-4">
+                  <div className="hidden md:flex flex-wrap justify-center gap-10">
                     {cardsInCategory.map((card) => (
                       <CourseItem key={card.id} card={card} />
                     ))}

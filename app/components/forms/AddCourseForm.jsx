@@ -50,13 +50,17 @@ const AddCourseForm = ({ categoriesData }) => {
         const errorData = await res.json();
         console.log("Something went wrong in else block");
       }
+      setImageFiles([]);
+      setBase64Files([]);
     } catch (error) {
       console.log("error", error);
     }
   };
 
   const handleImageChange = (e) => {
+    console.log(e, "entrou no handle")
     const files = Array.from(e.target.files);
+    console.log(files)
     const promises = files.map((file) => {
       return new Promise((resolve, reject) => {
         const reader = new FileReader();

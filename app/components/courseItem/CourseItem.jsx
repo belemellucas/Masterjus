@@ -20,29 +20,18 @@ const CourseItem = ({ card }) => {
 
     return (
         <> 
-       <div className="flex flex-col md:ml-10 md:max-w-[307px] max-w-full">
+       <div className="flex flex-col md:max-w-[307px] max-w-full">
        <div className="flex flex-col justify-center text-2xl font-bold leading-8 text-center text-white whitespace-nowrap bg-zinc-100 relative"></div>
           <div className="flex flex-col px-6 py-7 mt-10 w-full bg-white rounded-2xl border border-solid border-zinc-100 max-md:px-5">
             <Link href={`/courses/${id}`}>
             {imageCard ? (
                 <div className="relative w-full h-[260px] mb-4 rounded-md overflow-hidden">
-            {/*   <Image
-                  blurDataURL={imageCard}
-                  placeholder="blur"
-                  loading="lazy"
-                  layout="fill"
-                  objectFit="cover"
-                  quality={100}
-                  alt="img card"
-                  src={`data:image/jpeg;base64,${imageCard}`}
-                  className="absolute inset-0"
-              />*/}
                <Image
               src={`data:image/jpeg;base64,${imageCard}`}
               alt={`Image ${imageCard}`}
               layout="fill"
-              objectFit="cover" // Garante que a imagem cubra totalmente o espaço disponível
-              className="w-full h-full" // Garante que a imagem ocupe todo o espaço do contêiner
+              objectFit="cover" 
+              className="w-full h-full" 
             />
                 </div>
             ) : null}

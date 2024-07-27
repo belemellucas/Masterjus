@@ -8,7 +8,6 @@ import Footer from './components/footer/Footer'
 import Home from './components/initial/Initial'
 import { getServerSession } from 'next-auth'
 import { authOptions } from "@/app/utils/authOptions"
-import AdminLayout from './admin/layout'
 import HeaderAdmin from './components/admin/header/HeaderAdmin'
 
 const inter = Inter({ subsets: ['latin'] })
