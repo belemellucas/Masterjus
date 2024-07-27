@@ -25,44 +25,66 @@ const Depositions = ({ depositions }) => {
   }, [depositions.length]);
 
   return (
-    <div className="relative flex justify-center pt-10 pb-10">
-      <div className="flex gap-2.5 items-center px-5 max-md:flex-wrap hover">
+    <div className="relative flex justify-center pt-10 pb-10 max-md:flex-col">
+   <div className="hidden md:flex">
         <img
           loading="lazy"
           src="/icones/setaesquerda.svg"
           className="shrink-0 self-stretch my-auto w-12 aspect-square cursor-pointer"
           onClick={handlePrev}
         />
-        {depositions[currentIndex] && (
-          <img
-            loading="lazy"
-            src={`data:image/jpeg;base64,${depositions[currentIndex].imageDep}`}
-            className="shrink-0 self-stretch my-auto max-w-full aspect-[0.74] w-[210px] h-[280px] rounded-full object-cover"
-          />
-        )}
-        <div className="flex flex-col self-stretch max-md:max-w-full h-[calc(100%-6rem)] max-h-[calc(100%-6rem)]">
-          <div className="self-start ml-3 text-4xl font-extrabold leading-10 text-center text-black max-md:max-w-full">
-            DEPOIMENTOS DOS ALUNOS
-          </div>
-          <div className="flex gap-5 mt-20 text-xl leading-8 text-stone-400 max-md:flex-wrap items-start max-md:mt-10">
-            <img
-              loading="lazy"
-              src="https://cdn.builder.io/api/v1/image/assets/TEMP/8eccec54b85373e583f5a92397a197b91fa21b9e4d073fb484382b1ccfba97dc?"
-              className="shrink-0 aspect-[0.98] w-[60px]"
-              onClick={handleNext}
-            />
-                    <div className="flex-auto max-w-[calc(100%-80px)]  overflow-auto">
-
-              {depositions[currentIndex]?.depoimento}
-            </div>
-          </div>
-          <div className="mt-3.5 text-base italic leading-6 text-gray-500 max-md:max-w-full">
-            —{" "}
-            <span className="italic">
-              {depositions[currentIndex]?.autorDepo}
-            </span>
-          </div>
+      </div>
+    <div className="flex gap-2.5 items-center px-5 max-md:flex-col md:justify-between">
+      {/* Esquerda: seta fora no desktop */}
+     
+  
+      {/* Conteúdo principal: setas dentro no mobile */}
+      <div className="flex gap-2.5 items-center max-md:w-full">
+      <img
+        loading="lazy"
+        src="/icones/setaesquerda.svg"
+        className="shrink-0 self-stretch my-auto w-12 aspect-square cursor-pointer md:hidden"
+        onClick={handlePrev}
+      />
+      {depositions[currentIndex] && (
+        <img
+          loading="lazy"
+          src={`data:image/jpeg;base64,${depositions[currentIndex].imageDep}`}
+          className="shrink-0 self-stretch my-auto max-w-full aspect-[0.74] w-[210px] h-[280px] rounded-full object-cover"
+        />
+      )}
+      <img
+        loading="lazy"
+        src="/icones/setadireita.svg"
+        className="shrink-0 self-stretch my-auto w-12 aspect-square cursor-pointer md:hidden"
+        onClick={handleNext}
+      />
+    </div>
+      
+    </div>
+  
+    <div className="flex flex-col self-stretch max-md:max-w-full h-[calc(100%-6rem)] max-h-[calc(100%-6rem)]">
+     
+      <div className="flex gap-5 mt-20 text-xl leading-8 text-stone-400 max-md:flex-wrap items-start max-md:mt-10">
+        <img
+          loading="lazy"
+          src="https://cdn.builder.io/api/v1/image/assets/TEMP/8eccec54b85373e583f5a92397a197b91fa21b9e4d073fb484382b1ccfba97dc?"
+          className="shrink-0 aspect-[0.98] w-[60px]"
+          onClick={handleNext}
+        />
+        <div className="flex-auto w-[300px] max-w-[calc(100%-40px)] overflow-auto">
+          {depositions[currentIndex]?.depoimento}
         </div>
+      </div>
+      <div className="mt-3.5 text-base italic leading-6 text-gray-500 max-md:max-w-full">
+        —{" "}
+        <span className="italic">
+          {depositions[currentIndex]?.autorDepo}
+        </span>
+      </div>
+    </div>
+
+    <div className="hidden md:flex">
         <img
           loading="lazy"
           src="/icones/setadireita.svg"
@@ -70,7 +92,12 @@ const Depositions = ({ depositions }) => {
           onClick={handleNext}
         />
       </div>
-    </div>
+  </div>
+  
+  
+  
+
+
   );
 };
 
