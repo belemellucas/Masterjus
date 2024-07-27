@@ -19,7 +19,7 @@ services:
   mongo:
     image: mongo
     ports:
-      - 2717:27017
+      - 2720:27017
     volumes:
       - amazona:/data/db
 
