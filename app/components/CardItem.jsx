@@ -38,7 +38,7 @@ const CardItem = ({ card, categories }) => {
                         });
             } else {
                 const errorData = await res.json();
-                console.log('Something went wrong in else block');
+                console.log('Something went wrong in else block.');
                 
             }
         } catch (error) {
