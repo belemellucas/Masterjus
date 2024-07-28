@@ -53,7 +53,7 @@ services:
     image: mongo
     # specify the ports to expose for the db service
     ports:
-      - 27017:27017
+      - 27018:27017
 
     # specify the volumes to mount for the db service
     # we're mounting the volume named "amazona" inside the container at /data/db directory
