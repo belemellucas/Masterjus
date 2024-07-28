@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+import { fetchBlogs } from "@/actions/actions";
 import Blogs from "../components/blogs/Blogs"
 
 const prisma = new PrismaClient();
@@ -11,14 +12,12 @@ const BlogsPage = async ({ searchParams }) => {
     where: query
       ? {
           OR: [
-            { title: { contains: query } },
-            { category: { contains: query } },
+            { blog: { contains: query } }
           ],
         }
       : {}, 
   });
-
-
+  
   return (
     
     <Blogs blogs={blogs} />

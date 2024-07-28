@@ -1,4 +1,3 @@
-"use client"
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
@@ -21,7 +20,6 @@ const BlogPost = ({ blogs }) => {
     <Link href={`/blog/${id}`}>
     {imageUrl ? (
     <div className="relative w-full h-[260px] mb-4 rounded-md overflow-hidden">
-   
       <Image
               src={`data:image/jpeg;base64,${imageUrl}`}
               alt={`Image ${imageUrl}`}
