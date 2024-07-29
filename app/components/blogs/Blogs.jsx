@@ -1,5 +1,5 @@
 import React from "react";
-import BlogPost from './BlogPost';
+import BlogPost from '../blogsItem/BlogItem';
 
 function Blogs({ searchParams, blogs }) {
     return (
@@ -7,7 +7,7 @@ function Blogs({ searchParams, blogs }) {
         <main className="bg-white">
             <h1 className="text-4xl font-extrabold text-center text-neutral-950">Nosso Blog</h1>
         </main>
-        <section className="flex justify-center items-center px-16 pt-10 pb-6 bg-white max-md:px-5">
+        <section className="flex flex-col items-center px-16 pt-10 pb-6 bg-white max-md:px-5">
             <div className="flex flex-col max-w-full w-[1150px]">
                 <div className="max-md:max-w-full">
                 <div className="flex gap-5 max-md:flex-col max-md:gap-0">

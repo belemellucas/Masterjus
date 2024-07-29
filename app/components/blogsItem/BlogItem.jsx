@@ -1,4 +1,3 @@
-"use client"
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
@@ -14,14 +13,12 @@ const BlogPost = ({ blogs }) => {
     year: 'numeric',
   });
 
-
    return (
     <div className="flex flex-col text-sm font-medium leading-4 text-right text-neutral-600 max-md:mt-10">
     <article className="flex flex-col justify-center pb-7 bg-white rounded border border-solid border-black border-opacity-10 leading-[150%] max-w-[237px] text-zinc-700">
     <Link href={`/blog/${id}`}>
     {imageUrl ? (
     <div className="relative w-full h-[260px] mb-4 rounded-md overflow-hidden">
-   
       <Image
               src={`data:image/jpeg;base64,${imageUrl}`}
               alt={`Image ${imageUrl}`}
@@ -42,7 +39,7 @@ const BlogPost = ({ blogs }) => {
         <a href="#" className="self-end mt-3 text-sm text-right">Leia mais...</a>
       </div>
     </article>
-  </div>
+    </div>
    )
 }
   

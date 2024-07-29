@@ -18,7 +18,7 @@ function MenuItems() {
     },
     { name: "PrevEvolution" },
     { name: "Mat. Gratuitos" },
-    { name: "BLOG" },
+    { name: "BLOG", href: "/blog/page" },
     { name: "Livros/e-books" },
     { name: "Fale Conosco" },
   ];
