@@ -20,6 +20,7 @@ const AddCourseForm = ({ categoriesData }) => {
   const [categories, setCategories] = useState([]);
   const [imageFiles, setImageFiles] = useState([]);
   const [base64Files, setBase64Files] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState(""); 
 
   const onSubmit = async (data) => {
     try {
@@ -82,6 +83,19 @@ const AddCourseForm = ({ categoriesData }) => {
       .catch((error) => console.error("Error convertion images", error));
   };
 
+  const isFreeMaterialsCategory = (category) => {
+    const normalizedCategory = category.replace(/\s+/g, '').toLowerCase();
+    return normalizedCategory === "materiaisgratuitos";
+  }
+  
+  const handleCategoryChange = (e) => {
+     const selectedCategoryId = e.target.value;
+     const category = categoriesData.find(cat => cat.id === selectedCategoryId);
+     const categoryName = category ? category.NomeCat : ""; 
+     setSelectedCategory(categoryName);
+
+  }
+
   return (
     <div className="flex-grow ml-64">
     <div className="flex flex-col justify-center items-center">
@@ -130,6 +144,7 @@ const AddCourseForm = ({ categoriesData }) => {
             name="catId"
             {...register("catId", { required: true })}
             className="mt-1 p-2 text-gray-600 w-full border rounded-md"
+            onChange={handleCategoryChange}
           >
             <option value="">Selecione uma categoria</option>
             {categoriesData.map((category) => (
@@ -139,8 +154,9 @@ const AddCourseForm = ({ categoriesData }) => {
             ))}
           </select>
         </div>
-  
-        <div className="mb-4 w-full">
+        {!isFreeMaterialsCategory(selectedCategory) && (
+            <>
+              <div className="mb-4 w-full">
           <label htmlFor="valorAtual" className="block text-sm font-medium text-gray-600">Valor Atual</label>
           <input
             id="valorAtual"
@@ -178,6 +194,9 @@ const AddCourseForm = ({ categoriesData }) => {
             placeholder="Insira o número de parcelas"
           />
         </div>
+            </>
+        )}
+      
   
         <div className="mb-4 w-full">
           <label htmlFor="linkCurso" className="block text-sm font-medium text-gray-600">Link do Curso</label>

@@ -11,7 +11,7 @@ const infoSite = async () => {
   return (
     <AdminLayout>
       <div className="flex-grow ml-64">
-        <div className="flex justify-center items-center mt-5">
+        <div className="flex justify-center items-center mt-5 pt-[30px]">
           <Link
             href="/admin/infoSite/add-info"
             className="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg"

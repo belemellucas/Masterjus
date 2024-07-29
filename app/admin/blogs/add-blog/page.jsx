@@ -21,9 +21,9 @@ const AddBlog = async () => {
 
   return (
     <AdminLayout>
-      <div>
+    
         <AddBlogForm />
-      </div>
+    
     </AdminLayout>
   );
 };

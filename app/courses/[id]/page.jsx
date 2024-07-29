@@ -9,20 +9,15 @@ const CourseDetail = async ({ params }) => {
 
   return (
     <div className="flex flex-col pb-10">
-      <div className="flex overflow-hidden relative flex-col justify-center items-center px-16 py-3 w-full text-center text-white min-h-[350px] max-md:px-5 max-md:max-w-full"
-      
-      style={{
-        backgroundImage: 'linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(https://www.masterjus.com.br/imagemsite/38/PoS-PLANEJAMENTO-PREV.png)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center'
-      }}
+      <div
+        className="flex overflow-hidden relative flex-col justify-center items-center px-16 py-3 w-full text-center text-white min-h-[350px] max-md:px-5 max-md:max-w-full"
+        style={{
+          backgroundImage:
+            "linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(https://www.masterjus.com.br/imagemsite/38/PoS-PLANEJAMENTO-PREV.png)",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
       >
-        {/* <img
-          loading="lazy"
-          src={`data:image/jpeg;base64,${course.imageCard}`}
-          className="object-cover absolute inset-0 size-full"
-          alt={course.infoCard}
-        /> */}
         <div className="flex relative flex-col items-center w-full max-w-[1649px] max-md:max-w-full">
           <div className="self-stretch text-3xl font-medium leading-10 max-md:max-w-full">
             {course.infoCard}

@@ -51,61 +51,62 @@ const Course = ({ groupedCards, searchParams }) => {
                       ))}
                     </div>
 
-                    
-
-
                     <div className="md:hidden w-full mt-4">
-      <Swiper
-        ref={swiperRef}
-        effect="coverflow"
-        grabCursor
-        centeredSlides
-        slidesPerView="auto"
-        spaceBetween={20} // Add space between slides for mobile view
-        coverflowEffect={{
-          rotate: 50,
-          stretch: 0,
-          depth: 100,
-          modifier: 1,
-          slideShadows: true,
-        }}
-        pagination={{ clickable: true }}
-        onSlideChange={handleSlideChange}
-        className="mySwiper"
-        breakpoints={{
-          640: {
-            slidesPerView: 1,
-            spaceBetween: 10,
-          },
-          768: {
-            slidesPerView: 2,
-            spaceBetween: 20,
-          },
-          1024: {
-            slidesPerView: 3,
-            spaceBetween: 30,
-          },
-        }}
-      >
-        {cardsInCategory.map((card) => (
-          <SwiperSlide key={card.id} className="w-full max-w-sm">
-            <CourseItem key={card.id} card={card} />
-          </SwiperSlide>
-        ))}
-      </Swiper>
-      <ul className="carousel-indicators flex justify-center mt-4">
-        {cardsInCategory.map((card, index) => (
-          <li
-            key={index}
-            className={`cursor-pointer mx-2 w-3 h-3 rounded-full ${activeIndex === index ? 'bg-blue-800' : 'bg-gray-400'}`}
-            onClick={() => handleIndicatorClick(index)}
-          ></li>
-        ))}
-      </ul>
-    </div>
-
-
-                    
+                      <Swiper
+                        ref={swiperRef}
+                        effect="coverflow"
+                        grabCursor
+                        centeredSlides
+                        slidesPerView="auto"
+                        spaceBetween={20} // Add space between slides for mobile view
+                        coverflowEffect={{
+                          rotate: 50,
+                          stretch: 0,
+                          depth: 100,
+                          modifier: 1,
+                          slideShadows: true,
+                        }}
+                        pagination={{ clickable: true }}
+                        onSlideChange={handleSlideChange}
+                        className="mySwiper"
+                        breakpoints={{
+                          640: {
+                            slidesPerView: 1,
+                            spaceBetween: 10,
+                          },
+                          768: {
+                            slidesPerView: 2,
+                            spaceBetween: 20,
+                          },
+                          1024: {
+                            slidesPerView: 3,
+                            spaceBetween: 30,
+                          },
+                        }}
+                      >
+                        {cardsInCategory.map((card) => (
+                          <SwiperSlide
+                            key={card.id}
+                            className="w-full max-w-sm"
+                          >
+                            <CourseItem key={card.id} card={card} />
+                          </SwiperSlide>
+                        ))}
+                      </Swiper>
+                      <ul className="carousel-indicators flex justify-center mt-4">
+                        {cardsInCategory.map((card, index) => (
+                          <li
+                            key={index}
+                            className={`cursor-pointer mx-2 w-3 h-3 rounded-full ${
+                              activeIndex === index
+                                ? "bg-blue-800"
+                                : "bg-gray-400"
+                            }`}
+                            onClick={() => handleIndicatorClick(index)}
+                          ></li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
                 );
               }

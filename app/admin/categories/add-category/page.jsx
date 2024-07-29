@@ -1,5 +1,6 @@
 //import { authOptions } from "@/app/api/auth/[...nextauth]/route"
 import { authOptions } from "@/app/utils/authOptions";
+import AdminLayout from "../../../components/admin/adminLayout/AdminLayout"
 
 import AddCategoryForm from "@/app/components/forms/AddCategoryForm";
 import { getServerSession } from "next-auth";
@@ -19,9 +20,9 @@ const AddBlog = async () => {
   }
 
   return (
-    <div>
+    <AdminLayout>
       <AddCategoryForm />
-    </div>
+      </AdminLayout>
   );
 };
 

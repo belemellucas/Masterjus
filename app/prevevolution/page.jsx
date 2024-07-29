@@ -1,0 +1,14 @@
+
+
+
+
+const PrevEvolutuion = async () => {
+
+return (
+    <div>
+        <h1>Página em construção</h1>
+    </div>
+)
+}
+
+export default PrevEvolutuion

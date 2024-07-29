@@ -1,22 +1,16 @@
 import { PrismaClient } from "@prisma/client";
 import { fetchCategory } from "@/actions/actions";
 import Course from "../components/course/Course";
+import FreeCourse from "../components/freeCourse/FreeCourse";
 
 const prisma = new PrismaClient();
 
-const Courses = async ({ searchParams }) => {
+const FreeCourses = async ({ searchParams }) => {
   const query = searchParams?.query;
 
 // Função para buscar categorias e cartões
   const fetchCards = async () => {
-    const cards = await prisma.cards.findMany({
-      include: { categoria: true }, // Inclui os dados da categoria relacionada
-      where: query
-        ? {
-            OR: [{ infoCard: { contains: query } }],
-          }
-        : {},
-    });
+    const cards = await prisma.cards.findMany();
 
     const categoriesData = await fetchCategory();
 
@@ -41,8 +35,8 @@ const Courses = async ({ searchParams }) => {
   const groupedCards = await fetchCards();
 
   return (
-    <Course groupedCards={groupedCards} />
+    <FreeCourse groupedCards={groupedCards} />
   );
 };
 
-export default Courses;
+export default FreeCourses;

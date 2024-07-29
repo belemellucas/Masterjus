@@ -62,9 +62,9 @@ model Cards {
   catId       String    @db.ObjectId
   categoria   CatCurso? @relation(fields: [catId], references: [id])
   imageCard   String[]
-  valorAtual  String
+  valorAtual  String?
   valorAnt    String?
-  numParcela  Int
+  numParcela  Int?
   linkCurso   String?
   avaliacao   String?
   tituloCurso String?

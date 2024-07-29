@@ -4,6 +4,7 @@ import AddCourseForm from "@/app/components/forms/AddCourseForm"
 import { getServerSession } from "next-auth"
 import { redirect } from "next/navigation"
 import { fetchCategory } from "@/actions/actions"
+import AdminLayout from "../../../components/admin/adminLayout/AdminLayout"
 
 
 const AddBlog = async () => {
@@ -22,9 +23,9 @@ const AddBlog = async () => {
     const categoriesData = await fetchCategory();
    
     return (
-        <div>
+        <AdminLayout>
             <AddCourseForm categoriesData={categoriesData} />
-        </div>
+        </AdminLayout>
     )
 }
 

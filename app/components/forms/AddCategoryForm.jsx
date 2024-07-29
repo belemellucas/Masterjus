@@ -53,10 +53,10 @@ const AddCategoryForm = () => {
   return (
     <div className="flex-grow ml-64">
       <div className="flex flex-col justify-center items-center">
-        <h2 className="text-center mt-4 px-2 text-2xl py-2 font-bold">
+      <h2 className="text-center px-2 text-2xl py-2 font-bold">
           Adicionar Categoria
         </h2>
-
+        
         <form
           ref={ref}
           onSubmit={handleSubmit(onSubmit)}
@@ -82,7 +82,7 @@ const AddCategoryForm = () => {
             ></input>
           </div>
           <div className="flex justify-center">
-          <Button label={"Adicionar Categoria"} color={"green"} />
+            <Button label={"Adicionar Categoria"} color={"green"} />
           </div>
         </form>
       </div>
