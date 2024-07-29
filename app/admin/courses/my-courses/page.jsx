@@ -1,6 +1,4 @@
-import BlogItem from "@/app/components/BlogItem";
 import Search from "@/app/components/Search";
-import CardItem from "../../components/CourseItem";
 
 const fetchBlogs = async (query = "") => {
   try {
@@ -38,8 +36,8 @@ const CardCourses = async ({ searchParams }) => {
       </h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-5 mb-5 px-4 py-5">
-        {blogs?.length > 0 &&
-          blogs?.map((blog) => <CardItem key={blog?.id} blog={blog} />)}
+        {/* {blogs?.length > 0 &&
+          blogs?.map((blog) => <CardItem key={blog?.id} blog={blog} />)} */}
       </div>
     </div>
   );
