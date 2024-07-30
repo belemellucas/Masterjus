@@ -16,8 +16,8 @@ services:
       MONGO_REPLICA_PORT: 27017
     ports:
       - "27017:27017"
-    volumes:
-      - mongodb_data:/data/db
+    # volumes:
+    #   - mongodb_data:/data/db
   web:
     # we use depends_on to specify that service depends on another service
     # in this case, we specify that the web depends on the mongo service
