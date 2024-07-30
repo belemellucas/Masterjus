@@ -8,8 +8,8 @@ services:
     # we use depends_on to specify that service depends on another service
     # in this case, we specify that the web depends on the mongo service
     # this means that the mongo service will be started before the web service
-    # depends_on:
-    #   - mongo
+    depends_on:
+      - mongo
 
     # specify the environment variables for the web service
     # these environment variables will be available inside the container
@@ -46,4 +46,14 @@ services:
         - path: .
           target: /app
           action: sync
- 
+  mongo:
+    build: ./mongodb_rs
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: db
+      MONGO_REPLICA_HOST: localhost
+      MONGO_REPLICA_PORT: "27017"
+    ports:
+      - 27017:27017
