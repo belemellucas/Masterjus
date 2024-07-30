@@ -1,27 +1,21 @@
-# Use a imagem base oficial do Node.js
-FROM node:18
+# inherit from a existing image to add the functionality
+FROM node:20-alpine
 
-# Defina o diretório de trabalho
+# Set the working directory
 WORKDIR /app
 
-# Copie os arquivos de definição do projeto
+# Copy the package.json and package-lock.json files into the image.
 COPY package*.json ./
 
-# Instale as dependências do projeto
+
+# Install the dependencies.
 RUN npm install
 
-# Copie o restante dos arquivos do projeto
+# Copy the rest of the source files into the image.
 COPY . .
 
-# Gere o Prisma Client e aplique as migrações do banco de dados (descomente se necessário)
-# RUN npx prisma generate
-# RUN npx prisma db push
-
-# Construa o aplicativo
-RUN npm run build
-
-# Exponha a porta que a aplicação irá rodar
+# Expose the port that the application listens on.
 EXPOSE 3000
 
-# Comando para iniciar o aplicativo
-CMD ["npm", "start"]
+# Run the application.
+CMD npm run dev
