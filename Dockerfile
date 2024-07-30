@@ -15,7 +15,7 @@ COPY . .
 
 # Gere o Prisma Client e aplique as migrações do banco de dados
 RUN npx prisma generate
-RUN npx prisma db push
+#RUN npx prisma db push
 
 # Construa o aplicativo
 RUN npm run build
