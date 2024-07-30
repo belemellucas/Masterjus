@@ -3,13 +3,27 @@ version: '3.8'
 
 # define the services to be run
 services:
-  # define the web service for next.js app.
+  db:
+    build: ./mongodb-rs
+    container_name: techdoc_db
+    command: ["mongod", "--bind_ip_all", "--replSet", "rs0"]
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_DATABASE: admin
+      MONGO_REPLICA_HOST: techdoc_db
+      MONGO_REPLICA_PORT: 27017
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
   web:
     # we use depends_on to specify that service depends on another service
     # in this case, we specify that the web depends on the mongo service
     # this means that the mongo service will be started before the web service
     depends_on:
-      - mongo
+      - db
 
     # specify the environment variables for the web service
     # these environment variables will be available inside the container
@@ -46,14 +60,3 @@ services:
         - path: .
           target: /app
           action: sync
-  mongo:
-    build: ./mongodb_rs
-    restart: always
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: admin
-      MONGO_INITDB_ROOT_PASSWORD: password
-      MONGO_INITDB_DATABASE: db
-      MONGO_REPLICA_HOST: localhost
-      MONGO_REPLICA_PORT: "27017"
-    ports:
-      - 27017:27017
