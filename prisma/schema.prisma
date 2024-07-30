@@ -129,6 +129,12 @@ model Lead{
   nome        String
   email       String
 }
+
+model tableTest{
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  nome        String
+}
+
 enum Role {
   ADMIN
   EDITOR
