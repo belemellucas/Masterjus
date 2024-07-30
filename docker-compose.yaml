@@ -4,7 +4,7 @@ version: '3.8'
 # define the services to be run
 services:
   db:
-    build: ./mongodb_rs
+    build: ./mongodb-rs
     container_name: techdoc_db
     command: ["mongod", "--bind_ip_all", "--replSet", "rs0"]
     restart: always
