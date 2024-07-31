@@ -4,12 +4,29 @@ import { useEffect, useState } from "react";
 
 const SlideImages = ({ infoSite }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const isDesktop = typeof window !== "undefined" && window.innerWidth >= 768;
-  // const images = isDesktop ? infoSite[0].imageAnex : infoSite[0].imageMob;
+  const [isDesktop, setIsDesktop] = useState(false);
+  const [images, setImages] = useState([]);
 
-  const images = isDesktop
-    ? infoSite[0]?.imageAnex || []
-    : infoSite[0]?.imageMob || [];
+  useEffect(() => {
+    const updateIsDesktop = () => {
+      setIsDesktop(window.innerWidth >= 768);
+    };
+
+    updateIsDesktop();
+
+    window.addEventListener("resize", updateIsDesktop);
+
+    return () => window.removeEventListener("resize", updateIsDesktop);
+  }, []);
+
+  useEffect(() => {
+    if (infoSite && infoSite[0]) {
+      const selectedImages = isDesktop
+        ? infoSite[0]?.imageAnex || []
+        : infoSite[0]?.imageMob || [];
+      setImages(selectedImages);
+    }
+  }, [infoSite, isDesktop]);
 
   const handlePrev = () => {
     setCurrentSlide((prevSlide) =>
@@ -24,26 +41,18 @@ const SlideImages = ({ infoSite }) => {
   };
 
   if (!infoSite || !infoSite[0]) {
-    return <div>Loading...</div>; // or some loading indicator
+    return <div>Loading...</div>;
   }
 
   useEffect(() => {
     if (!infoSite || infoSite.length === 0) return;
 
     const interval = setInterval(() => {
-      setCurrentSlide(
-        (prevSlide) => (prevSlide + 1) % infoSite[0].imageAnex.length
-      );
+      setCurrentSlide((prevSlide) => (prevSlide + 1) % images.length);
     }, 3000);
 
     return () => clearInterval(interval);
-  }, [infoSite]);
-
-  useEffect(() => {}, [currentSlide]);
-
-  if (!infoSite || infoSite.length === 0) {
-    return null;
-  }
+  }, [images]);
 
   return (
     <div className="relative w-full h-96 md:h-[452px] overflow-hidden">
