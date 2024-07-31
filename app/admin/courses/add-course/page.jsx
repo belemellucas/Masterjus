@@ -17,7 +17,7 @@ const AddBlog = async () => {
     const admin = session?.user?.role === 'ADMIN';
 
     if (!admin && !checkPermissions) {
-        console.log('YOU CANNOT CREATE!')
+        console.log('YOU CANNOT CREATE!!')
         redirect('/')
     }
     const categoriesData = await fetchCategory();
