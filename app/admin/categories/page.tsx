@@ -25,7 +25,7 @@ const Categories = async ({ searchParams }) => {
   return (
     <div>
       <AdminLayout>
-        <div className="flex-grow ml-64">
+        <div className="flex-grow md:ml-64">
           <div className="flex justify-center items-center mt-5 pt-[30px]">
             <Link
               href="/admin/categories/add-category"

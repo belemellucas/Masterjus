@@ -5,6 +5,7 @@ import Link from "next/link";
 const HamburgerMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef(null);
+  const [isCursosSubMenuOpen, setIsCursosSubMenuOpen] = useState(false);
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
@@ -13,6 +14,8 @@ const HamburgerMenu = () => {
       setIsOpen(false); 
     }
   };
+
+  const toggleCursosSubMenu = () => setIsCursosSubMenuOpen(!isCursosSubMenuOpen);
 
   useEffect(() => {
     if (isOpen) {
@@ -76,34 +79,53 @@ const HamburgerMenu = () => {
             </button>
             <ul className="flex flex-col mt-5 space-y-2">
               <li>
-                <Link href="/card" className="block px-4 py-2 text-white hover:bg-gray-800 transition-colors duration-200">HOME</Link>
+                <Link href="/" className="block px-4 py-2 text-white hover:bg-gray-800 transition-colors duration-200">HOME</Link>
               </li>
               <li>
-                <Link href="/blogs" className="block px-4 py-2 text-white hover:bg-gray-800 transition-colors duration-200">CURSOS</Link>
+                <button
+                  onClick={toggleCursosSubMenu}
+                  className={`block px-4 py-2 text-white w-full text-left transition-colors duration-200 ${isCursosSubMenuOpen ? 'bg-gray-800' : 'hover:bg-gray-800'}`}
+                >
+                  CURSOS
+                </button>
+                {isCursosSubMenuOpen && (
+                   <ul className="flex flex-col space-y-1 pl-4 mt-2 bg-gray-900">
+                   <li>
+                     <Link href={"/category/"+ encodeURIComponent("PÓS-GRADUAÇÃO")} className="block px-4 py-2 text-white">PÓS-GRADUAÇÃO</Link>
+                   </li>
+                   <li>
+                     <Link href="https://masterjus.com/praticaprev/" className="block px-4 py-2 text-white">CURSOS PRESENCIAIS</Link>
+                   </li>
+                   <li>
+                     <Link href={"/category/"+ encodeURIComponent("CURSOS PRESENCIAIS")}  className="block px-4 py-2 text-white">PRÁTICAPREV</Link>
+                   </li>
+                   <li>
+                     <Link href={"/category/"+ encodeURIComponent("CURSOS DE PRÁTICA")}  className="block px-4 py-2 text-white">CURSOS DE PRÁTICA</Link>
+                   </li>
+                  
+                 </ul>
+                )}
               </li>
               <li>
-                <Link href="/infoSite" className="block px-4 py-2 text-white hover:bg-gray-800 transition-colors duration-200">PREVEVOLUTION</Link>
+                <Link href={"/category/"+ encodeURIComponent("PrevEvolution")} className="block px-4 py-2 text-white hover:bg-gray-800 transition-colors duration-200">PREVEVOLUTION</Link>
               </li>
               <li>
-                <Link href="/testimonials" className="block px-4 py-2 text-white hover:bg-gray-800 transition-colors duration-200">MAT.GRATUITOS</Link>
+                <Link href="/freeCourses" className="block px-4 py-2 text-white hover:bg-gray-800 transition-colors duration-200">MATERIAIS GRATUITOS</Link>
               </li>
               <li>
-                <Link href="/testimonials" className="block px-4 py-2 text-white hover:bg-gray-800 transition-colors duration-200">BLOG</Link>
+                <Link href="/blogs" className="block px-4 py-2 text-white hover:bg-gray-800 transition-colors duration-200">BLOG</Link>
               </li>
               <li>
-                <Link href="/testimonials" className="block px-4 py-2 text-white hover:bg-gray-800 transition-colors duration-200">LIVROS/E-BOOKS</Link>
+                <Link href={"/category"+ encodeURIComponent("Ebooks")} className="block px-4 py-2 text-white hover:bg-gray-800 transition-colors duration-200">LIVROS/E-BOOKS</Link>
               </li>
               <li>
-                <Link href="/testimonials" className="block px-4 py-2 text-white hover:bg-gray-800 transition-colors duration-200">FALE CONOSCO</Link>
+                <Link href="/contact-us" className="block px-4 py-2 text-white hover:bg-gray-800 transition-colors duration-200">FALE CONOSCO</Link>
               </li>
               <li>
-                <Link href="/testimonials" className="block px-4 py-2 text-white hover:bg-gray-800 transition-colors duration-200">CARRINHO</Link>
+                <Link href="/student-portal" className="block px-4 py-2 text-white hover:bg-gray-800 transition-colors duration-200">PORTAL DO ALUNO</Link>
               </li>
               <li>
-                <Link href="/testimonials" className="block px-4 py-2 text-white hover:bg-gray-800 transition-colors duration-200">PORTAL DO ALUNO</Link>
-              </li>
-              <li>
-                <Link href="/testimonials" className="block px-4 py-2 text-white hover:bg-gray-800 transition-colors duration-200">DEIXE SEU CADASTRO</Link>
+                <Link href="/register-use" className="block px-4 py-2 text-white hover:bg-gray-800 transition-colors duration-200">DEIXE SEU CADASTRO</Link>
               </li>
             </ul>
           </div>

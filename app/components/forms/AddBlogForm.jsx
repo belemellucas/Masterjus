@@ -90,7 +90,7 @@ const AddBlogForm = () => {
   };
 
   return (
-    <div className="flex-grow ml-64">
+    <div className="flex-grow md:ml-64">
       <div className="flex flex-col justify-center items-center">
       <h2 className='text-center px-2 text-2xl py-2 font-bold'>Adicionar Blog</h2>
 

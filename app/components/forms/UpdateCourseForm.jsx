@@ -7,10 +7,15 @@ import { toast } from "react-toastify";
 import TagsInput from "react-tagsinput";
 import "react-tagsinput/react-tagsinput.css";
 //import { fetchCategory } from "@/actions/actions"
+import { usePathname } from 'next/navigation';
 
-const AddCourseForm = ({ categoriesData }) => {
+
+const UpdateCourseForm = ({categoriesData}) => {
   const ref = useRef();
   const router = useRouter();
+  const pathname = usePathname()
+  console.log(pathname)
+  //const { id } = router.query;
   const {
     register,
     handleSubmit,
@@ -21,11 +26,12 @@ const AddCourseForm = ({ categoriesData }) => {
   const [imageFiles, setImageFiles] = useState([]);
   const [base64Files, setBase64Files] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(""); 
-
+ // const cardId = cardId
   const onSubmit = async (data) => {
     try {
       data.imageCard = base64Files;
-      const res = await fetch("/api/admin/add-course", {
+      data.id = id;
+      const res = await fetch("/api/admin/update-course", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -106,7 +112,7 @@ const AddCourseForm = ({ categoriesData }) => {
         className="max-w-md mx-auto mt-2 p-8 bg-white rounded shadow-md flex flex-col items-center"
       >
         <h2 className="text-2xl text-green-500 font-semibold mb-6 flex justify-center">
-         Criar novo curso
+         Editar curso
         </h2>
   
         <div className="mb-4 w-full">
@@ -234,7 +240,7 @@ const AddCourseForm = ({ categoriesData }) => {
           ></textarea>
         </div>
   
-        <Button label={"Adicionar Curso"} color={"green"} />
+        <Button label={"Editar Curso"} color={"green"} />
       </form>
     </div>
   </div>
@@ -242,4 +248,4 @@ const AddCourseForm = ({ categoriesData }) => {
   );
 };
 
-export default AddCourseForm;
+export default UpdateCourseForm;

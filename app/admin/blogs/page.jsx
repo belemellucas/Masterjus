@@ -39,7 +39,7 @@ const Blogs = async ({ searchParams }) => {
 
   return (
     <AdminLayout>
-    <div className="flex-grow ml-64">
+    <div className="flex-grow md:ml-64">
       <div className="flex justify-center items-center mt-5 pt-[30px]">
         <Link
           href="/admin/blogs/add-blog"

@@ -47,7 +47,9 @@ const CardItem = ({ card, categories }) => {
 
     }
 
-
+    const updateCourseHandler = (id) => {
+        router.push(`/admin/courses/update-course/${id}`);
+    }
 
     return (
         <div className="bg-gray-900 p-4 border-2 border-green-200 mx-2 my-2 rounded-lg shadow-md">
@@ -72,8 +74,10 @@ const CardItem = ({ card, categories }) => {
                 {category ? category.NomeCat : 'Categoria não encontrada'}
             </p> */}
             <p className="text-gray-300">{DescCurso.slice(0, 100)}...</p>
-
+             <div className="flex justify-center gap-4">
             <button type='button' onClick={() => deleteBlogHandler(id)} className='rounded-lg bg-red-700 text-center px-2 py-1  mt-4'>delete</button>
+            <button type='button' onClick={() => updateCourseHandler(id)} className='rounded-lg bg-green-700 text-center px-2 py-1  mt-4'>update</button>
+            </div>
         </div>
     )
 }

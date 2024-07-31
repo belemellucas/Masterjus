@@ -51,20 +51,16 @@ const AddCategoryForm = () => {
   };
 
   return (
-    <div className="flex-grow ml-64">
+    <div className="flex-grow md:ml-64">
       <div className="flex flex-col justify-center items-center">
-      <h2 className="text-center px-2 text-2xl py-2 font-bold">
-          Adicionar Categoria
-        </h2>
-        
+      <h2 className='text-center px-2 text-2xl py-2 font-bold'>Adicionar Categoria</h2>
+
+
         <form
           ref={ref}
           onSubmit={handleSubmit(onSubmit)}
           className="max-w-md mx-auto mt-8 p-8 bg-white rounded shadow-md"
         >
-          <h2 className="text-2xl text-green-500 font-semibold mb-6">
-            Adicionar nova categoria
-          </h2>
           <div className="mb-4">
             <label
               htmlFor="catId"
