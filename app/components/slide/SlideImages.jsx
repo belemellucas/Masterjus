@@ -12,12 +12,22 @@ const SlideImages = ({ infoSite }) => {
       setIsDesktop(window.innerWidth >= 768);
     };
 
+    // Atualiza isDesktop e images ao montar o componente
     updateIsDesktop();
 
-    window.addEventListener("resize", updateIsDesktop);
+    if (infoSite && infoSite[0]) {
+      const selectedImages = window.innerWidth >= 768
+        ? infoSite[0]?.imageAnex || []
+        : infoSite[0]?.imageMob || [];
+      setImages(selectedImages);
+    }
 
-    return () => window.removeEventListener("resize", updateIsDesktop);
-  }, []);
+    // Adiciona um event listener para atualizar isDesktop ao redimensionar a janela
+    window.addEventListener('resize', updateIsDesktop);
+
+    // Limpa o event listener ao desmontar o componente
+    return () => window.removeEventListener('resize', updateIsDesktop);
+  }, [infoSite]);
 
   useEffect(() => {
     if (infoSite && infoSite[0]) {
@@ -26,7 +36,7 @@ const SlideImages = ({ infoSite }) => {
         : infoSite[0]?.imageMob || [];
       setImages(selectedImages);
     }
-  }, [infoSite, isDesktop]);
+  }, [isDesktop, infoSite]);
 
   const handlePrev = () => {
     setCurrentSlide((prevSlide) =>
@@ -48,7 +58,9 @@ const SlideImages = ({ infoSite }) => {
     if (!infoSite || infoSite.length === 0) return;
 
     const interval = setInterval(() => {
-      setCurrentSlide((prevSlide) => (prevSlide + 1) % images.length);
+      setCurrentSlide(
+        (prevSlide) => (prevSlide + 1) % images.length
+      );
     }, 3000);
 
     return () => clearInterval(interval);
