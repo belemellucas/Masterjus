@@ -21,7 +21,6 @@ export async function GET(req) {
     const blogs = await prisma.blog.findMany({
       where: whereCondition,
     });
-
     return NextResponse.json(
       { message: "Blogs Data", data: blogs },
       { status: 201 }

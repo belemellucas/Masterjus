@@ -1,26 +1,19 @@
 "use client";
 import Image from "next/image";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
 import React from "react";
 import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
-const CardItem = ({ card, categories }) => {
+const InfoItem = ({ infoSite }) => {
+    console.log(infoSite)
   const {
     id,
-    infoCard,
-    catId,
-    imageCard,
-    valorAtual,
-    valorAnt,
-    numParcela,
-    linkCurso,
-    avaliacao,
-    tituloCurso,
-    subCurso,
-    DescCurso,
-    author,
-  } = card || {};
+    linkVideo,
+    tituloVideo,
+    descVideo,
+    imageMob,
+    imageAnex
+  } = infoSite || {};
 
   const router = useRouter();
 
@@ -59,9 +52,10 @@ const CardItem = ({ card, categories }) => {
   const updateCourseHandler = (id) => {
     router.push(`/admin/courses/update-course/${id}`);
   };
+
   return (
     <div className="bg-gray-900 p-4 border-2 border-green-200 mx-2 my-2 rounded-lg shadow-md">
-      {imageCard ? (
+      {/* {imageCard ? (
         <Image
           // placeholder="blur"
           loading="lazy"
@@ -75,9 +69,7 @@ const CardItem = ({ card, categories }) => {
 
       <h2 className="text-xl text-white font-semibold mb-2">{infoCard}</h2>
 
-      {/* <p className="mb-2 max-w-md text-green-500 inline-block border-2 p-2 border-green-300 rounded-full">
-                {category ? category.NomeCat : 'Categoria não encontrada'}
-            </p> */}
+     
       <p className="text-gray-300">{DescCurso.slice(0, 100)}...</p>
       <div className="flex justify-center gap-4">
         <button
@@ -94,9 +86,9 @@ const CardItem = ({ card, categories }) => {
         >
           update
         </button>
-      </div>
+      </div> */}
     </div>
   );
 };
 
-export default CardItem;
+export default InfoItem;

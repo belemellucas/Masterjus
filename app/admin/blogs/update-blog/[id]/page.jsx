@@ -1,10 +1,9 @@
 import { fetchSingleBlog } from "@/actions/actions";
-//import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import UpdateBlogForm from "@/app/components/forms/UpdateBlogForm";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { authOptions } from "@/app/utils/authOptions"
-
+import UpdateBlogForm from "@/app/components/forms/UpdateBlogForm";
+import AdminLayout from "../../../../components/admin/adminLayout/AdminLayout";
 
 const UpdateBlogPage = async ({ params }) => {
 
@@ -26,15 +25,11 @@ const UpdateBlogPage = async ({ params }) => {
     // get the db info for each blog to fill forms
 
     const blog = await fetchSingleBlog(id);
-
     return (
-        <div>
-
-            <h2 className='text-center mt-4 px-2 text-2xl py-2 font-bold'>Update Blog Page</h2>
-
+        <AdminLayout>
             <UpdateBlogForm blog={blog} />
-
-        </div>
+        </AdminLayout>
+       
     )
 }
 

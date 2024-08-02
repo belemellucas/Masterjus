@@ -21,7 +21,7 @@ const AddCourseForm = ({ categoriesData }) => {
   const [imageFiles, setImageFiles] = useState([]);
   const [base64Files, setBase64Files] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(""); 
-
+  const [selectedImage, setSelectedImage] = useState(null);
   const onSubmit = async (data) => {
     try {
       data.imageCard = base64Files;
@@ -35,7 +35,6 @@ const AddCourseForm = ({ categoriesData }) => {
 
       if (res.ok) {
         ref?.current?.reset();
-       // router.push("/courses");
         const data = await res.json();
         toast.success(`${data.message}`, {
           position: "top-right",
@@ -47,6 +46,9 @@ const AddCourseForm = ({ categoriesData }) => {
           progress: undefined,
           theme: "dark",
         });
+        await fetch('/api/admin/all-courses');
+        router.push("/admin/courses");
+
       } else {
         const errorData = await res.json();
         console.log("Something went wrong in else block");
@@ -66,6 +68,7 @@ const AddCourseForm = ({ categoriesData }) => {
 
         reader.onload = (e) => {
           resolve(reader.result.split(",")[1]);
+          setSelectedImage(reader.result)
         };
 
         reader.onerror = (error) => {
@@ -96,10 +99,13 @@ const AddCourseForm = ({ categoriesData }) => {
 
   }
 
+  const handleRemoveImage = () => {
+    setSelectedImage(null)
+  }
+
   return (
     <div className="flex-grow md:ml-64">
-    <div className="flex flex-col justify-center items-center">
-      <h2 className='text-center px-2 text-2xl py-2 font-bold'>Adicionar Curso</h2>
+    <div className="flex flex-col justify-center items-center pt-14">
       <form
         ref={ref}
         onSubmit={handleSubmit(onSubmit)}
@@ -122,6 +128,18 @@ const AddCourseForm = ({ categoriesData }) => {
           <label htmlFor="image" className="cursor-pointer block w-full max-w-xs mx-auto bg-blue-200 hover:bg-blue-300 text-blue-800 font-semibold py-2 px-4 rounded-lg text-center shadow-md">
             Selecionar Imagem
           </label>
+          {selectedImage && (
+            <div className="mt-4 relative">
+          <img src={selectedImage} alt="Preview" className="w-20 h-20 mx-auto rounded-md" />
+          <button
+              type="button"
+              onClick={handleRemoveImage}
+              className="absolute top-0 right-0 text-black rounded-full p-1 -mt-2 -mr-2"
+            >
+              &times;
+            </button>
+          </div>
+          )}
         </div>
   
         <div className="mb-4 w-full">

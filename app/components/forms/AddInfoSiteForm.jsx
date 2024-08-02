@@ -22,9 +22,9 @@ const AddInfoSiteForm = () => {
   const [imageFiles, setImageFiles] = useState([]);
   const [base64Files, setBase64Files] = useState([]);
   const [desktopImageFiles, setDesktopImageFiles] = useState([]);
-const [desktopBase64Files, setDesktopBase64Files] = useState([]);
-const [mobileImageFiles, setMobileImageFiles] = useState([]);
-const [mobileBase64Files, setMobileBase64Files] = useState([]);
+  const [desktopBase64Files, setDesktopBase64Files] = useState([]);
+  const [mobileImageFiles, setMobileImageFiles] = useState([]);
+  const [mobileBase64Files, setMobileBase64Files] = useState([]);
 
   const handleImageChange = (e, type) => {
     const files = Array.from(e.target.files);
@@ -52,16 +52,14 @@ const [mobileBase64Files, setMobileBase64Files] = useState([]);
           setMobileImageFiles([...mobileImageFiles, ...files]);
           setMobileBase64Files([...mobileBase64Files, ...base64String]);
         }
-
       })
       .catch((error) => console.error("Error convertion images", error));
   };
 
-
   const onSubmit = async (event) => {
     if (desktopBase64Files.length === 0 || mobileBase64Files.length === 0) {
-      alert("Por favor, carregue imagens para desktop e mobile."); 
-      return; 
+      alert("Por favor, carregue imagens para desktop e mobile.");
+      return;
     }
     try {
       event.imageAnex = desktopBase64Files;
@@ -96,22 +94,22 @@ const [mobileBase64Files, setMobileBase64Files] = useState([]);
       console.log("error", error);
     }
   };
-  
+
   const removeDesktopImage = (index) => {
     const newImageFiles = [...desktopImageFiles];
     newImageFiles.splice(index, 1);
     setDesktopImageFiles(newImageFiles);
-  
+
     const newBase64Files = [...desktopBase64Files];
     newBase64Files.splice(index, 1);
     setDesktopBase64Files(newBase64Files);
   };
-  
+
   const removeMobileImage = (index) => {
     const newImageFiles = [...mobileImageFiles];
     newImageFiles.splice(index, 1);
     setMobileImageFiles(newImageFiles);
-  
+
     const newBase64Files = [...mobileBase64Files];
     newBase64Files.splice(index, 1);
     setMobileBase64Files(newBase64Files);
@@ -121,7 +119,7 @@ const [mobileBase64Files, setMobileBase64Files] = useState([]);
     <div className="flex-grow ml-64 mt-16">
       <div className="flex flex-col justify-center items-center">
         <h2 className="text-center mt-4 px-2 text-2xl py-2 font-bold">
-           Imagens e video do Site
+          Imagens e video do Site
         </h2>
         <form
           ref={ref}
@@ -132,21 +130,29 @@ const [mobileBase64Files, setMobileBase64Files] = useState([]);
             Adicionar novas imagens
           </h2>
           <div className="mb-4 w-full">
-          <label htmlFor="desktop-file" className="block text-sm font-medium text-gray-700 pb-2">Carregar Imagens para Desktop</label>
-            
-          <input
-            type="file"
-            id="desktop-file"
-            name="desktop-file"
-          //  onChange={handleImageChange}
-            onChange={(e) => handleImageChange(e, "desktop")}
-            accept="image/*"
-            className="hidden"
-          />
-           
-            <label htmlFor="desktop-file" className="cursor-pointer block w-full max-w-xs mx-auto bg-blue-200 hover:bg-blue-300 text-blue-800 font-semibold py-2 px-4 rounded-lg text-center shadow-md">
-            Selecionar Imagens
-          </label>
+            <label
+              htmlFor="desktop-file"
+              className="block text-sm font-medium text-gray-700 pb-2"
+            >
+              Carregar Imagens para Desktop
+            </label>
+
+            <input
+              type="file"
+              id="desktop-file"
+              name="desktop-file"
+              //  onChange={handleImageChange}
+              onChange={(e) => handleImageChange(e, "desktop")}
+              accept="image/*"
+              className="hidden"
+            />
+
+            <label
+              htmlFor="desktop-file"
+              className="cursor-pointer block w-full max-w-xs mx-auto bg-blue-200 hover:bg-blue-300 text-blue-800 font-semibold py-2 px-4 rounded-lg text-center shadow-md"
+            >
+              Selecionar Imagens
+            </label>
             <div>
               {desktopImageFiles.map((preview, index) => (
                 <div
@@ -159,7 +165,10 @@ const [mobileBase64Files, setMobileBase64Files] = useState([]);
                     alt=""
                     style={{ width: "100px", height: "auto" }}
                   />
-                  <button type="button" onClick={() => removeDesktopImage(index)}>
+                  <button
+                    type="button"
+                    onClick={() => removeDesktopImage(index)}
+                  >
                     Remove
                   </button>
                 </div>
@@ -172,20 +181,28 @@ const [mobileBase64Files, setMobileBase64Files] = useState([]);
             )}
           </div>
           <div className="mb-4 w-full">
-          <label htmlFor="mobile-file" className="block text-sm font-medium text-gray-700 pb-2">Carregar Imagens para dispositivos móveis</label>
-            
-          <input
-            type="file"
-            id="mobile-file"
-            name="mobile-file"
-            onChange={(e) => handleImageChange(e, "mobile")}
-            accept="image/*"
-            className="hidden"
-          />
-           
-            <label htmlFor="mobile-file" className="cursor-pointer block w-full max-w-xs mx-auto bg-blue-200 hover:bg-blue-300 text-blue-800 font-semibold py-2 px-4 rounded-lg text-center shadow-md">
-            Selecionar Imagens
-          </label>
+            <label
+              htmlFor="mobile-file"
+              className="block text-sm font-medium text-gray-700 pb-2"
+            >
+              Carregar Imagens para dispositivos móveis
+            </label>
+
+            <input
+              type="file"
+              id="mobile-file"
+              name="mobile-file"
+              onChange={(e) => handleImageChange(e, "mobile")}
+              accept="image/*"
+              className="hidden"
+            />
+
+            <label
+              htmlFor="mobile-file"
+              className="cursor-pointer block w-full max-w-xs mx-auto bg-blue-200 hover:bg-blue-300 text-blue-800 font-semibold py-2 px-4 rounded-lg text-center shadow-md"
+            >
+              Selecionar Imagens
+            </label>
             <div>
               {mobileImageFiles.map((preview, index) => (
                 <div
@@ -198,7 +215,10 @@ const [mobileBase64Files, setMobileBase64Files] = useState([]);
                     alt=""
                     style={{ width: "100px", height: "auto" }}
                   />
-                  <button type="button" onClick={() => removeMobileImage(index)}>
+                  <button
+                    type="button"
+                    onClick={() => removeMobileImage(index)}
+                  >
                     Remove
                   </button>
                 </div>
@@ -231,8 +251,50 @@ const [mobileBase64Files, setMobileBase64Files] = useState([]);
               </p>
             )}
           </div>
+          <div className="mb-4">
+            <label
+              htmlFor="tituloVideo"
+              className="block text-sm font-medium text-gray-600"
+            >
+              Título área do vídeo
+            </label>
+            <input
+              id="tituloVideo"
+              name="tituloVideo"
+              type="text"
+              {...register("tituloVideo", { required: true })}
+              className="mt-1 p-2 text-gray-600 w-full border rounded-md"
+              placeholder="Insira título área do vídeo"
+            />
+            {errors.linkVideo && (
+              <p className="text-red-500 text-sm mt-1">
+                Este campo é obrigatório
+              </p>
+            )}
+          </div>
+          <div className="mb-4">
+            <label
+              htmlFor="descVideo"
+              className="block text-sm font-medium text-gray-600"
+            >
+              Descrição área do vídeo
+            </label>
+            <input
+              id="descVideo"
+              name="descVideo"
+              type="text"
+              {...register("descVideo", { required: true })}
+              className="mt-1 p-2 text-gray-600 w-full border rounded-md"
+              placeholder="Insira descrição área do vídeo"
+            />
+            {errors.linkVideo && (
+              <p className="text-red-500 text-sm mt-1">
+                Este campo é obrigatório
+              </p>
+            )}
+          </div>
           <div className="flex justify-center">
-          <Button label={"Adicionar conteúdos"} color={"green"} />
+            <Button label={"Adicionar conteúdos"} color={"green"} />
           </div>
         </form>
       </div>

@@ -11,22 +11,22 @@ export async function DELETE(req, { params }) {
   try {
     const session = await getServerSession(authOptions);
 
-    const id = params?.blogId || "";
+    const id = params?.courseId || "";
 
     if (session?.user?.role === "ADMIN") {
       // push the data into the DB
 
       if (id) {
-        await prisma.blog.delete({
+        await prisma.cards.delete({
           where: {
             id: id,
           },
         });
 
-        revalidatePath(`/admin/blogs`);
+        revalidatePath(`/admin/courses`);
 
         return NextResponse.json(
-          { message: "Blog deletado com sucesso!" },
+          { message: "Curso deletado com sucesso!" },
           { status: 200 }
         );
       } else {

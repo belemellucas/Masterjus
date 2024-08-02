@@ -10,30 +10,26 @@ export async function POST(req, { params }) {
     try {
         const session = await getServerSession(authOptions);
 
-        const { id, infoCard, catId, imageCard, valorAtual, valorAnt, numParcela, linkCurso, subCurso, DescCurso } = await req.json();
-
-        if (session?.user?.role === 'ADMIN' || session?.user?.permissions?.includes('UPDATE_COURSE')) {
-            const normalizedImageCard = Array.isArray(imageCard) ? imageCard : [imageCard];
+         const { id, subtitulo, title, description, category, imageUrl } = await req.json();
+    
+         if (session?.user?.role === 'ADMIN' || session?.user?.permissions?.includes('UPDATE_COURSE')) {
+            const normalizedImageCard = Array.isArray(imageUrl) ? imageUrl : [imageUrl];
             
-            const updated_course = await prisma.cards.update({
+            const updated_blog = await prisma.blog.update({
                 where: { id: id },
                 data: {
-                    imageCard: normalizedImageCard.length > 0 ? normalizedImageCard : null,
-                    infoCard,
-                    catId,
-                    valorAtual,
-                    valorAnt,
-                    numParcela,
-                    linkCurso,
-                    subCurso,
-                    DescCurso,
+                    imageUrl: normalizedImageCard.length > 0 ? normalizedImageCard : null,
+                    subtitulo,
+                    title,
+                    description, 
+                    category,
                     authorId: session?.user?.id
                 }
             });
 
-            revalidatePath('/admin/courses');
+            revalidatePath('/admin/blogs');
 
-            return NextResponse.json({ message: 'Curso atualizado com sucesso!' }, { status: 200 });
+            return NextResponse.json({ message: 'Blog atualizado com sucesso!' }, { status: 200 });
         } else {
             return NextResponse.json({ message: 'Você não tem permissão para atualizar o curso!' }, { status: 403 });
         }

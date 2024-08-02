@@ -31,7 +31,7 @@ export async function POST(req, {params}) {
                 }
             })
 
-            revalidatePath('/courses')
+            revalidatePath('/admin/courses')
 
             return NextResponse.json({ message: 'Curso adicionado com sucesso!'}, { status: 201 }); 
         } else {

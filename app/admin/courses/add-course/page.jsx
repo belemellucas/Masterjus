@@ -21,7 +21,7 @@ const AddBlog = async () => {
         redirect('/')
     }
     const categoriesData = await fetchCategory();
-   
+    
     return (
         <AdminLayout>
             <AddCourseForm categoriesData={categoriesData} />

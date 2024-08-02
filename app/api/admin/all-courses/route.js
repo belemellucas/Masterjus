@@ -18,12 +18,11 @@ export async function GET(req) {
       };
     }
 
-    const blogs = await prisma.blog.findMany({
+    const courses = await prisma.cards.findMany({
       where: whereCondition,
     });
-
     return NextResponse.json(
-      { message: "Blogs Data", data: blogs },
+      { message: "Courses Data", data: courses },
       { status: 201 }
     );
   } catch (error) {

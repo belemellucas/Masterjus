@@ -11,7 +11,7 @@ const prisma = new PrismaClient();
 export async function POST(req, { params }) {
   try {
     const session = await getServerSession(authOptions);
-    const { linkVideo, imageAnex, imageMob } = await req.json();
+    const { linkVideo, imageAnex, imageMob, tituloVideo, descVideo } = await req.json();
  
     if (
       session?.user?.role === "ADMIN" ||
@@ -22,10 +22,12 @@ export async function POST(req, { params }) {
           imageAnex: imageAnex,
           imageMob: imageMob,
           linkVideo,
+          tituloVideo, 
+          descVideo
         },
       });
 
-      revalidatePath("/infoSite");
+      revalidatePath("/admin/infoSite");
 
       return NextResponse.json(
         { message: "Imagens e Video adicionados com sucesso" },

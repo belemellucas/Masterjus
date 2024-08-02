@@ -2,74 +2,67 @@
 
 import Button from "@/app/ui/Button";
 import { useRouter } from "next/navigation";
-import { useRef } from "react";
-import { Controller, useForm } from "react-hook-form";
+import { useEffect, useRef, useState } from "react";
+import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import TagsInput from "react-tagsinput";
+import "react-toastify/dist/ReactToastify.css";
 import "react-tagsinput/react-tagsinput.css";
-import React, { useState } from "react";
 
 const AddBlogForm = () => {
   const ref = useRef();
-
-  // const addBlogHandler = async (formData) => {
-  //     // await addBlog(formData);
-  //     //refresh the form
-  //     ref?.current?.reset();
-  //     // show toast
-  //     toast.success('New Blog Added', {
-  //         position: "top-right",
-  //         autoClose: 3000,
-  //         hideProgressBar: false,
-  //         closeOnClick: true,
-  //         pauseOnHover: true,
-  //         draggable: true,
-  //         progress: undefined,
-  //         theme: "dark",
-  //     });
-  // }
-
   const router = useRouter();
-
   const {
     register,
     handleSubmit,
-    control,
+    setValue,
     formState: { errors },
   } = useForm();
-  const [base64String, setBase64String] = useState("");
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [imageFiles, setImageFiles] = useState([]);
+  const [base64Files, setBase64Files] = useState([]);
 
   const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        const base64 = reader.result.replace("data:", "").replace(/^.+,/, "");
-        setBase64String(base64);
-        // setValue('imageUrl', base64);
-      };
-      reader.readAsDataURL(file);
-    }
+    const files = Array.from(e.target.files);
+    const promises = files.map((file) => {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+
+        reader.onload = () => {
+          resolve(reader.result.split(",")[1]);
+          setSelectedImage(reader.result);
+          setValue("image", file, { shouldValidate: true });
+        };
+
+        reader.onerror = (error) => {
+          reject(error);
+        };
+        reader.readAsDataURL(file);
+      });
+    });
+
+    Promise.all(promises)
+      .then((base64String) => {
+        setImageFiles([...imageFiles, ...files]);
+        setBase64Files([...base64Files, ...base64String]);
+      })
+      .catch((error) => console.error("Error converting images", error));
   };
 
   const onSubmit = async (formData) => {
     try {
-      const data = {
-        ...formData,
-        imageUrl: base64String,
-      };
+      formData.imageUrl = base64Files;
+      console.log("Submitting form data:", formData); // Debug log
       const res = await fetch("/api/admin/add-blog", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(formData),
       });
 
       if (res.ok) {
-        ref?.current?.reset();
-        router.push("/blogs");
         const data = await res.json();
+        console.log("API success response:", data); // Debug log
         toast.success(`${data.message}`, {
           position: "top-right",
           autoClose: 3000,
@@ -80,52 +73,92 @@ const AddBlogForm = () => {
           progress: undefined,
           theme: "dark",
         });
+        ref?.current?.reset();
+        router.push("/admin/blogs");
       } else {
         const errorData = await res.json();
-        console.log("Something went wrong in else block");
+        console.log("API error response:", errorData); // Debug log
+        toast.error(errorData.message, {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
       }
     } catch (error) {
-      console.log("error", error);
+      console.error("API request error:", error); // Debug log
+      toast.error("An unexpected error occurred.", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
     }
+  };
+
+  const handleRemoveImage = () => {
+    setSelectedImage(null);
   };
 
   return (
     <div className="flex-grow md:ml-64">
-      <div className="flex flex-col justify-center items-center">
-      <h2 className='text-center px-2 text-2xl py-2 font-bold'>Adicionar Blog</h2>
-
+      <div className="flex flex-col justify-center items-center pt-14">
         <form
           ref={ref}
           onSubmit={handleSubmit(onSubmit)}
           className="max-w-md mx-auto mt-8 p-8 bg-white rounded shadow-md"
         >
           <h2 className="text-2xl text-green-500 font-semibold mb-6">
-            Criar novo bloge page
+            Criar novo blog
           </h2>
 
           <div className="mb-4">
             <label
-              htmlFor="imageUrl"
-              className="pb-2block text-sm font-medium text-gray-700"
+              htmlFor="image"
+              className="block text-sm font-medium text-gray-700"
             >
               Carregar imagem
             </label>
 
             <input
               type="file"
-              id="imageUrl"
-              name="imageUrl"
-              {...register("imageUrl")}
+              id="image"
+              name="image"
               className="hidden"
               onChange={handleImageChange}
-              placeholder="Adicione a Imagem"
+              accept="image/*"
+              //{...register("image", { required: "Uma imagem é obrigatória" })}
             />
             <label
-              htmlFor="imageUrl"
+              htmlFor="image"
               className="cursor-pointer block w-full max-w-xs mx-auto bg-blue-200 hover:bg-blue-300 text-blue-800 font-semibold py-2 px-4 rounded-lg text-center shadow-md"
             >
               Selecionar Imagem
             </label>
+            {selectedImage && (
+              <div className="mt-4 relative">
+                <img
+                  src={selectedImage}
+                  alt="Preview"
+                  className="w-20 h-20 mx-auto rounded-md"
+                />
+                <button
+                  type="button"
+                  onClick={handleRemoveImage}
+                  className="absolute top-0 right-0 text-black rounded-full p-1 -mt-2 -mr-2"
+                >
+                  &times;
+                </button>
+              </div>
+            )}
           </div>
 
           <div className="mb-4">
@@ -133,34 +166,35 @@ const AddBlogForm = () => {
               htmlFor="title"
               className="block text-sm font-medium text-gray-600"
             >
-              Title
+              Título
             </label>
             <input
               type="text"
               id="title"
               name="title"
-              {...register("title", { required: true })}
+              {...register("title", { required: "Título é obrigatório" })}
               className="mt-1 p-2 w-full border text-gray-600 rounded-md"
               placeholder="Entre com o título"
             />
             {errors?.title && <p role="alert">{errors?.title?.message}</p>}
           </div>
+
           <div className="mb-4">
             <label
               htmlFor="subtitulo"
               className="block text-sm font-medium text-gray-600"
             >
-              Subtitulo
+              Subtítulo
             </label>
             <input
               type="text"
               id="subtitulo"
               name="subtitulo"
-              {...register("subtitulo", { required: true })}
+              {...register("subtitulo", { required: "Subtítulo é obrigatório" })}
               className="mt-1 p-2 w-full border text-gray-600 rounded-md"
-              placeholder="Entre com o subtitulo"
+              placeholder="Entre com o subtítulo"
             />
-            {errors?.title && <p role="alert">{errors?.title?.message}</p>}
+            {errors?.subtitulo && <p role="alert">{errors?.subtitulo?.message}</p>}
           </div>
 
           <div className="mb-4">
@@ -191,10 +225,11 @@ const AddBlogForm = () => {
               type="text"
               id="category"
               name="category"
-              {...register("category", { required: true })}
+              {...register("category", { required: "Categoria é obrigatória" })}
               className="mt-1 p-2 text-gray-600 w-full border rounded-md"
-              placeholder="Entre com a Categoria"
+              placeholder="Entre com a categoria"
             />
+            {errors?.category && <p role="alert">{errors?.category?.message}</p>}
           </div>
 
           <Button label={"Adicionar Blog"} color={"green"} />

@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import BlogItem from "../../components/BlogItem";
+import InfoItem from "../../components/InfoItem";
 import Link from "next/link";
 import AdminLayout from "../../components/admin/adminLayout/AdminLayout"
 
@@ -7,7 +7,6 @@ const prisma = new PrismaClient();
 
 const infoSite = async () => {
   const infoSite = await prisma.infoSite.findMany();
-
   return (
     <AdminLayout>
       <div className="flex-grow ml-64">
@@ -25,7 +24,7 @@ const infoSite = async () => {
         {infoSite?.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-5 mb-5 px-4 py-5">
             {infoSite.map((info) => (
-              <BlogItem key={info?.id} infoSite={info} />
+              <InfoItem key={info?.id} infoSite={info} />
             ))}
           </div>
         ) : (
