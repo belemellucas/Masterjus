@@ -9,15 +9,20 @@ import TagsInput from "react-tagsinput";
 import "react-tagsinput/react-tagsinput.css";
 import React, { useState } from "react";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
-const AddInfoSiteForm = () => {
+const UpdateInfoForm = ({ singleInfoSite }) => {
   const ref = useRef();
   const router = useRouter();
+  const pathname = usePathname();
+
+  const id = pathname.split("/").pop();
   const {
     register,
     handleSubmit,
     control,
     formState: { errors },
+    setValue,
   } = useForm();
   const [imageFiles, setImageFiles] = useState([]);
   const [base64Files, setBase64Files] = useState([]);
@@ -25,6 +30,7 @@ const AddInfoSiteForm = () => {
   const [desktopBase64Files, setDesktopBase64Files] = useState([]);
   const [mobileImageFiles, setMobileImageFiles] = useState([]);
   const [mobileBase64Files, setMobileBase64Files] = useState([]);
+  const [selectedImageDesktop, setSelectedImageDesktop] = useState([]);
 
   const handleImageChange = (e, type) => {
     const files = Array.from(e.target.files);
@@ -48,12 +54,16 @@ const AddInfoSiteForm = () => {
         if (type === "desktop") {
           setDesktopImageFiles([...desktopImageFiles, ...files]);
           setDesktopBase64Files([...desktopBase64Files, ...base64String]);
+          setSelectedImageDesktop([
+            ...selectedImageDesktop,
+            ...files.map((file) => URL.createObjectURL(file)),
+          ]);
         } else if (type === "mobile") {
           setMobileImageFiles([...mobileImageFiles, ...files]);
           setMobileBase64Files([...mobileBase64Files, ...base64String]);
         }
       })
-      .catch((error) => console.error("Error convertion images", error));
+      .catch((error) => console.error("Error converting images", error));
   };
 
   const onSubmit = async (event) => {
@@ -64,7 +74,8 @@ const AddInfoSiteForm = () => {
     try {
       event.imageAnex = desktopBase64Files;
       event.imageMob = mobileBase64Files;
-      const res = await fetch("/api/admin/add-info", {
+      event.id = id;
+      const res = await fetch("/api/admin/update-info", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -74,7 +85,6 @@ const AddInfoSiteForm = () => {
 
       if (res.ok) {
         ref?.current?.reset();
-        // router.push('/infoSite');
         const data = await res.json();
         toast.success(`${data.message}`, {
           position: "top-right",
@@ -103,6 +113,10 @@ const AddInfoSiteForm = () => {
     const newBase64Files = [...desktopBase64Files];
     newBase64Files.splice(index, 1);
     setDesktopBase64Files(newBase64Files);
+
+    const newSelectedImages = [...selectedImageDesktop];
+    newSelectedImages.splice(index, 1);
+    setSelectedImageDesktop(newSelectedImages);
   };
 
   const removeMobileImage = (index) => {
@@ -115,17 +129,36 @@ const AddInfoSiteForm = () => {
     setMobileBase64Files(newBase64Files);
   };
 
+  useEffect(() => {
+    const fetchCourseData = async () => {
+      setValue("linkVideo", singleInfoSite.linkVideo);
+      setValue("tituloVideo", singleInfoSite.tituloVideo);
+      setValue("descVideo", singleInfoSite.descVideo);
+
+      if (singleInfoSite.imageAnex && singleInfoSite.imageAnex.length > 0) {
+        setSelectedImageDesktop(
+          singleInfoSite.imageAnex.map((img) => `data:image/jpeg;base64,${img}`)
+        );
+        setDesktopBase64Files(singleInfoSite.imageAnex);
+      }
+
+      if (singleInfoSite.imageMob && singleInfoSite.imageMob.length > 0) {
+        setMobileBase64Files(singleInfoSite.imageMob);
+      }
+    };
+    fetchCourseData();
+  }, [singleInfoSite, setValue]);
+
   return (
     <div className="flex-grow ml-64 mt-16">
       <div className="flex flex-col justify-center items-center">
-        
         <form
           ref={ref}
           onSubmit={handleSubmit(onSubmit)}
           className="max-w-md mx-auto mt-8 p-8 bg-white rounded shadow-md"
         >
           <h2 className="text-2xl text-green-500 font-semibold mb-6">
-            Adicionar novas imagens
+            Editar imagens e video
           </h2>
           <div className="mb-4 w-full">
             <label
@@ -139,7 +172,6 @@ const AddInfoSiteForm = () => {
               type="file"
               id="desktop-file"
               name="desktop-file"
-              //  onChange={handleImageChange}
               onChange={(e) => handleImageChange(e, "desktop")}
               accept="image/*"
               className="hidden"
@@ -152,25 +184,25 @@ const AddInfoSiteForm = () => {
               Selecionar Imagens
             </label>
             <div>
-              {desktopImageFiles.map((preview, index) => (
-                <div
-                  key={index}
-                  style={{ display: "inline-block", margin: "10px" }}
-                >
-                  <img
-                    //src={preview}
-                    src={URL.createObjectURL(preview)}
-                    alt=""
-                    style={{ width: "100px", height: "auto" }}
-                  />
-                  <button
-                    type="button"
-                    onClick={() => removeDesktopImage(index)}
+              {selectedImageDesktop &&
+                selectedImageDesktop.map((preview, index) => (
+                  <div
+                    key={index}
+                    style={{ display: "inline-block", margin: "10px" }}
                   >
-                    Remove
-                  </button>
-                </div>
-              ))}
+                    <img
+                      src={preview}
+                      alt=""
+                      style={{ width: "100px", height: "auto" }}
+                    />
+                    <button
+                      type="button"
+                      onClick={() => removeDesktopImage(index)}
+                    >
+                      Remove
+                    </button>
+                  </div>
+                ))}
             </div>
             {errors.imageAnex && (
               <p className="text-red-500 text-sm mt-1">
@@ -202,14 +234,13 @@ const AddInfoSiteForm = () => {
               Selecionar Imagens
             </label>
             <div>
-              {mobileImageFiles.map((preview, index) => (
+              {mobileBase64Files.map((base64, index) => (
                 <div
                   key={index}
                   style={{ display: "inline-block", margin: "10px" }}
                 >
                   <img
-                    //src={preview}
-                    src={URL.createObjectURL(preview)}
+                    src={`data:image/jpeg;base64,${base64}`}
                     alt=""
                     style={{ width: "100px", height: "auto" }}
                   />
@@ -237,11 +268,9 @@ const AddInfoSiteForm = () => {
             </label>
             <input
               id="linkVideo"
-              name="linkVideo"
-              type="text"
-              {...register("linkVideo", { required: true })}
-              className="mt-1 p-2 text-gray-600 w-full border rounded-md"
-              placeholder="Insira o link do vídeo"
+              {...register("linkVideo")}
+              className="block w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring focus:ring-opacity-40"
+              placeholder="Link do vídeo"
             />
             {errors.linkVideo && (
               <p className="text-red-500 text-sm mt-1">
@@ -254,17 +283,15 @@ const AddInfoSiteForm = () => {
               htmlFor="tituloVideo"
               className="block text-sm font-medium text-gray-600"
             >
-              Título área do vídeo
+              Título do Vídeo
             </label>
             <input
               id="tituloVideo"
-              name="tituloVideo"
-              type="text"
-              {...register("tituloVideo", { required: true })}
-              className="mt-1 p-2 text-gray-600 w-full border rounded-md"
-              placeholder="Insira título área do vídeo"
+              {...register("tituloVideo")}
+              className="block w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring focus:ring-opacity-40"
+              placeholder="Título do vídeo"
             />
-            {errors.linkVideo && (
+            {errors.tituloVideo && (
               <p className="text-red-500 text-sm mt-1">
                 Este campo é obrigatório
               </p>
@@ -275,24 +302,24 @@ const AddInfoSiteForm = () => {
               htmlFor="descVideo"
               className="block text-sm font-medium text-gray-600"
             >
-              Descrição área do vídeo
+              Descrição do Vídeo
             </label>
-            <input
+            <textarea
               id="descVideo"
-              name="descVideo"
-              type="text"
-              {...register("descVideo", { required: true })}
-              className="mt-1 p-2 text-gray-600 w-full border rounded-md"
-              placeholder="Insira descrição área do vídeo"
+              {...register("descVideo")}
+              className="block w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring focus:ring-opacity-40"
+              placeholder="Descrição do vídeo"
             />
-            {errors.linkVideo && (
+            {errors.descVideo && (
               <p className="text-red-500 text-sm mt-1">
                 Este campo é obrigatório
               </p>
             )}
           </div>
           <div className="flex justify-center">
-            <Button label={"Adicionar conteúdos"} color={"green"} />
+            <Button label={"Atualizar Curso"} color={"green"}>
+              Atualizar
+            </Button>
           </div>
         </form>
       </div>
@@ -300,4 +327,4 @@ const AddInfoSiteForm = () => {
   );
 };
 
-export default AddInfoSiteForm;
+export default UpdateInfoForm;

@@ -32,6 +32,24 @@ export const fetchSingleCourse = async (id) => {
   return courses;
 }
 
+export const fetchSingleInfoSite = async (id) => {
+  const info = await prisma.infoSite.findFirst({
+    where: {
+      id: id
+    },
+  });
+  return info;
+}
+
+export const fetchSingleDeposition = async (id) => {
+  const info = await prisma.depoimento.findFirst({
+    where: {
+      id: id
+    },
+  });
+  return info;
+}
+
 export const addBlog = async (formData) => {
   // collect info from form using formData
   const imageUrl = formData.get("imageUrl");

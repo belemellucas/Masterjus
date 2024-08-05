@@ -5,7 +5,6 @@ import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 
 const InfoItem = ({ infoSite }) => {
-    console.log(infoSite)
   const {
     id,
     linkVideo,
@@ -17,9 +16,9 @@ const InfoItem = ({ infoSite }) => {
 
   const router = useRouter();
 
-  const deleteCourseHandler = async (id) => {
+  const deleteInfoHandler = async (id) => {
     try {
-      const res = await fetch(`/api/admin/remove-course/${id}`, {
+      const res = await fetch(`/api/admin/remove-info/${id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -49,44 +48,59 @@ const InfoItem = ({ infoSite }) => {
     }
   };
 
-  const updateCourseHandler = (id) => {
-    router.push(`/admin/courses/update-course/${id}`);
+  const updateInfoHandler = (id) => {
+    router.push(`/admin/infoSite/update-info/${id}`);
   };
 
   return (
     <div className="bg-gray-900 p-4 border-2 border-green-200 mx-2 my-2 rounded-lg shadow-md">
-      {/* {imageCard ? (
+     {imageAnex ? (
         <Image
           // placeholder="blur"
           loading="lazy"
           width="600"
           height="400"
           quality={100}
-          src={`data:image/jpeg;base64,${imageCard}`}
-          className="w-full h-[200px]  lg:h-[250px] object-cover mb-4 rounded-md"
+          src={`data:image/jpeg;base64,${imageAnex[0]}`}
+          className="w-full h-[80px]  lg:h-[120px] object-cover mb-4 rounded-md"
         />
-      ) : null}
+      ) : null} 
+       {imageMob ? (
+        <Image
+          // placeholder="blur"
+          loading="lazy"
+          width="600"
+          height="400"
+          quality={100}
+          src={`data:image/jpeg;base64,${imageMob[0]}`}
+          className="w-full h-[120px]  lg:h-[200px] object-cover mb-4 rounded-md"
+        />
+      ) : null} 
 
-      <h2 className="text-xl text-white font-semibold mb-2">{infoCard}</h2>
+<h2 className="text-xl text-white font-semibold mb-2">{tituloVideo}</h2>
 
-     
-      <p className="text-gray-300">{DescCurso.slice(0, 100)}...</p>
-      <div className="flex justify-center gap-4">
-        <button
-          type="button"
-          onClick={() => deleteCourseHandler(id)}
-          className="rounded-lg bg-red-700 text-center px-2 py-1  mt-4"
-        >
-          delete
-        </button>
-        <button
-          type="button"
-          onClick={() => updateCourseHandler(id)}
-          className="rounded-lg bg-green-700 text-center px-2 py-1  mt-4"
-        >
-          update
-        </button>
-      </div> */}
+{/* <p className="mb-2 max-w-md text-green-500 inline-block border-2 p-2 border-green-300 rounded-full">
+          {category ? category.NomeCat : 'Categoria não encontrada'}
+      </p> */}
+<p className="text-gray-300">{linkVideo.slice(0, 100)}...</p>
+<p className="text-gray-300">{descVideo.slice(0, 100)}...</p>
+<div className="flex justify-center gap-4">
+  <button
+    type="button"
+    onClick={() => deleteInfoHandler(id)}
+    className="rounded-lg bg-red-700 text-center px-2 py-1  mt-4"
+  >
+    delete
+  </button>
+  <button
+    type="button"
+    onClick={() => updateInfoHandler(id)}
+    className="rounded-lg bg-green-700 text-center px-2 py-1  mt-4"
+  >
+    update
+  </button>
+</div>
+  
     </div>
   );
 };

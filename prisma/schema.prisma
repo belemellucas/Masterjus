@@ -91,7 +91,7 @@ model InfoSite {
 
 model Depoimento {
   id          String    @id @default(auto()) @map("_id") @db.ObjectId
-  imageDep    String
+  imageDep    String[]
   depoimento  String?
   autorDepo   String?
   published   Boolean   @default(true)

@@ -9,7 +9,7 @@ import TagsInput from "react-tagsinput";
 import "react-tagsinput/react-tagsinput.css";
 import React, { useState } from "react";
 
-const AddDepositionsForm = () => {
+const AddDepositionForm = () => {
   const ref = useRef();
   const {
     register,
@@ -17,39 +17,54 @@ const AddDepositionsForm = () => {
     control,
     formState: { errors },
   } = useForm();
-  const [base64String, setBase64String] = useState("");
+
+  const [categories, setCategories] = useState([]);
+  const [imageFiles, setImageFiles] = useState([]);
+  const [base64Files, setBase64Files] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedImage, setSelectedImage] = useState(null);
   const router = useRouter();
 
   const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        const base64 = reader.result.replace("data:", "").replace(/^.+,/, "");
-        setBase64String(base64);
-        // setValue('imageUrl', base64);
-      };
-      reader.readAsDataURL(file);
-    }
+    const files = Array.from(e.target.files);
+    const promises = files.map((file) => {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+
+        reader.onload = (e) => {
+          resolve(reader.result.split(",")[1]);
+          setSelectedImage(reader.result);
+        };
+
+        reader.onerror = (error) => {
+          reject(error);
+        };
+        reader.readAsDataURL(file);
+      });
+    });
+
+    Promise.all(promises)
+      .then((base64String) => {
+        setImageFiles([...imageFiles, ...files]);
+        setBase64Files([...base64Files, ...base64String]);
+      })
+      .catch((error) => console.error("Error convertion images", error));
   };
 
   const onSubmit = async (formData) => {
     try {
-      const data = {
-        ...formData,
-        imageDep: base64String,
-      };
+      formData.imageDep = base64Files;
       const res = await fetch("/api/admin/add-depositions", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(formData),
       });
 
       if (res.ok) {
         ref?.current?.reset();
-       // router.push("/depositions");
+        // router.push("/depositions");
         const data = await res.json();
         toast.success(`${data.message}`, {
           position: "top-right",
@@ -65,43 +80,65 @@ const AddDepositionsForm = () => {
         const errorData = await res.json();
         console.log("Something went wrong in else block");
       }
+      setImageFiles([]);
+      setBase64Files([]);
     } catch (error) {
       console.log("error", error);
     }
   };
 
+  const handleRemoveImage = () => {
+    setSelectedImage(null);
+  };
+
   return (
-    <div className="flex-grow ml-64">
+    <div className="flex-grow md:ml-64">
       <div className="flex flex-col justify-center items-center">
-        <h2 className="text-center px-2 text-2xl py-2 font-bold">
-          Adicionar Depoimento
-        </h2>
         <form
           ref={ref}
           onSubmit={handleSubmit(onSubmit)}
           className="max-w-md mx-auto mt-8 p-8 bg-white rounded shadow-md"
         >
           <h2 className="text-2xl text-green-500 font-semibold mb-6">
-            Adicionar Novo Depoimento
+            Adicionar Depoimento
           </h2>
           <div className="mb-4">
             <label
               htmlFor="image"
               className="block text-sm font-medium text-gray-600"
             >
-             Carregar Imagem
+              Carregar Imagem
             </label>
             <input
-              type="file"
-              id="imageDep"
-              name="imageDep"
-              {...register("imageDep")}
-              className="hidden"
-              onChange={handleImageChange}
+             type="file"
+             id="image"
+             name="image"
+             onChange={handleImageChange}
+             accept="image/*"
+             className="hidden"
             />
-            <label htmlFor="imageDep" className=" cursor-pointer block w-full max-w-xs mx-auto bg-blue-200 hover:bg-blue-300 text-blue-800 font-semibold py-2 px-4 rounded-lg text-center shadow-md">
-            Selecionar Imagem
-          </label>
+            <label
+              htmlFor="image"
+              className=" cursor-pointer block w-full max-w-xs mx-auto bg-blue-200 hover:bg-blue-300 text-blue-800 font-semibold py-2 px-4 rounded-lg text-center shadow-md"
+            >
+              Selecionar Imagem
+            </label>
+            {selectedImage && (
+              <div className="mt-4 relative">
+                <img
+                  src={selectedImage}
+                  alt="Preview"
+                  className="w-20 h-20 mx-auto rounded-md"
+                />
+                <button
+                  type="button"
+                  onClick={handleRemoveImage}
+                  className="absolute top-0 right-0 text-black rounded-full p-1 -mt-2 -mr-2"
+                >
+                  &times;
+                </button>
+              </div>
+            )}
           </div>
 
           <div className="mb-4">
@@ -139,7 +176,7 @@ const AddDepositionsForm = () => {
             {errors?.title && <p role="alert">{errors?.title?.message}</p>}
           </div>
           <div className="flex justify-center">
-          <Button label={"Adicionar Depoimento"} color={"green"} />
+            <Button label={"Adicionar Depoimento"} color={"green"} />
           </div>
         </form>
       </div>
@@ -147,4 +184,4 @@ const AddDepositionsForm = () => {
   );
 };
 
-export default AddDepositionsForm;
+export default AddDepositionForm;

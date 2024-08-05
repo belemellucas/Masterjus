@@ -1,10 +1,11 @@
-import AddDepositionForm from "@/app/components/forms/AddDepositionForm";
+import UpdateDepositionForm from "@/app/components/forms/UpdateDepositionForm";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { authOptions } from "@/app/utils/authOptions";
-import AdminLayout from "../../../components/admin/adminLayout/AdminLayout"
+import AdminLayout from "../../../../components/admin/adminLayout/AdminLayout"
+import { fetchSingleDeposition } from "@/actions/actions";
 
-const AddDepositions = async () => {
+const AddDepositions = async (depoId) => {
   const session = await getServerSession(authOptions);
 
   // as i have the permissions i can see this page / routes
@@ -18,9 +19,12 @@ const AddDepositions = async () => {
     redirect("/");
   }
 
+  const singleDeposition = await fetchSingleDeposition(depoId.params.id);
+
+
   return (
     <AdminLayout>
-      <AddDepositionForm />
+      <UpdateDepositionForm singleDeposition={singleDeposition} />
     </AdminLayout>
   );
 };

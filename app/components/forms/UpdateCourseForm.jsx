@@ -364,8 +364,9 @@ const UpdateCourseForm = ({ categoriesData, singleCourse }) => {
               placeholder="Insira a descrição do curso"
             ></textarea>
           </div>
-
+          <div className="flex justify-center">
           <Button label={"Editar Curso"} color={"green"} />
+          </div>
         </form>
       </div>
     </div>

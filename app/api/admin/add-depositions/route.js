@@ -23,7 +23,7 @@ export async function POST(req, {params}) {
         // push the data into the DB
         const new_cat = await prisma.depoimento.create({
             data: {
-                imageDep,
+                imageDep :imageDep  ? imageDep : null,
                 depoimento,
                 autorDepo
             }
