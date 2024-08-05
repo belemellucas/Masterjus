@@ -81,9 +81,9 @@ model InfoSite {
   id          String    @id @default(auto()) @map("_id") @db.ObjectId
   imageAnex   String[]
   imageMob    String[]
-  linkVideo   String
-  tituloVideo String
-  descVideo   String
+  linkVideo   String?
+  tituloVideo String?
+  descVideo   String?
   published   Boolean   @default(true)
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
