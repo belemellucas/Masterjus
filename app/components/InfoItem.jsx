@@ -82,8 +82,8 @@ const InfoItem = ({ infoSite }) => {
 {/* <p className="mb-2 max-w-md text-green-500 inline-block border-2 p-2 border-green-300 rounded-full">
           {category ? category.NomeCat : 'Categoria não encontrada'}
       </p> */}
-<p className="text-gray-300">{linkVideo.slice(0, 100)}...</p>
-<p className="text-gray-300">{descVideo.slice(0, 100)}...</p>
+<p className="text-gray-300">{linkVideo ? linkVideo.slice(0, 100) : 'Link não disponível'}...</p>
+<p className="text-gray-300">{descVideo ? descVideo.slice(0, 100) : 'Descrição não disponível'}...</p>
 <div className="flex justify-center gap-4">
   <button
     type="button"
