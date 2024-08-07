@@ -1,20 +1,38 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const HeaderAdmin = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const subMenuRef = useRef(null); 
+  const buttonRef = useRef(null);
+ 
+  const handleMenu = (event) => {
+    event.stopPropagation();
+    setIsMenuOpen((prev) => !prev);
+  }
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  const handleClickOutside = (event) => {
+    if (
+      subMenuRef.current &&
+      !subMenuRef.current.contains(event.target) &&
+      buttonRef.current &&
+      !buttonRef.current.contains(event.target)
+    ) {
+      setIsMenuOpen(false); 
+    }
+  }
+
+  useEffect(() => {
+    document.addEventListener("click", handleClickOutside); 
+    return () => {
+      document.removeEventListener("click", handleClickOutside); 
+    };
+  }, []);
 
   return (
-    <header
-    className={`fixed top-0 left-0 w-full flex justify-between items-center px-6 py-3 bg-gray-700 z-50`}
-    >
+    <header className="fixed top-0 left-0 w-full flex justify-between items-center px-6 py-3 bg-gray-700 z-50">
       <div className="flex items-center pl-8">
         <Image
           src="/logo/logo-master.png" 
@@ -39,8 +57,9 @@ const HeaderAdmin = () => {
         {/* Tool Icon */}
         <div className="relative">
           <button
-            onClick={toggleMenu}
+            onClick={handleMenu}
             className="text-white focus:outline-none"
+            ref={buttonRef}
           >
             <Image
               src="/icones/settings.svg" // Substitua pelo caminho da imagem de configurações
@@ -53,7 +72,7 @@ const HeaderAdmin = () => {
 
           {/* Submenu */}
           {isMenuOpen && (
-            <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-300 shadow-lg rounded-lg z-10">
+            <div ref={subMenuRef} className="absolute right-0 mt-2 w-48 bg-white border border-gray-300 shadow-lg rounded-lg z-10">
               <ul className="py-1">
                 <li>
                   <Link

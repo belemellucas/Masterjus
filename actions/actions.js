@@ -271,9 +271,7 @@ export const fetchPreferedBlogs = async () => {
 };
 
 export const fetchCategory = async () => {
-  const categories = await prisma.catCurso.findMany({
-    take: 5,
-  });
+  const categories = await prisma.catCurso.findMany({});
 
   return categories;
 };

@@ -5,6 +5,8 @@ import { authOptions } from "@/app/utils/authOptions";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import UpdateCategoryForm from "../../../../components/forms/UpdateCategoryForm";
+import AdminLayout from "../../../../components/admin/adminLayout/AdminLayout"
+
 const UpdateBlogPage = async ({ params }) => {
   const session = await getServerSession(authOptions);
 
@@ -23,9 +25,9 @@ const UpdateBlogPage = async ({ params }) => {
   const categoriesData = await fetchSingleCategory(catId);
 
   return (
-    <div>
+    <AdminLayout>
       <UpdateCategoryForm categoriesData={categoriesData} />
-    </div>
+      </AdminLayout>
   );
 };
 

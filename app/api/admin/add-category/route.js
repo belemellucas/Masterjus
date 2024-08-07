@@ -28,7 +28,7 @@ export async function POST(req, {params}) {
             }
         })
 
-        revalidatePath('/categories')
+        revalidatePath('/admin/categories')
     
         return NextResponse.json({ message: 'Categoria adicionada com sucesso!' }, { status: 201 });
 

@@ -9,6 +9,7 @@ import "react-tagsinput/react-tagsinput.css";
 //import { fetchCategory } from "@/actions/actions"
 
 const AddCourseForm = ({ categoriesData }) => {
+  
   const ref = useRef();
   const router = useRouter();
   const {
@@ -112,7 +113,7 @@ const AddCourseForm = ({ categoriesData }) => {
         className="max-w-md mx-auto p-8 bg-white rounded shadow-md flex flex-col items-center"
       >
         <h2 className="text-2xl text-green-500 font-semibold mb-6 flex justify-center">
-         Criar novo curso
+         Adicionar Curso
         </h2>
   
         <div className="mb-4 w-full">
