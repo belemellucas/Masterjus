@@ -3,18 +3,16 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
-function MenuItems() {
+function MenuItems({categoriesData}) {
   const menuOptions = [
     { name: "Home" },
     {
       name: "CURSOS",
       hasSubMenu: true,
-      subMenuOptions: [
-        { name: "PÓS-GRADUAÇÃO", href: "/category/" + encodeURIComponent("PÓS-GRADUAÇÃO") },
-        { name: "PRÁTICAPREV", href: "https://masterjus.com/praticaprev/" },
-        { name: "CURSOS PRESENCIAIS", href: "/category/" + encodeURIComponent("CURSOS PRESENCIAIS") },
-        { name: "CURSOS DE PRÁTICA", href: "/category/" + encodeURIComponent("CURSOS DE PRÁTICA") },
-      ],
+      subMenuOptions: categoriesData.map(category => ({
+        name: category.NomeCat,
+        href: "/category" + encodeURIComponent(category.NomeCat),
+      }))
     },
     { name: "PrevEvolution", href: "/prevevolution/" + encodeURIComponent("Materiais Gratuitos") },
     { name: "Materiais Gratuitos", href:"/freeCourses" },

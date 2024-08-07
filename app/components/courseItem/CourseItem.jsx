@@ -5,20 +5,13 @@ import { useRouter } from "next/navigation";
 import React from "react";
 
 const CourseItem = ({ card }) => {
+  console.log(card)
   const {
     id,
-    infoCard,
-    catId,
     imageCard,
     valorAtual,
     valorAnt,
     numParcela,
-    linkCurso,
-    avaliacao,
-    tituloCurso,
-    subCurso,
-    DescCurso,
-    author,
   } = card || {};
 
   const router = useRouter();
@@ -51,6 +44,9 @@ const CourseItem = ({ card }) => {
               </div>
             ) : null}
           </Link>
+          {/* <h3 className="text-lg font-bold text-center text-gray-900 mt-4">
+            {tituloCurso}
+          </h3> */}
           <div className="flex gap-5 justify-between px-px mt-5 text-sm">
             <div className="flex flex-col my-auto leading-5 text-indigo-950">
               <div>

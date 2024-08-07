@@ -62,22 +62,34 @@ const Lead = () => {
     }
   };
   return (
-    <div class="flex justify-center items-center px-8 py-4 w-full text-xs text-white bg-neutral-950 max-md:px-5 max-md:max-w-full">
-    <form class="flex gap-2 justify-between items-start max-w-full w-[1169px] max-md:flex-wrap max-md:justify-center">
-      <div class="text-lg leading-7 max-md:text-center">
-        Fique por dentro de tudo que acontece no Direito!
-      </div>
-      <div class="flex flex-col justify-start items-start px-4 py-3 bg-white rounded-3xl border border-white border-solid text-neutral-500 max-md:pr-5 w-80 h-14 max-md:w-64 max-md:h-14">
-        <input placeholder="Nome" class="w-full h-full bg-transparent focus:outline-none" type="text" value="" name="nome"/>
-      </div>
-      <div class="flex flex-col justify-start items-start px-4 py-3 bg-white rounded-3xl border border-white border-solid text-neutral-500 max-md:pr-5 w-80 h-14 max-md:w-64 max-md:h-14">
-        <input placeholder="E-mail" class="w-full h-full bg-transparent focus:outline-none" type="email" value="" name="email"/>
-      </div>
-      <button type="submit" class="flex justify-center text-base leading-6 text-center bg-blue-800 rounded-[40px] py-4 px-16 max-md:px-8 max-md:h-14">
-        ENVIAR
-      </button>
-    </form>
-  </div>
+    <div class="flex justify-center items-center px-8 py-4 w-full text-xs text-black bg-gray-600 max-md:px-5 max-md:max-w-full">
+      <form class="flex gap-2 justify-between items-center max-w-full w-[1169px] max-md:flex-wrap max-md:justify-center">
+        <div class="text-sm md:text-sm leading-5 whitespace-nowrap text-center md:text-left text-white">
+          Fique por dentro de tudo que acontece no Direito!
+        </div>
+        <div class="flex flex-col justify-start items-start px-4 py-3 bg-white rounded-3xl border border-solid text-black max-md:pr-5 w-80 h-10 max-md:w-64 max-md:h-10">
+          <input
+            placeholder="Nome"
+            class="w-full h-full bg-transparent focus:outline-none"
+            type="text"
+            value=""
+            name="nome"
+          />
+        </div>
+        <div class="flex flex-col justify-start items-start px-4 py-3 bg-white rounded-3xl border  border-solid text-black max-md:pr-5 w-80 h-10 max-md:w-64 max-md:h-10">
+          <input
+            placeholder="E-mail"
+            class="w-full h-full bg-transparent focus:outline-none"
+            type="email"
+            value=""
+            name="email"
+          />
+        </div>
+        <button type="submit" class="flex justify-center text-base leading-6 text-center text-white bg-gray-800 rounded-[40px] py-2 px-16 max-md:px-8 max-md:h-10 transition-transform duration-200 hover:scale-105 active:scale-105">
+  ENVIAR
+</button>
+      </form>
+    </div>
   );
 };
 
