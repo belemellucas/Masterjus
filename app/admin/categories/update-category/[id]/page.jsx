@@ -1,40 +1,32 @@
-import { fetchSingleBlog } from "@/actions/actions";
+import { fetchSingleCategory } from "@/actions/actions";
 //import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import { authOptions } from "@/app/utils/authOptions"
+import { authOptions } from "@/app/utils/authOptions";
 
-import UpdateBlogForm from "@/app/components/forms/UpdateBlogForm";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
-
+import UpdateCategoryForm from "../../../../components/forms/UpdateCategoryForm";
 const UpdateBlogPage = async ({ params }) => {
+  const session = await getServerSession(authOptions);
 
-    const session = await getServerSession(authOptions);
+  // as i have the permissions i can see this page / routes
 
-    // as i have the permissions i can see this page / routes
+  const checkPermissions = session?.user?.permissions?.includes("EDIT_BLOG");
 
-    const checkPermissions = session?.user?.permissions?.includes('EDIT_BLOG');
+  const admin = session?.user?.role === "ADMIN";
 
-    const admin = session?.user?.role === 'ADMIN';
+  if (!admin && !checkPermissions) {
+    redirect("/");
+  }
 
-    if (!admin && !checkPermissions) {
-        redirect('/')
-    }
+  const catId = params?.id;
 
-    const id = params?.id;
+  const categoriesData = await fetchSingleCategory(catId);
 
-    // get the db info for each blog to fill forms
+  return (
+    <div>
+      <UpdateCategoryForm categoriesData={categoriesData} />
+    </div>
+  );
+};
 
-    const blog = await fetchSingleBlog(id);
-
-    return (
-        <div>
-
-            <h2 className='text-center mt-4 px-2 text-2xl py-2 font-bold'>Update Blog Page</h2>
-
-            <UpdateBlogForm blog={blog} />
-
-        </div>
-    )
-}
-
-export default UpdateBlogPage
+export default UpdateBlogPage;

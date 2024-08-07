@@ -96,6 +96,8 @@ const UpdateInfoForm = ({ singleInfoSite }) => {
           progress: undefined,
           theme: "dark",
         });
+        await fetch("/api/admin/all-infoSite");
+        router.push(`/admin/infoSite?${new Date().getTime()}`);
       } else {
         const errorData = await res.json();
         console.log("Something went wrong in else block");
@@ -150,12 +152,12 @@ const UpdateInfoForm = ({ singleInfoSite }) => {
   }, [singleInfoSite, setValue]);
 
   return (
-    <div className="flex-grow ml-64 mt-16">
+    <div className="flex-grow md:ml-64 mt-16">
       <div className="flex flex-col justify-center items-center">
         <form
           ref={ref}
           onSubmit={handleSubmit(onSubmit)}
-          className="max-w-md mx-auto mt-8 p-8 bg-white rounded shadow-md"
+          className="max-w-md mx-auto p-8 bg-white rounded shadow-md"
         >
           <h2 className="text-2xl text-green-500 font-semibold mb-6">
             Editar imagens e video
@@ -317,7 +319,7 @@ const UpdateInfoForm = ({ singleInfoSite }) => {
             )}
           </div>
           <div className="flex justify-center">
-            <Button label={"Atualizar Curso"} color={"green"}>
+            <Button label={"Atualizar Informações"} color={"green"}>
               Atualizar
             </Button>
           </div>

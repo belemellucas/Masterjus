@@ -29,7 +29,7 @@ export async function POST(req, {params}) {
             }
         })
 
-        revalidatePath('/blogs')
+        revalidatePath('/admin/blogs')
     
         return NextResponse.json({ message: 'Blog adicionado com sucesso!' }, { status: 201 });
 

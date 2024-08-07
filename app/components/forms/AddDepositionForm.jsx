@@ -76,6 +76,8 @@ const AddDepositionForm = () => {
           progress: undefined,
           theme: "dark",
         });
+        await fetch('/api/admin/all-depositions');
+        router.push(`/admin/depositions?${new Date().getTime()}`);
       } else {
         const errorData = await res.json();
         console.log("Something went wrong in else block");
@@ -92,12 +94,12 @@ const AddDepositionForm = () => {
   };
 
   return (
-    <div className="flex-grow md:ml-64">
+    <div className="flex-grow ml-64 mt-16">
       <div className="flex flex-col justify-center items-center">
         <form
           ref={ref}
           onSubmit={handleSubmit(onSubmit)}
-          className="max-w-md mx-auto mt-8 p-8 bg-white rounded shadow-md"
+          className="max-w-md mx-auto p-8 bg-white rounded shadow-md"
         >
           <h2 className="text-2xl text-green-500 font-semibold mb-6">
             Adicionar Depoimento

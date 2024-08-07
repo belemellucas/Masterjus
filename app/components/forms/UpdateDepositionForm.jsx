@@ -11,7 +11,6 @@ import React, { useState } from "react";
 import { usePathname } from "next/navigation";
 
 const UpdateDepositionForm = ({ singleDeposition }) => {
-    console.log(singleDeposition)
   const ref = useRef();
   const {
     register,
@@ -38,7 +37,7 @@ const UpdateDepositionForm = ({ singleDeposition }) => {
 
         reader.onload = (e) => {
           resolve(reader.result.split(",")[1]);
-          setSelectedImage(reader.result);
+         // setSelectedImage(reader.result);
         };
 
         reader.onerror = (error) => {
@@ -50,28 +49,27 @@ const UpdateDepositionForm = ({ singleDeposition }) => {
 
     Promise.all(promises)
       .then((base64String) => {
-        setImageFiles([...imageFiles, ...files]);
-        setBase64Files([...base64Files, ...base64String]);
+        //setImageFiles([...imageFiles, ...files]);
+      //  setBase64Files([...base64Files, ...base64String]);
+        setImageFiles(files);
+        setBase64Files(base64String);
+        setSelectedImage(URL.createObjectURL(files[0]));
       })
       .catch((error) => console.error("Error convertion images", error));
   };
 
   const onSubmit = async (formData) => {
-    console.log(formData, "FORM DATA ");
     try {
-     // formData.imageDep = base64Files[0];
-     // console.log(formData.imageDep, "IMAGE DEP ")
-    //  if (base64Files && base64Files.length > 0) {
-    //     formData.imageDep = base64Files[0];
-    //   }
+      console.log(base64Files)
       if (base64Files && base64Files.length > 0) {
+        console.log("entrou em base 64 files")
         formData.imageDep = base64Files[0];
 
       } else {
         formData.imageDep = singleDeposition.imageDep;
       }
-    //  formData.imageDep = base64Files[0];
       formData.id = id;
+
       const res = await fetch("/api/admin/update-depositions", {
         method: "POST",
         headers: {
@@ -94,6 +92,9 @@ const UpdateDepositionForm = ({ singleDeposition }) => {
           progress: undefined,
           theme: "dark",
         });
+        await fetch("/api/admin/all-depositions");
+        router.push(`/admin/depositions?${new Date().getTime()}`);
+    
       } else {
         const errorData = await res.json();
         console.log("Something went wrong in else block");
@@ -116,20 +117,20 @@ const UpdateDepositionForm = ({ singleDeposition }) => {
 
       if (singleDeposition.imageDep) {
         setSelectedImage(`data:image/jpeg;base64,${singleDeposition.imageDep}`);
-        setBase64Files([singleDeposition.imageDep[0]]);
-      //  console.log(singleDeposition.imageDep[0], "BASE 64 ")
+        setBase64Files([singleDeposition.imageDep]);
+        console.log(base64Files)
       }
     };
     fetchCourseData();
   }, [singleDeposition, setValue]);
 
   return (
-    <div className="flex-grow md:ml-64">
+    <div className="flex-grow md:ml-64 mt-16">
       <div className="flex flex-col justify-center items-center">
         <form
           ref={ref}
           onSubmit={handleSubmit(onSubmit)}
-          className="max-w-md mx-auto mt-8 p-8 bg-white rounded shadow-md"
+          className="max-w-md mx-auto p-8 bg-white rounded shadow-md"
         >
           <h2 className="text-2xl text-green-500 font-semibold mb-6">
             Editar Depoimento

@@ -1,8 +1,8 @@
 import { PrismaClient } from "@prisma/client";
-import CategoryItem from "../../components/CategoryItem";
 import Search from "../../components/Search";
 import AdminLayout from "../../components/admin/adminLayout/AdminLayout"
 import Link from "next/link";
+import CategoryItem from "../../components/CategoryItem"
 
 const prisma = new PrismaClient();
 

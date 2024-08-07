@@ -77,13 +77,13 @@ const InfoItem = ({ infoSite }) => {
         />
       ) : null} 
 
-<h2 className="text-xl text-white font-semibold mb-2">{tituloVideo}</h2>
+<h2 className="text-xl text-white font-semibold mb-2 truncate">{tituloVideo}</h2>
 
 {/* <p className="mb-2 max-w-md text-green-500 inline-block border-2 p-2 border-green-300 rounded-full">
           {category ? category.NomeCat : 'Categoria não encontrada'}
       </p> */}
-<p className="text-gray-300">{linkVideo ? linkVideo.slice(0, 100) : 'Link não disponível'}...</p>
-<p className="text-gray-300">{descVideo ? descVideo.slice(0, 100) : 'Descrição não disponível'}...</p>
+<p className="text-gray-300 overflow-hidden text-ellipsis whitespace-nowrap">{linkVideo ? linkVideo.slice(0, 100) : 'Link não disponível'}...</p>
+<p className="text-gray-300 overflow-hidden text-ellipsis whitespace-nowrap">{descVideo ? descVideo.slice(0, 100) : 'Descrição não disponível'}...</p>
 <div className="flex justify-center gap-4">
   <button
     type="button"

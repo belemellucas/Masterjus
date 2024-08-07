@@ -1,7 +1,6 @@
 import { fetchSingleCourse } from "@/actions/actions";
 
 const CourseDetail = async ({ params }) => {
-  console.log(params);
   const id = params?.id;
   try {
     const cardItem = await fetchSingleCourse(id);

@@ -27,6 +27,11 @@ const AddBlogForm = ({ blog }) => {
 
   useEffect(() => {
     const fetchCourseData = async () => {
+      try {
+        fetch("/api/admin/all-blogs").catch((error) => {
+          console.error('Failed to fetch data:', error); 
+        });
+     
       setValue("subtitulo", blog.subtitulo);
       setValue("title", blog.title);
       setValue("description", blog.description);
@@ -36,7 +41,11 @@ const AddBlogForm = ({ blog }) => {
         setSelectedImage(`data:image/jpeg;base64,${blog.imageUrl}`);
         setBase64Files([blog.imageUrl]);
       }
-    };
+    }   
+    catch (error) {
+      console.error('Failed to fetch data:', error);
+    }
+  }
     fetchCourseData();
   }, [blog, setValue]);
 
@@ -117,7 +126,9 @@ const AddBlogForm = ({ blog }) => {
           theme: "dark",
         });
         ref?.current?.reset();
-        router.push("/admin/blogs");
+        await fetch("/api/admin/all-blogs");
+       router.push(`/admin/blogs?${new Date().getTime()}`);
+
       } else {
         const errorData = await res.json();
         console.log("API error response:", errorData); // Debug log
@@ -152,12 +163,12 @@ const AddBlogForm = ({ blog }) => {
   };
 
   return (
-    <div className="flex-grow md:ml-64">
-      <div className="flex flex-col justify-center items-center pt-14">
+    <div className="flex-grow md:ml-64 mt-16">
+      <div className="flex flex-col justify-center items-center">
         <form
           ref={ref}
           onSubmit={handleSubmit(onSubmit)}
-          className="max-w-md mx-auto mt-8 p-8 bg-white rounded shadow-md"
+          className="max-w-md mx-auto p-8 bg-white rounded shadow-md"
         >
           <h2 className="flex justify-center text-2xl text-green-500 font-semibold mb-6">
             Atualizar blog

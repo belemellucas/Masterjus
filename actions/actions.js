@@ -50,6 +50,15 @@ export const fetchSingleDeposition = async (id) => {
   return info;
 }
 
+export const fetchSingleCategory = async (id) => {
+  const category = await prisma.catCurso.findFirst({
+     where: {
+      id: id
+     },
+  });
+  return category; 
+}
+
 export const addBlog = async (formData) => {
   // collect info from form using formData
   const imageUrl = formData.get("imageUrl");

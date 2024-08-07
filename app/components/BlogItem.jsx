@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useEffect } from "react";
 import { toast } from "react-toastify";
 
 const BlogItem = ({ blog }) => {
@@ -44,6 +44,22 @@ const BlogItem = ({ blog }) => {
   const updateBlogHandler = (id) => {
     router.push(`/admin/blogs/update-blog/${id}`);
   };
+
+
+  const fetchBlogs = async () => {
+    try {
+      const res = await fetch("/api/admin/all-blogs");
+      const data = await res.json();
+      setBlogs(data.blogs); 
+    } catch (error) {
+      console.error("Failed to fetch blogs:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchBlogs();
+  }, []); 
+
 
   return (
     <div className="bg-gray-900 p-4 border-2 border-green-200 mx-2 my-2 rounded-lg shadow-md">

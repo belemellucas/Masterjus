@@ -74,7 +74,8 @@ const AddBlogForm = () => {
           theme: "dark",
         });
         ref?.current?.reset();
-        router.push("/admin/blogs");
+        await fetch('/api/admin/all-blogs');
+        router.push(`/admin/blogs?${new Date().getTime()}`);
       } else {
         const errorData = await res.json();
         console.log("API error response:", errorData); // Debug log
@@ -109,15 +110,15 @@ const AddBlogForm = () => {
   };
 
   return (
-    <div className="flex-grow md:ml-64">
-      <div className="flex flex-col justify-center items-center pt-14">
+    <div className="flex-grow md:ml-64 mt-16">
+      <div className="flex flex-col justify-center items-center">
         <form
           ref={ref}
           onSubmit={handleSubmit(onSubmit)}
-          className="max-w-md mx-auto mt-8 p-8 bg-white rounded shadow-md"
+          className="max-w-md mx-auto p-8 bg-white rounded shadow-md"
         >
           <h2 className="text-2xl text-green-500 font-semibold mb-6">
-            Criar novo blog
+            Adicionar Blog
           </h2>
 
           <div className="mb-4">
@@ -231,8 +232,9 @@ const AddBlogForm = () => {
             />
             {errors?.category && <p role="alert">{errors?.category?.message}</p>}
           </div>
-
+         <div className="flex justify-center">
           <Button label={"Adicionar Blog"} color={"green"} />
+          </div>
         </form>
       </div>
     </div>

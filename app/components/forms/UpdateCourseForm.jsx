@@ -91,7 +91,6 @@ const UpdateCourseForm = ({ categoriesData, singleCourse }) => {
 
       if (res.ok) {
         ref?.current?.reset();
-        // router.push("/courses");
         const data = await res.json();
         toast.success(`${data.message}`, {
           position: "top-right",
@@ -104,7 +103,7 @@ const UpdateCourseForm = ({ categoriesData, singleCourse }) => {
           theme: "dark",
         });
         await fetch("/api/admin/all-courses");
-        router.push("/admin/courses");
+      router.push(`/admin/courses?${new Date().getTime()}`); 
       } else {
         const errorData = await res.json();
         console.log("Something went wrong in else block");
@@ -163,14 +162,12 @@ const UpdateCourseForm = ({ categoriesData, singleCourse }) => {
 
   return (
     <div className="flex-grow md:ml-64">
-      <div className="flex flex-col justify-center items-center">
-        <h2 className="text-center px-2 text-2xl py-2 font-bold">
-          Adicionar Curso
-        </h2>
+      <div className="flex flex-col justify-center items-center mt-14">
+      
         <form
           ref={ref}
           onSubmit={handleSubmit(onSubmit)}
-          className="max-w-md mx-auto mt-2 p-8 bg-white rounded shadow-md flex flex-col items-center"
+          className="max-w-md mx-auto p-8 bg-white rounded shadow-md flex flex-col items-center"
         >
           <h2 className="text-2xl text-green-500 font-semibold mb-6 flex justify-center">
             Editar curso

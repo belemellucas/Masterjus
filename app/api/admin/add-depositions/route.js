@@ -23,13 +23,13 @@ export async function POST(req, {params}) {
         // push the data into the DB
         const new_cat = await prisma.depoimento.create({
             data: {
-                imageDep :imageDep  ? imageDep : null,
+                imageDep: imageDep  ? imageDep : null,
                 depoimento,
                 autorDepo
             }
         })
 
-        revalidatePath('/depositions')
+        revalidatePath('/admin/depositions')
     
         return NextResponse.json({ message: 'Depoimento adicionado com sucesso!' }, { status: 201 });
 

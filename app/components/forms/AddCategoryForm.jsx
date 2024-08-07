@@ -41,6 +41,8 @@ const AddCategoryForm = () => {
           progress: undefined,
           theme: "dark",
         });
+        await fetch('/api/admin/all-category');
+        router.push(`/admin/categories?${new Date().getTime()}`);
       } else {
         const errorData = await res.json();
         console.log("Something went wrong in else block");
@@ -51,14 +53,14 @@ const AddCategoryForm = () => {
   };
 
   return (
-    <div className="flex-grow md:ml-64">
+    <div className="flex-grow md:ml-64 mt-16">
       <div className="flex flex-col justify-center items-center">
         <form
           ref={ref}
           onSubmit={handleSubmit(onSubmit)}
-          className="max-w-md mx-auto mt-8 p-8 bg-white rounded shadow-md"
+          className="max-w-md mx-auto p-8 bg-white rounded shadow-md"
         >
-          <h2 className="text-center px-2 text-2xl py-2 font-bold">
+         <h2 className="text-2xl text-green-500 font-semibold mb-6">
             Adicionar Categoria
           </h2>
 

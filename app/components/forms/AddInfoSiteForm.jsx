@@ -86,6 +86,8 @@ const AddInfoSiteForm = () => {
           progress: undefined,
           theme: "dark",
         });
+        await fetch('/api/admin/all-info');
+        router.push(`/admin/infoSite?${new Date().getTime()}`);
       } else {
         const errorData = await res.json();
         console.log("Something went wrong in else block");
@@ -122,7 +124,7 @@ const AddInfoSiteForm = () => {
         <form
           ref={ref}
           onSubmit={handleSubmit(onSubmit)}
-          className="max-w-md mx-auto mt-8 p-8 bg-white rounded shadow-md"
+          className="max-w-md mx-auto p-8 bg-white rounded shadow-md"
         >
           <h2 className="text-2xl text-green-500 font-semibold mb-6">
             Adicionar novas imagens
@@ -151,7 +153,7 @@ const AddInfoSiteForm = () => {
             >
               Selecionar Imagens
             </label>
-            <div>
+            <div className="flex flex-wrap mt-4">
               {desktopImageFiles.map((preview, index) => (
                 <div
                   key={index}
@@ -201,7 +203,7 @@ const AddInfoSiteForm = () => {
             >
               Selecionar Imagens
             </label>
-            <div>
+            <div className="flex flex-wrap mt-4">
               {mobileImageFiles.map((preview, index) => (
                 <div
                   key={index}
