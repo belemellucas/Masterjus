@@ -288,7 +288,7 @@ export const fetchCardsByCategory = async (category) => {
   });
 
   //const categoriesData = await fetchCategory();
-  const categoriesData = await prisma.catCurso.findMany();
+  const categoriesData = await prisma.catCurso.findMany({});
 
   const groupedCards = {};
 
