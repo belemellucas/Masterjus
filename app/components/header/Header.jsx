@@ -117,9 +117,7 @@ function Header({categoriesData}) {
                     height={22}
                   />
                 </Link>
-                <div className="flex-auto my-auto font-poppins">
-                  PORTAL DO ALUNO
-                </div>
+               
               </div>
             </div>
           </div>
