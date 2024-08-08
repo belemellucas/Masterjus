@@ -21,7 +21,7 @@ export const metadata = {
 
 const RootLayout = async ({children}) => {
   const prisma = new PrismaClient();
-  //const categoriesData = await fetchCategory();
+  const categoriesData = await fetchCategory();
   const session = await getServerSession(authOptions);
   if (session?.user?.role === "ADMIN") {
      return (
@@ -41,7 +41,7 @@ const RootLayout = async ({children}) => {
     <html lang="en">
       <body className={inter.className}>
         <Providers>
-       <Header  />
+       <Header categoriesData={categoriesData}/>
         {children}
         <Footer />
         <ToastComponent />

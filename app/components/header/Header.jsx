@@ -8,6 +8,7 @@ import MenuItems from "../menuItems/MenuItems";
 import HamburgerMenu from "../HamburgerMenu";
 
 function Header({categoriesData}) {
+  console.log(categoriesData, "CATEGORIES DATA")
   const [showSearch, setShowSearch] = useState(false);
 
   const toggleSearch = () => {
