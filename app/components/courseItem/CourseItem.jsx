@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import React from "react";
 
 const CourseItem = ({ card }) => {
-  console.log(card)
   const {
     id,
     imageCard,
