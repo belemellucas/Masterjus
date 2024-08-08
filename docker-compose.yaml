@@ -5,14 +5,14 @@ version: '3.8'
 services:
   db:
     build: ./mongodb-rs
-    container_name: techdoc_db
+    container_name: masterjus
     command: ["mongod", "--auth", "--bind_ip_all", "--replSet", "rs0"]
     restart: always
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_ROOT_PASSWORD: master2024
       MONGO_INITDB_DATABASE: admin
-      MONGO_REPLICA_HOST: techdoc_db
+      MONGO_REPLICA_HOST: masterjus
       MONGO_REPLICA_PORT: 27017
     ports:
       - "27017:27017"
