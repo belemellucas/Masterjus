@@ -11,7 +11,7 @@ import { authOptions } from "@/app/utils/authOptions"
 import HeaderAdmin from './components/admin/header/HeaderAdmin'
 import { PrismaClient } from "@prisma/client";
 import { fetchCategory } from "@/actions/actions";
-
+import HeaderInitial from "./headerInitial/page"
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
@@ -21,7 +21,7 @@ export const metadata = {
 
 const RootLayout = async ({children}) => {
   const prisma = new PrismaClient();
-  const categoriesData = await fetchCategory();
+ 
   const session = await getServerSession(authOptions);
   if (session?.user?.role === "ADMIN") {
      return (
@@ -41,7 +41,8 @@ const RootLayout = async ({children}) => {
     <html lang="en">
       <body className={inter.className}>
         <Providers>
-       <Header categoriesData={categoriesData}/>
+      
+       <HeaderInitial />
         {children}
         <Footer />
         <ToastComponent />
