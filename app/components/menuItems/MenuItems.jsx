@@ -4,17 +4,17 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
 function MenuItems({categoriesData}) {
- 
+   console.log(categoriesData, "CATEGORIES DATA")
   const menuOptions = [
     { name: "Home" },
-    {
-      name: "CURSOS",
-      hasSubMenu: true,
-       subMenuOptions: categoriesData.map(category => ({
-         name: category.NomeCat,
-         href: "/category" + encodeURIComponent(category.NomeCat),
-      }))
-    },
+    // {
+    //   name: "CURSOS",
+    //   hasSubMenu: true,
+    //    subMenuOptions: categoriesData.map(category => ({
+    //      name: category.NomeCat,
+    //      href: "/category" + encodeURIComponent(category.NomeCat),
+    //   }))
+    // },
     { name: "PrevEvolution", href: "/prevevolution/" + encodeURIComponent("Materiais Gratuitos") },
     { name: "Materiais Gratuitos", href:"/freeCourses" },
     { name: "BLOG", href: "/blog/page" },
