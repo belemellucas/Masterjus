@@ -10,7 +10,7 @@ function VideoComponent({ infoSite }) {
   const description = infoSite && infoSite.length > 0 ? infoSite[0].descVideo : 'Descrição';
   console.log(infoSite)
   return (
-    <div className="flex flex-col md:flex-row w-full h-screen bg-blue-900 h-[450px]">
+    <div className="flex flex-col md:flex-row w-full bg-blue-900 h-[450px]">
       {/* Title and Description Section */}
       <div className="pt-4 flex-1 p-6 flex flex-col justify-center text-white h-[400px]">
         <h1 className="text-3xl font-bold mb-4">{title}</h1>
@@ -18,7 +18,7 @@ function VideoComponent({ infoSite }) {
       </div>
 
       {/* Video Section */}
-      <div className="pt-4 flex-1  h-[400px]">
+      <div className="pt-6 flex-1 h-[400px]">
         <div className="relative w-full h-[400px]">
           {videoId ? (
             <iframe
