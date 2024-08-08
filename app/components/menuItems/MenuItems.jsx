@@ -122,8 +122,8 @@ import { useEffect, useRef, useState } from "react";
 //   );
 // }
 
-function MenuItems({categoriesData}) {
-  console.log(categoriesData, "CATEGORIES DATA ")
+function MenuItems({categories}) {
+  console.log(categories, "CATEGORIES DATA ")
   return (
     <>
     <h1>aaa</h1>

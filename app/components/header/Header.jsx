@@ -8,7 +8,6 @@ import MenuItems from "../menuItems/MenuItems";
 import HamburgerMenu from "../HamburgerMenu";
 
 function Header({categoriesData}) {
-  console.log(categoriesData, "CATEGORIES DATA")
   const [showSearch, setShowSearch] = useState(false);
 
   const toggleSearch = () => {
@@ -92,7 +91,7 @@ function Header({categoriesData}) {
 
         {/* Menu completo para telas grandes */}
         <div className="hidden md:flex">
-          <MenuItems categoriesData={categoriesData}/>
+          <MenuItems categoriesData={categories}/>
         </div>
 
         {/* Menu hamburger para telas pequenas */}
