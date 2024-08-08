@@ -3,11 +3,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
-function MenuItems({categoriesData =[]}) {
+/*function MenuItems({categoriesData =[]}) {
    console.log(categoriesData, "CATEGORIES DATA")
   const menuOptions = [
     { name: "Home" },
-     {
+    {
       name: "CURSOS",
       hasSubMenu: true,
        subMenuOptions: Array.isArray(categoriesData) 
@@ -15,7 +15,7 @@ function MenuItems({categoriesData =[]}) {
         name: category.NomeCat,
           href: "/category" + encodeURIComponent(category.NomeCat),
       }))
-     : [] 
+     : []  
     },
     { name: "PrevEvolution", href: "/prevevolution/" + encodeURIComponent("Materiais Gratuitos") },
     { name: "Materiais Gratuitos", href:"/freeCourses" },
@@ -120,6 +120,12 @@ function MenuItems({categoriesData =[]}) {
 
   
   );
-}
-
+} */
+  function MenuItems() {
+    return (
+      <div>
+        <h1>test</h1>
+      </div>
+    )
+  }
 export default MenuItems;
