@@ -4,15 +4,16 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
 function MenuItems({categoriesData}) {
+ 
   const menuOptions = [
     { name: "Home" },
     {
       name: "CURSOS",
       hasSubMenu: true,
-      subMenuOptions: categoriesData.map(category => ({
-        name: category.NomeCat,
-        href: "/category" + encodeURIComponent(category.NomeCat),
-      }))
+      // subMenuOptions: categoriesData.map(category => ({
+      //   name: category.NomeCat,
+      //   href: "/category" + encodeURIComponent(category.NomeCat),
+      // }))
     },
     { name: "PrevEvolution", href: "/prevevolution/" + encodeURIComponent("Materiais Gratuitos") },
     { name: "Materiais Gratuitos", href:"/freeCourses" },
