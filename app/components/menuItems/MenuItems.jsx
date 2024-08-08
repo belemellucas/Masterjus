@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
-function MenuItems({categoriesData =[]}) {
+function MenuItems({categoriesData}) {
    console.log(categoriesData, "CATEGORIES DATA")
   const menuOptions = [
     { name: "Home" },

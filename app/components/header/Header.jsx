@@ -14,6 +14,8 @@ function Header({categoriesData}) {
     setShowSearch(!showSearch);
   };
 
+  console.log("HEADER",categoriesData)
+
   return (
     <>
       {/* Barra superior com ícones e pesquisa */}
@@ -91,7 +93,7 @@ function Header({categoriesData}) {
 
         {/* Menu completo para telas grandes */}
         <div className="hidden md:flex">
-          <MenuItems />
+          <MenuItems categoriesData={categoriesData} />
         </div>
 
         {/* Menu hamburger para telas pequenas */}
