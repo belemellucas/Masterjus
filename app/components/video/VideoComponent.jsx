@@ -13,8 +13,8 @@ function VideoComponent({ infoSite }) {
     <div className="flex flex-col md:flex-row w-full bg-blue-900 h-auto md:h-[450px]">
     {/* Title and Description Section */}
     <div className="pt-4 flex-1 p-6 flex flex-col justify-center text-white h-auto md:h-[400px]">
-      <h1 className="text-3xl font-bold mb-4">{title}</h1>
-      <p className="text-lg">{description}</p>
+      <h1 className="text-3xl font-bold mb-4 break-words">{title}</h1>
+      <p className="text-lg break-words">{description}</p>
     </div>
   
     {/* Video Section */}
@@ -33,6 +33,7 @@ function VideoComponent({ infoSite }) {
       </div>
     </div>
   </div>
+  
   );
 }
 
