@@ -94,8 +94,8 @@ const AddDepositionForm = () => {
   };
 
   return (
-    <div className="flex-grow ml-64 mt-16">
-      <div className="flex flex-col justify-center items-center">
+    <div className="flex-grow md:ml-64 ">
+      <div className="flex flex-col justify-center items-center mt-16">
         <form
           ref={ref}
           onSubmit={handleSubmit(onSubmit)}

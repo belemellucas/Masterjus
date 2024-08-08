@@ -12,7 +12,6 @@ import { useRef, useState } from "react";
 SwiperCore.use([EffectCoverflow, Pagination, Navigation]);
 
 const Course = ({ groupedCards, searchParams }) => {
-  console.log(groupedCards, "GROUPED CARDS")
   const [activeIndex, setActiveIndex] = useState(0);
   const swiperRef = useRef(null);
 
