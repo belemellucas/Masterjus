@@ -5,13 +5,8 @@ import { useRouter } from "next/navigation";
 import React from "react";
 
 const CourseItem = ({ card }) => {
-  const {
-    id,
-    imageCard,
-    valorAtual,
-    valorAnt,
-    numParcela,
-  } = card || {};
+  const { id, imageCard, infoCard, valorAtual, valorAnt, numParcela } =
+    card || {};
 
   const router = useRouter();
 
@@ -43,9 +38,9 @@ const CourseItem = ({ card }) => {
               </div>
             ) : null}
           </Link>
-          {/* <h3 className="text-lg font-bold text-center text-gray-900 mt-4">
-            {tituloCurso}
-          </h3> */}
+          <h3 className="text-lg font-bold text-center text-gray-900">
+            {infoCard}
+          </h3>
           <div className="flex gap-5 justify-between px-px mt-5 text-sm">
             <div className="flex flex-col my-auto leading-5 text-indigo-950">
               <div>
@@ -57,6 +52,7 @@ const CourseItem = ({ card }) => {
               <div className="mt-3">
                 por{" "}
                 <span className="font-semibold">R$ {valorAtualFormatted}</span>
+                <h1 className="mt-1 flex text-green-600">No Pix</h1>
               </div>
             </div>
             <div className="flex flex-col text-right text-rose-500 leading-[135%]">
@@ -65,14 +61,17 @@ const CourseItem = ({ card }) => {
               <div className="mt-2">sem juros</div>
             </div>
           </div>
-          <div className="flex gap-5 justify-between px-0.5 mt-7 w-full">
+          <div className="flex gap-5 justify-between px-0.5 mt-2 w-full">
             <div className="flex gap-1.5 self-start text-sm font-semibold leading-7 text-center text-rose-500 whitespace-nowrap">
-              <div className="grow">MATRICULE-SE</div>
-              <img
-                loading="lazy"
-                src="https://cdn.builder.io/api/v1/image/assets/TEMP/b28e715548503f7742454874e29f3c52e850699d1d1cf4eb7cf44cb82bff8b3b?"
-                className="shrink-0 self-start w-1.5 aspect-[0.6]"
-              />
+              <div className="flex justify-center mt-6">
+              <Link href={`/courses/${id}`}>
+                <button className="px-4 py-2 text-sm font-semibold text-white bg-blue-800 rounded-md cursor-pointer">
+                  MATRICULE-SE
+                </button>
+                </Link>
+              </div>
+            
+            
             </div>
             <div className="flex gap-0">
               <img

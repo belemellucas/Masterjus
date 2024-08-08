@@ -12,7 +12,6 @@ export async function DELETE(req, { params }) {
     const session = await getServerSession(authOptions);
 
     const id = params?.categoryId || "";
-    console.log(id)
     if (session?.user?.role === "ADMIN") {
       // push the data into the DB
 

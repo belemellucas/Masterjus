@@ -104,7 +104,6 @@ const AddBlogForm = ({ blog }) => {
       }
       formData.imageUrl = base64Files[0];
       formData.id = id;
-      console.log(formData.imageUrl)
       const res = await fetch("/api/admin/update-blog", {
         method: "POST",
         headers: {

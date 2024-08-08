@@ -10,7 +10,6 @@ const BlogDetail = async ({ params }) => {
     const blog = await fetchSingleBlog(id);
     const formattedDate = format(blog.createdAt, "EEEE, dd 'de' MMMM 'de' yyyy", { locale: ptBR });
      
-    console.log(blog); 
     return (
           <div className="flex justify-center items-center px-16 py-12 bg-white max-md:px-5">
             <div className="flex flex-col max-w-full w-[1070px]">

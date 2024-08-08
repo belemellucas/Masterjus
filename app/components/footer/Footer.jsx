@@ -18,20 +18,7 @@ function Footer() {
                 width={200}
                 height={50}
               />
-              <div className="flex z-10 gap-5 justify-between items-start mt-0 pt-4 text-base leading-3 text-neutral-600">
-                <Image
-                  loading="lazy"
-                  src="/icones/localizacao.svg"
-                  alt="localizacao"
-                  width={24}
-                  height={24}
-                />
-                <div className="flex flex-col mt-1.5">
-                  <div>Praça da Sé, 96 404</div>
-                  <div className="mt-3">Sé - São Paulo - SP</div>
-                  <div className="mt-4">CEP 01.001-001</div>
-                </div>
-              </div>
+            
               <div className="flex gap-5 mt-5  items-center">
                 <div className="text-2xl leading-6 text-stone-400">
                   <Image

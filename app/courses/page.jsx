@@ -41,6 +41,7 @@ const Courses = async ({ searchParams }) => {
   // Renderizar as categorias e cartões após a resolução da promessa
   const groupedCards = await fetchCards();
 
+
   return (
     <Course groupedCards={groupedCards} />
   );

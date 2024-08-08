@@ -6,7 +6,6 @@ const FreeCourseDetail = async ({ params }) => {
   const id = params?.id;
 
   const course = await fetchSingleCourse(id);
-  console.log(course)
   return (
     <></>
     // <div className="flex flex-col pb-10">

@@ -60,9 +60,7 @@ const UpdateDepositionForm = ({ singleDeposition }) => {
 
   const onSubmit = async (formData) => {
     try {
-      console.log(base64Files)
       if (base64Files && base64Files.length > 0) {
-        console.log("entrou em base 64 files")
         formData.imageDep = base64Files[0];
 
       } else {
@@ -118,7 +116,6 @@ const UpdateDepositionForm = ({ singleDeposition }) => {
       if (singleDeposition.imageDep) {
         setSelectedImage(`data:image/jpeg;base64,${singleDeposition.imageDep}`);
         setBase64Files([singleDeposition.imageDep]);
-        console.log(base64Files)
       }
     };
     fetchCourseData();

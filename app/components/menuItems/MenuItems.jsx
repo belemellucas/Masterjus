@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
 function MenuItems({categoriesData}) {
-   console.log(categoriesData, "CATEGORIES DATA")
   const menuOptions = [
     { name: "Home" },
     {
@@ -13,7 +12,7 @@ function MenuItems({categoriesData}) {
        subMenuOptions: Array.isArray(categoriesData) 
        ? categoriesData.map(category => ({
         name: category.NomeCat,
-          href: "/category" + encodeURIComponent(category.NomeCat),
+          href: "/category/" + encodeURIComponent(category.NomeCat),
       }))
      : []  
     },

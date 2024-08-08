@@ -23,7 +23,7 @@ export default async function Home({ searchParams }) {
   const depositions = await prisma.depoimento.findMany();
   
   const blogs = await prisma.blog.findMany();
-
+  console.log(infoSite)
   return (
     <>
       <Initial infoSite={infoSite} />

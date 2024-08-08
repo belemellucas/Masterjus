@@ -17,50 +17,48 @@ const CategoryItems = ({ category, groupedCards }) => {
 
   return (
     <div className="flex flex-col items-center px-5 mx-auto w-full text-center leading-[150%] text-neutral-950 pt-8 pb-10">
-      <div className="self-stretch w-full text-4xl font-extrabold leading-10">
+  <div className="self-stretch w-full text-4xl font-extrabold leading-10 mb-6"> 
         {category.toUpperCase()}
       </div>
       {cardsInCategory.length > 0 ? (
         <>
           {/* Desktop view */}
           <div className="hidden md:flex flex-wrap gap-4 justify-center">
-            {cardsInCategory.map((card) => (
-              <div key={card.id} className="w-full max-w-sm">
-                <div className="relative w-full h-96">
-                  <Image
-                    src={`data:image/jpeg;base64,${card.imageCard}`}
-                    alt={`Image ${card.imageCard}`}
-                    layout="fill"
-                    objectFit="cover"
-                    className="w-full h-full"
-                  />
-                </div>
-                <div className="mt-2.5 text-2xl font-medium leading-7 h-14 overflow-hidden">
-                {card.infoCard}
-                </div>
-                <div className="mt-11 text-sm font-medium leading-5 text-neutral-400">
-                  De <span className="line-through">R$ {card.valorAnt}</span> por
-                  R$ {card.valorAtual}
-                </div>
-                <div className="flex gap-1.5 mt-4">
-                  <div className="my-auto text-2xl font-medium">12 x </div>
-                  <div className="flex-auto text-3xl font-semibold">
-                    R$ {(card.valorAtual / card.numParcela).toFixed(2)}
-                  </div>
-                </div>
-                <div className="mt-4 text-xs font-semibold text-neutral-400">
-                  sem juros
-                </div>
-                <div className="mt-6 text-xs font-semibold">SAIBA MAIS</div>
-                <Link href={card.linkCurso} passHref>
-                  <div className="justify-center px-6 py-3 mt-6 text-base font-semibold text-white bg-blue-800 rounded-[30px] cursor-pointer">
-                    MATRICULE-SE
-                  </div>
-                </Link>
-              
+        {cardsInCategory.map((card) => (
+          <div key={card.id} className="w-full max-w-sm">
+            <div className="relative w-[20rem] h-[22rem]">
+              <Image
+                src={`data:image/jpeg;base64,${card.imageCard}`}
+                alt={`Image ${card.imageCard}`}
+                layout="fill"
+                objectFit="cover" 
+                className="w-full h-full"
+              />
+            </div>
+            <div className="mt-4 text-2xl font-medium leading-7 h-14 overflow-hidden"> 
+            </div>
+            <div className="mt-6 text-sm font-medium leading-5 text-neutral-400"> 
+              De <span className="line-through">R$ {card.valorAnt}</span> por
+              R$ {card.valorAtual}
+            </div>
+            <div className="flex gap-1.5 mt-4">
+              <div className="my-auto text-2xl font-medium">12 x </div>
+              <div className="flex-auto text-3xl font-semibold">
+                R$ {(card.valorAtual / card.numParcela).toFixed(2)}
               </div>
-            ))}
+            </div>
+            <div className="mt-4 text-xs font-semibold text-neutral-400">
+              sem juros
+            </div>
+            <div className="mt-6 text-xs font-semibold">SAIBA MAIS</div>
+            <Link href={card.linkCurso} passHref>
+              <div className="justify-center px-6 py-3 mt-6 text-base font-semibold text-white bg-blue-800 rounded-[30px] cursor-pointer">
+                MATRICULE-SE
+              </div>
+            </Link>
           </div>
+        ))}
+      </div>
 
           {/* Mobile view */}
           <div className="md:hidden w-full">

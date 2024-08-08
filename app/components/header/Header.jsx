@@ -14,7 +14,6 @@ function Header({categoriesData}) {
     setShowSearch(!showSearch);
   };
 
-  console.log("HEADER",categoriesData)
 
   return (
     <>
