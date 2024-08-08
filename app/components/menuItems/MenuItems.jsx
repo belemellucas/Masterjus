@@ -121,7 +121,8 @@ import { useEffect, useRef, useState } from "react";
   
   );
 } */
-  function MenuItems() {
+  function MenuItems({categoriesData}) {
+    console.log("DATA INFO",categoriesData )
     return (
       <div>
         <h1>test</h1>

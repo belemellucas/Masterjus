@@ -91,7 +91,7 @@ function Header({categoriesData}) {
 
         {/* Menu completo para telas grandes */}
         <div className="hidden md:flex">
-          <MenuItems/>
+          <MenuItems categoriesData={categoriesData}/>
         </div>
 
         {/* Menu hamburger para telas pequenas */}
