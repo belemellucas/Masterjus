@@ -30,7 +30,7 @@ export default async function Home({ searchParams }) {
       <Cards searchParams={searchParams} />
       <VideoComponent infoSite={infoSite} />
       <Depositions depositions={depositions} />
-      <Blogs searchParams={searchParams} />
+      {/* <Blogs searchParams={searchParams} /> */}
     </>
   );
 }
