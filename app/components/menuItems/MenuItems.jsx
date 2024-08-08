@@ -10,10 +10,10 @@ function MenuItems({categoriesData}) {
     {
       name: "CURSOS",
       hasSubMenu: true,
-      // subMenuOptions: categoriesData.map(category => ({
-      //   name: category.NomeCat,
-      //   href: "/category" + encodeURIComponent(category.NomeCat),
-      // }))
+       subMenuOptions: categoriesData.map(category => ({
+         name: category.NomeCat,
+         href: "/category" + encodeURIComponent(category.NomeCat),
+      }))
     },
     { name: "PrevEvolution", href: "/prevevolution/" + encodeURIComponent("Materiais Gratuitos") },
     { name: "Materiais Gratuitos", href:"/freeCourses" },
