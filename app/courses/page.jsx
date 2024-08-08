@@ -18,7 +18,8 @@ const Courses = async ({ searchParams }) => {
         : {},
     });
 
-    const categoriesData = await fetchCategory();
+    //const categoriesData = await fetchCategory();
+    const categoriesData = await prisma.catCurso.findMany({});
 
     // Inicializar groupedCards com todas as categorias e cartões vazios
     const groupedCards = {};

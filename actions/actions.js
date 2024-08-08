@@ -272,10 +272,8 @@ export const fetchPreferedBlogs = async () => {
 
 export const fetchCategory = async () => {
   const categories = await prisma.catCurso.findMany({});
-
   return categories;
 };
-
 
 export const fetchCardsByCategory = async (category) => {
   
@@ -287,21 +285,10 @@ export const fetchCardsByCategory = async (category) => {
     where: query,
   });
 
-  //const categoriesData = await fetchCategory();
   const categoriesData = await prisma.catCurso.findMany({});
 
   const groupedCards = {};
 
-  /*categoriesData.forEach((cat) => {
-    groupedCards[cat.NomeCat.toLowerCase()] = [];
-  });
-
-  cards.forEach((card) => {
-    const categoryName = card.categoria?.NomeCat.toLowerCase() || 'Sem Categoria';
-    if (groupedCards[categoryName]) {
-      groupedCards[categoryName].push(card);
-    }
-  }); */
   categoriesData.forEach((cat) => {
     const cleanedCategoryName = cat.NomeCat.replace(/\s+/g, ' ').trim().toLowerCase();
     groupedCards[cleanedCategoryName] = [];
