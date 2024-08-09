@@ -1,8 +1,16 @@
 "use client";
 import { useState, useEffect } from "react";
+import TestimonyModal from "../TestimonyModal"
+import { useRouter } from "next/navigation";
+import Alert from "../Alert";
 
-const Depositions = ({ depositions }) => {
+const Depositions = ({ depositions, session }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
+
+  const router = useRouter(); 
+
   const maxChars = 200;
   const handlePrev = () => {
     setCurrentIndex((prevIndex) => {
@@ -23,6 +31,39 @@ const Depositions = ({ depositions }) => {
   };
 
   useEffect(() => {
+    const modalAction = sessionStorage.getItem("modalAction");
+    const redirectUrl = sessionStorage.getItem("redirectUrl"); 
+
+    if (modalAction === "openModal") {
+      setIsModalOpen(true);
+      sessionStorage.removeItem("modalAction");
+      sessionStorage.removeItem("redirectUrl");
+    }
+    if (redirectUrl && window.location.pathname !== new URL(redirectUrl).pathname) {
+      router.push(redirectUrl);
+    }
+  }, [router]);
+
+  const handleOpenModal = () => {
+    if(!session?.user) {
+     sessionStorage.setItem("modalAction", "openModal");
+     sessionStorage.setItem("redirectUrl", window.location.href);
+     setShowAlert(true);
+      setTimeout(() => {
+        router.push("/auth/login"); 
+      }, 2000)
+    } else {
+      setIsModalOpen(true)
+    }
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+
+
+  useEffect(() => {
     const interval = setInterval(() => {
       handleNext();
     }, 8000);
@@ -32,6 +73,7 @@ const Depositions = ({ depositions }) => {
 
   return (
     <div className="flex flex-col items-center justify-center overflow-hidden">
+        {showAlert && <Alert message="Para publicar o depoimento faça o Login." />}
       <h2 className="text-[32px] md:text-[40px] leading-[48px] font-bold text-black font-poppins text-center pt-6 pb-6">
         DEPOIMENTOS DOS ALUNOS
       </h2>
@@ -96,7 +138,9 @@ const Depositions = ({ depositions }) => {
         </div>
       </div>
       <div className="pt-8">
-        <div className="flex gap-1 px-4 py-2.5  text-base text-center text-white bg-blue-800 rounded">
+        <div className="flex gap-1 px-4 py-2.5 text-base text-center text-white bg-blue-800 rounded cursor-pointer"
+        onClick={handleOpenModal}
+        >
           <div className="grow">Escreva um depoimento </div>
           <div className="flex align-items">
           <img
@@ -107,6 +151,8 @@ const Depositions = ({ depositions }) => {
           </div>
         </div>
       </div>
+
+      {isModalOpen && <TestimonyModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />}
 
       <div className="flex flex-wrap justify-center gap-2.5 text-xl pt-4 text-center">
         <div className="flex-auto text-black">
